@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Install system
+GenericName=Live Installer
+Comment=Install the operating system to disk
+Exec=/usr/sbin/install-system.sh
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=Qt;System;
+Icon=install-system.png
