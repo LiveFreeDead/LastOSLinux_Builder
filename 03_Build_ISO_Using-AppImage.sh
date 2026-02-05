@@ -33,6 +33,10 @@ case $ID in
     ;;
 esac
 
+echo "Running Clean up from" "$MAINDIR/LLAppsInstalls/"
+
+/LastOS/LLStore/llstore -i -q $MAINDIR/LLAppsInstalls/LastOSLinux.Clean.Build_*_x64+x86_LLApp.tar
+
 
 echo "Running Build from" "$MAINDIR/LLAppsInstalls/"
 

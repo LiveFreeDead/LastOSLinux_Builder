@@ -25,6 +25,10 @@ done
 sudo cp -rf Cache/. /var/cache/apt/archives
 sudo cp -rf cache/. /var/cache/apt/archives
 
+#Apply Updates first.
+sudo apt update && sudo apt upgrade -y
+sudo apt autoremove -y
+
 #Wine downloaded MSI's
 if [ -f wine/wine-gecko-2.47.4-x86.msi ]; then
     mkdir -p $HOME/.cache/wine
@@ -117,11 +121,11 @@ sudo gsettings set org.nemo.preferences show-hidden-files true
 sudo ./Debian_Fixes.sh
 
 
-#Setup Portable Eggs
-chmod +x penguins-eggs-*-x86_64.AppImage
-sudo cp -f penguins-eggs-*-x86_64.AppImage /usr/local/bin/eggs
-sudo eggs setup
-sudo eggs setup --install
+##Setup Portable Eggs
+#chmod +x penguins-eggs-*.AppImage
+#sudo cp -f penguins-eggs-*.AppImage /usr/local/bin/eggs
+#sudo eggs setup
+#sudo eggs setup --install
 
 
 #Remove Builder Flag

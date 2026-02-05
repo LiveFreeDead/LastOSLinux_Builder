@@ -38,6 +38,11 @@ esac
 #sudo cp -f $MAINDIR/aaJobs-Manual/*.sh /usr/lib/penguins-eggs/conf/distros/noble/calamares/libexec
 
 
+echo "Running Clean up from" "$MAINDIR/LLAppsInstalls/"
+
+/LastOS/LLStore/llstore -i -q $MAINDIR/LLAppsInstalls/LastOSLinux.Clean.Build_*_x64+x86_LLApp.tar
+
+
 echo "Running Build from" "$MAINDIR/LLAppsInstalls/"
 
 /LastOS/LLStore/llstore -i -q $MAINDIR/LLAppsInstalls/LastOSLinux.Build.ISO.With.Wine_*_x64+x86_LLApp.tar
