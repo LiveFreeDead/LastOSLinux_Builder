@@ -2,6 +2,9 @@
 
 MAINDIR=$PWD
 
+#Disable Cache so wont be wiped
+$PWD/0-LastOS-Manage-Repo.sh -link-ro
+
 #Hill Mint Updater, so it doesn't trigger mid build
 killall mintUpdate
 killall mintreport-tray

@@ -21,9 +21,14 @@ do
     fi
 done
 
-#Use some cached files if available
+#Use some cached files if available (Switched to 2nd method)
 sudo cp -rf Cache/. /var/cache/apt/archives
 sudo cp -rf cache/. /var/cache/apt/archives
+
+#Enable Cache so can be updated
+$PWD/0-LastOS-Manage-Repo.sh -capture
+
+
 
 #Apply Updates first.
 sudo apt update && sudo apt upgrade -y
