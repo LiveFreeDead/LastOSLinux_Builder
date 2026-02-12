@@ -4,7 +4,7 @@
 echo "Builder Running" > /tmp/LastOSLinux-Builder
 
 #Install LLStore and apps
-CurDir=$PWD
+CurDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 #cd LLStore
 #./setup.sh
@@ -25,8 +25,20 @@ done
 sudo cp -rf Cache/. /var/cache/apt/archives
 sudo cp -rf cache/. /var/cache/apt/archives
 
-#Enable Cache so can be updated
-$PWD/0-LastOS-Manage-Repo.sh -capture
+#Enable Cache so can be updated and link existing
+# 1. Get the directory where the current script lives
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# 2. Path to the target: Go up two levels, then into the repo folder
+TARGET_SCRIPT="$SCRIPT_DIR/../../1-RepositoryLocalDebs/0-LastOS-Manage-Repo.sh"
+
+# 3. Check if it exists and execute it
+if [ -f "$TARGET_SCRIPT" ]; then
+    bash "$TARGET_SCRIPT" -capture
+    bash "$TARGET_SCRIPT" -link
+else
+    echo "Error: Could not find $TARGET_SCRIPT"
+fi
 
 
 
