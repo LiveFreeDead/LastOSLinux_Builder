@@ -1,0 +1,8344 @@
+#tag DesktopWindow
+Begin DesktopWindow Editor
+   Backdrop        =   0
+   BackgroundColor =   &cFFFFFF
+   Composite       =   False
+   DefaultLocation =   2
+   FullScreen      =   False
+   HasBackgroundColor=   False
+   HasCloseButton  =   True
+   HasFullScreenButton=   False
+   HasMaximizeButton=   True
+   HasMinimizeButton=   True
+   HasTitleBar     =   True
+   Height          =   520
+   ImplicitInstance=   True
+   MacProcID       =   0
+   MaximumHeight   =   32000
+   MaximumWidth    =   32000
+   MenuBar         =   ""
+   MenuBarVisible  =   False
+   MinimumHeight   =   520
+   MinimumWidth    =   630
+   Resizeable      =   True
+   Title           =   "LLFile Editor"
+   Type            =   0
+   Visible         =   False
+   Width           =   630
+   Begin DesktopTabPanel TabPanelEditor
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "Arial"
+      FontSize        =   12.0
+      FontUnit        =   0
+      Height          =   485
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   0
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
+      Panels          =   ""
+      Scope           =   0
+      SmallTabs       =   False
+      TabDefinition   =   "General\rLinks\rAssembly\rPost-Processing\rGraphics\rBuild/Save/Metadata"
+      TabIndex        =   0
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   -4
+      Transparent     =   False
+      Underline       =   False
+      Value           =   0
+      Visible         =   True
+      Width           =   630
+      Begin DesktopLabel LabelTitle
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   6
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   0
+         TabPanelIndex   =   1
+         TabStop         =   False
+         Text            =   "Title:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   31
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   42
+      End
+      Begin DesktopTextField TextTitle
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   55
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   0
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Text            =   "TextTitle"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   30
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   274
+      End
+      Begin DesktopLabel LabelVersion
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   332
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   2
+         TabPanelIndex   =   1
+         TabStop         =   False
+         Text            =   "Version:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   31
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   54
+      End
+      Begin DesktopTextField TextVersion
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   28
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   389
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   1
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Text            =   "TextVersion"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   30
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   235
+      End
+      Begin DesktopLabel LabelURL
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   6
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   4
+         TabPanelIndex   =   1
+         TabStop         =   False
+         Text            =   "URL(s):"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   55
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   42
+      End
+      Begin DesktopTextArea TextURLs
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   True
+         AllowStyledText =   True
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         HasHorizontalScrollbar=   False
+         HasVerticalScrollbar=   True
+         Height          =   43
+         HideSelection   =   True
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   55
+         LineHeight      =   0.0
+         LineSpacing     =   1.0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Multiline       =   True
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   2
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Text            =   "https://\n"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   62
+         Transparent     =   False
+         Underline       =   False
+         UnicodeMode     =   1
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   568
+      End
+      Begin DesktopLabel LabelCategory
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   4
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   6
+         TabPanelIndex   =   1
+         TabStop         =   False
+         Text            =   "Category:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   138
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   68
+      End
+      Begin DesktopComboBox ComboCategory
+         AllowAutoComplete=   False
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         InitialValue    =   "ComboCategory"
+         Italic          =   False
+         Left            =   74
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   5
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   "Separate each with a ; semi colon"
+         Top             =   138
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   372
+      End
+      Begin DesktopCheckBox CheckInternetRequired
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Install Requires Internet"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   262
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   12
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   "If your installation requires an interconnection to install this should be checked"
+         Top             =   251
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   184
+      End
+      Begin DesktopLabel LabelDescription
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   6
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   11
+         TabPanelIndex   =   1
+         TabStop         =   False
+         Text            =   "Description:"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   283
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   86
+      End
+      Begin DesktopTextArea TextDescription
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   True
+         AllowStyledText =   True
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         HasHorizontalScrollbar=   False
+         HasVerticalScrollbar=   True
+         Height          =   165
+         HideSelection   =   True
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   6
+         LineHeight      =   0.0
+         LineSpacing     =   1.0
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Multiline       =   True
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   14
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Text            =   "TextDescription"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   308
+         Transparent     =   False
+         Underline       =   False
+         UnicodeMode     =   1
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   618
+      End
+      Begin DesktopLabel LabelPriority
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   444
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   14
+         TabPanelIndex   =   1
+         TabStop         =   False
+         Text            =   "Install Priority:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   110
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
+      End
+      Begin DesktopTextField TextPriority
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   547
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   4
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Text            =   "TextPriority"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   "A Number from 1 to 99, 1 is first and 99 is last, 5 is default"
+         Top             =   110
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   76
+      End
+      Begin DesktopLabel LabelIncludeFolder
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   0
+         TabPanelIndex   =   6
+         TabStop         =   False
+         Text            =   "Include Folder:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   355
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopTextField TextIncludeFolder
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   106
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   False
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   74
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Text            =   "TextIncludeFolder"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   355
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   480
+      End
+      Begin DesktopButton ButtonBrowseIncludeFolder
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   ".."
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   591
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   75
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   355
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   30
+      End
+      Begin DesktopLabel LabelBuildToFolder
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   3
+         TabPanelIndex   =   6
+         TabStop         =   False
+         Text            =   "Build To Folder:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   "Careful this folder gets compressed and deleted"
+         Top             =   391
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopTextField TextBuildToFolder
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   106
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   False
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   76
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Text            =   "TextBuildToFolder"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   "This folder gets fully deleted, be cure to make a subfolder to build in"
+         Top             =   391
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   480
+      End
+      Begin DesktopButton ButtonBrowseBuildToFolder
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   ".."
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   591
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   77
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Tooltip         =   "This folder gets fully deleted, be cure to make a subfolder to build in"
+         Top             =   391
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   30
+      End
+      Begin DesktopButton ButtonBuild
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Build"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   44
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   472
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   80
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   427
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   149
+      End
+      Begin DesktopLabel LabelShortcuts
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   29
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   3
+         TabPanelIndex   =   2
+         TabStop         =   False
+         Text            =   "Shortcuts: -"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   89
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopLabel LabelDisplayName
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   4
+         TabPanelIndex   =   2
+         TabStop         =   False
+         Text            =   "Display Name:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   121
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopTextField TextNewShortcut
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   106
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   19
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   "TextNewShortcut"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   91
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   False
+         Width           =   393
+      End
+      Begin DesktopButton ButtonBrowseShortcut
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   ".."
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   529
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   21
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   "This will replace the current Item with loaded data, so start with an Empty item"
+         Top             =   121
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   30
+      End
+      Begin DesktopButton ButtonAddShortcut
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "+"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   560
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   22
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   121
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   30
+      End
+      Begin DesktopButton ButtonRemoveShortcut
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "-"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   591
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   23
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   121
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   30
+      End
+      Begin DesktopCheckBox CheckBoxLinuxLink
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Linux Link"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   28
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   504
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   24
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   "If checked, this shortcut is a Linux .desktop link (not a Windows .lnk)"
+         Top             =   89
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   False
+         VisualState     =   0
+         Width           =   117
+      End
+      Begin DesktopComboBox ComboShortcut
+         AllowAutoComplete=   False
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         InitialValue    =   "ComboShortcut"
+         Italic          =   False
+         Left            =   106
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   20
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   "Double Click to store updated Link Names"
+         Top             =   121
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   419
+      End
+      Begin DesktopLabel LabelComment
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   27
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   10
+         TabPanelIndex   =   2
+         TabStop         =   False
+         Text            =   "Comment:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   150
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopTextField TextComment
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   106
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   24
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   "TextComment"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   150
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   515
+      End
+      Begin DesktopLabel LabelExecute
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   27
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   12
+         TabPanelIndex   =   2
+         TabStop         =   False
+         Text            =   "Execute:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   180
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopTextField TextExecute
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   106
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   25
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   "TextExecute"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   180
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   515
+      End
+      Begin DesktopLabel LabelRunInPath
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   27
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   14
+         TabPanelIndex   =   2
+         TabStop         =   False
+         Text            =   "Run In Path:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   210
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopTextField TextRunInPath
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   106
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   26
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   "TextRunInPath"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   210
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   515
+      End
+      Begin DesktopLabel LabelIcon
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   27
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   16
+         TabPanelIndex   =   2
+         TabStop         =   False
+         Text            =   "Icon:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   240
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopTextField TextIcon
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   106
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   27
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   "TextIcon"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   240
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   515
+      End
+      Begin DesktopLabel LabelFileTypes
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   27
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   18
+         TabPanelIndex   =   2
+         TabStop         =   False
+         Text            =   "File Types:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   270
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopTextField TextFileTypes
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   106
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   28
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   "TextFileTypes"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   270
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   515
+      End
+      Begin DesktopLabel LabelDescriptionLnk
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   27
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   20
+         TabPanelIndex   =   2
+         TabStop         =   False
+         Text            =   "Description:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   "This description is only shown in Launcher when it has multiple items available"
+         Top             =   297
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopTextArea TextDescriptionLink
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   True
+         AllowStyledText =   True
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         HasHorizontalScrollbar=   False
+         HasVerticalScrollbar=   True
+         Height          =   66
+         HideSelection   =   True
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   106
+         LineHeight      =   0.0
+         LineSpacing     =   1.0
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Multiline       =   True
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   29
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   "TextDescriptionLink"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   300
+         Transparent     =   False
+         Underline       =   False
+         UnicodeMode     =   1
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   515
+      End
+      Begin DesktopButton ButtonAddCatalog
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Add"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   579
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   38
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   370
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   42
+      End
+      Begin DesktopComboBox ComboMenuCatalog
+         AllowAutoComplete=   False
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         InitialValue    =   "ComboMenuCatalog"
+         Italic          =   False
+         Left            =   316
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   False
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   37
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   370
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   256
+      End
+      Begin DesktopTextArea TextMenuCatalog
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   True
+         AllowStyledText =   True
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         HasHorizontalScrollbar=   False
+         HasVerticalScrollbar=   True
+         Height          =   77
+         HideSelection   =   True
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   316
+         LineHeight      =   0.0
+         LineSpacing     =   1.0
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   False
+         MaximumCharactersAllowed=   0
+         Multiline       =   True
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   39
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   "TextMenuCatalog"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   399
+         Transparent     =   False
+         Underline       =   False
+         UnicodeMode     =   1
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   305
+      End
+      Begin DesktopCheckBox CheckRunInTerminal
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Run In Terminal"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   11
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         TabIndex        =   32
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   399
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   143
+      End
+      Begin DesktopCheckBox CheckShowDesktop
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Show On Desktop"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   11
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         TabIndex        =   34
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   426
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   143
+      End
+      Begin DesktopCheckBox CheckShowPanel
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Show On Panel"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   11
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         TabIndex        =   35
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   453
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   143
+      End
+      Begin DesktopCheckBox CheckShowFavorites
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Show On Favorites"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   166
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         TabIndex        =   28
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   426
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   143
+      End
+      Begin DesktopCheckBox CheckSendTo
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Show In SendTo"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   166
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         TabIndex        =   33
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   399
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   143
+      End
+      Begin DesktopCheckBox CheckCompress
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Compressed"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   360
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         Scope           =   0
+         TabIndex        =   79
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Tooltip         =   "This is used for Linux items that have no installable files/folders"
+         Top             =   437
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   108
+      End
+      Begin DesktopTextArea TextUserScript
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   True
+         AllowStyledText =   True
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         HasHorizontalScrollbar=   False
+         HasVerticalScrollbar=   True
+         Height          =   170
+         HideSelection   =   True
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   7
+         LineHeight      =   0.0
+         LineSpacing     =   1.0
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Multiline       =   True
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   47
+         TabPanelIndex   =   4
+         TabStop         =   True
+         Text            =   ""
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   50
+         Transparent     =   False
+         Underline       =   False
+         UnicodeMode     =   1
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   614
+      End
+      Begin DesktopLabel LabelUserScript
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   7
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   1
+         TabPanelIndex   =   4
+         TabStop         =   False
+         Text            =   "User Script:"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   26
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
+      End
+      Begin DesktopLabel LabelSudoReg
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   30
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   7
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   2
+         TabPanelIndex   =   4
+         TabStop         =   False
+         Text            =   "Sudo Script / Registry:"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   232
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   146
+      End
+      Begin DesktopTextArea TextSudoScript
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   True
+         AllowStyledText =   True
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         HasHorizontalScrollbar=   False
+         HasVerticalScrollbar=   True
+         Height          =   167
+         HideSelection   =   True
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   8
+         LineHeight      =   0.0
+         LineSpacing     =   1.0
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   False
+         MaximumCharactersAllowed=   0
+         Multiline       =   True
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   49
+         TabPanelIndex   =   4
+         TabStop         =   True
+         Text            =   ""
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   258
+         Transparent     =   False
+         Underline       =   False
+         UnicodeMode     =   1
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   614
+      End
+      Begin DesktopButton ButtonLoadUserScript
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Load Script"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   523
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   48
+         TabPanelIndex   =   4
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   227
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopButton ButtonLoadSudoOrReg
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Load File"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   523
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   50
+         TabPanelIndex   =   4
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   445
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopLabel LabelMovieFile
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   153
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   0
+         TabPanelIndex   =   5
+         TabStop         =   False
+         Text            =   "Movie File:"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   318
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   67
+      End
+      Begin DesktopTextField TextMovieFile
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   218
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   False
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   57
+         TabPanelIndex   =   5
+         TabStop         =   True
+         Text            =   "TextIncludeFolder"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   318
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   373
+      End
+      Begin DesktopButton ButtonBrowseMovieFile
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   ".."
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   595
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   58
+         TabPanelIndex   =   5
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   318
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   30
+      End
+      Begin DesktopCanvas CanvasFader
+         AllowAutoDeactivate=   True
+         AllowFocus      =   False
+         AllowFocusRing  =   True
+         AllowTabs       =   False
+         Backdrop        =   0
+         Enabled         =   True
+         Height          =   256
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Left            =   3
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   54
+         TabPanelIndex   =   5
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   40
+         Transparent     =   True
+         Visible         =   True
+         Width           =   256
+      End
+      Begin DesktopCanvas CanvasScreenshot
+         AllowAutoDeactivate=   True
+         AllowFocus      =   False
+         AllowFocusRing  =   True
+         AllowTabs       =   False
+         Backdrop        =   0
+         Enabled         =   True
+         Height          =   256
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Left            =   261
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   55
+         TabPanelIndex   =   5
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   40
+         Transparent     =   True
+         Visible         =   True
+         Width           =   364
+      End
+      Begin DesktopCanvas CanvasIcon
+         AllowAutoDeactivate=   True
+         AllowFocus      =   False
+         AllowFocusRing  =   True
+         AllowTabs       =   False
+         Backdrop        =   0
+         Enabled         =   True
+         Height          =   128
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Left            =   5
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Scope           =   0
+         TabIndex        =   56
+         TabPanelIndex   =   5
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   318
+         Transparent     =   True
+         Visible         =   True
+         Width           =   128
+      End
+      Begin DesktopLabel LabelIconTitle
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   5
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   6
+         TabPanelIndex   =   5
+         TabStop         =   False
+         Text            =   "Icon (Windows):"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   298
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
+      End
+      Begin DesktopLabel LabelFaderTitle
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   3
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   7
+         TabPanelIndex   =   5
+         TabStop         =   False
+         Text            =   "Fader:"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   22
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
+      End
+      Begin DesktopLabel LabelScreenShotTitle
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   261
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   8
+         TabPanelIndex   =   5
+         TabStop         =   False
+         Text            =   "Screenshots:"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   22
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
+      End
+      Begin DesktopLabel LabelScreenshotCount
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   422
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   9
+         TabPanelIndex   =   5
+         TabStop         =   True
+         Text            =   "0"
+         TextAlignment   =   2
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   22
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   43
+      End
+      Begin DesktopButton ButtonPrevScreenshot
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "<"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   15
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   382
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   59
+         TabPanelIndex   =   5
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   24
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   37
+      End
+      Begin DesktopButton ButtonNextScreenshot
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   ">"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   15
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   468
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   60
+         TabPanelIndex   =   5
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   24
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   37
+      End
+      Begin DesktopButton ButtonLinkScreenshot
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Screenshot"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   166
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   36
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   451
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   144
+      End
+      Begin DesktopCheckBox CheckNoInstall
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "No Install Folder"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   454
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   6
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   "This is used for Linux items that have no installable files/folders And will be a replacement for Windows NoneThing items"
+         Top             =   136
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   162
+      End
+      Begin DesktopLabel LabelPM
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   20
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   21
+         TabPanelIndex   =   1
+         TabStop         =   False
+         Text            =   "PM:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   222
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   28
+      End
+      Begin DesktopComboBox ComboPM
+         AllowAutoComplete=   False
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         InitialValue    =   "ComboPM"
+         Italic          =   False
+         Left            =   50
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   9
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   224
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   200
+      End
+      Begin DesktopButton ButtonAddPM
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Add"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   252
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   26
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   222
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   41
+      End
+      Begin DesktopTextField TextPM
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   295
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   10
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Text            =   "TextPM"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   222
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   328
+      End
+      Begin DesktopComboBox ComboDE
+         AllowAutoComplete=   False
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         InitialValue    =   "ComboDE"
+         Italic          =   False
+         Left            =   50
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   7
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   195
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   200
+      End
+      Begin DesktopButton ButtonAddDE
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Add"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   252
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   29
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   192
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   41
+      End
+      Begin DesktopTextField TextDE
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   296
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   8
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Text            =   "TextDE"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   193
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   327
+      End
+      Begin DesktopLabel LabelArch
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   16
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   31
+         TabPanelIndex   =   1
+         TabStop         =   False
+         Text            =   "Arch:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   251
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   32
+      End
+      Begin DesktopComboBox ComboArch
+         AllowAutoComplete=   False
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         InitialValue    =   "All\nx86 + x64\nx86\nx64\nARM"
+         Italic          =   False
+         Left            =   50
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   11
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   252
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   200
+      End
+      Begin DesktopLabel LabelFlagsLnk
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   27
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   10
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   37
+         TabPanelIndex   =   2
+         TabStop         =   False
+         Text            =   "Flags:"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   368
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   41
+      End
+      Begin DesktopTextField TextFlags
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   45
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   31
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   "TextFlags"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   370
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   266
+      End
+      Begin DesktopTextField TextInstallToFolder
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   74
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   40
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   "TextInstallToFolder"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   34
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   515
+      End
+      Begin DesktopLabel LabelInstallTo
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   1
+         TabPanelIndex   =   3
+         TabStop         =   False
+         Text            =   "Install-To:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   34
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   62
+      End
+      Begin DesktopButton ButtonBrowseInstallToFolder
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   ".."
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   592
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   41
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   34
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   30
+      End
+      Begin DesktopLabel LabelDEPMHardware
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   6
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   33
+         TabPanelIndex   =   1
+         TabStop         =   False
+         Text            =   "Desktop Environment, Package Manager, Hardware:-"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   168
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   329
+      End
+      Begin DesktopTextField TextInstaller
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   74
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   42
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   "TextInstaller"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   86
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   515
+      End
+      Begin DesktopLabel LabelInstaller
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   4
+         TabPanelIndex   =   3
+         TabStop         =   False
+         Text            =   "Installer:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   86
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   62
+      End
+      Begin DesktopButton ButtonBrowseInstaller
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   ".."
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   592
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   43
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   86
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   30
+      End
+      Begin DesktopTextField TextUsage
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   74
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   44
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   "TextUsage"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   117
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   462
+      End
+      Begin DesktopLabel LabelUsage
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   7
+         TabPanelIndex   =   3
+         TabStop         =   False
+         Text            =   "Usage:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   117
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   62
+      End
+      Begin DesktopTextArea TextAssembly
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   True
+         AllowStyledText =   True
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         HasHorizontalScrollbar=   False
+         HasVerticalScrollbar=   True
+         Height          =   175
+         HideSelection   =   True
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   8
+         LineHeight      =   0.0
+         LineSpacing     =   1.0
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Multiline       =   True
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   46
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   ""
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   148
+         Transparent     =   False
+         Underline       =   False
+         UnicodeMode     =   1
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   614
+      End
+      Begin DesktopButton ButtonAddInstaller
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Add ->"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   572
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   45
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   117
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   49
+      End
+      Begin DesktopLabel LabelDirectives
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   8
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   10
+         TabPanelIndex   =   3
+         TabStop         =   False
+         Text            =   "Directives (click to add):"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   327
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   153
+      End
+      Begin DesktopLabel Is_x86
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   8
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   11
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   "#Is_x86#"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   347
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   69
+      End
+      Begin DesktopLabel Is_x64
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   8
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   12
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   "#Is_x64#"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   369
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   69
+      End
+      Begin DesktopLabel Is_ARM
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   8
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   13
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   "#Is_ARM#"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   390
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   69
+      End
+      Begin DesktopLabel Is_NT5
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   8
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   14
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   "#Is_NT5#"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   413
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   69
+      End
+      Begin DesktopLabel Is_NT6
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   8
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   15
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   "#Is_NT6#"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   435
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   69
+      End
+      Begin DesktopLabel ProcessKill
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   468
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   22
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   "%ProcessKill%"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   349
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   116
+      End
+      Begin DesktopLabel AddToHosts
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   468
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   23
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   "%AddToHosts%"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   371
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   116
+      End
+      Begin DesktopLabel Extract
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   468
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   24
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   "%Extract%"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   392
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   116
+      End
+      Begin DesktopLabel LabelComponents
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   465
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   25
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   "Components (click to add):"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   327
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   155
+      End
+      Begin DesktopLabel LabelBuildType
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   4
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   34
+         TabPanelIndex   =   1
+         TabStop         =   False
+         Text            =   "Build Type:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   109
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   68
+      End
+      Begin DesktopComboBox ComboBuildType
+         AllowAutoComplete=   False
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         InitialValue    =   "ComboBuildType"
+         Italic          =   False
+         Left            =   74
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   3
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   109
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   372
+      End
+      Begin DesktopCheckBox CheckHideInLauncher
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Hidden in Launcher"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   447
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   13
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   "This is used for Linux items that have no installable files/folders"
+         Top             =   251
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   172
+      End
+      Begin DesktopLabel LabelDE
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   20
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   37
+         TabPanelIndex   =   1
+         TabStop         =   False
+         Text            =   "DE:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   192
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   28
+      End
+      Begin DesktopLabel Label1DefaultMenu
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   27
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   39
+         TabPanelIndex   =   2
+         TabStop         =   False
+         Text            =   "Default Menu:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   31
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopLabel LabelKeepShortcuts
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   27
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   0
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   40
+         TabPanelIndex   =   2
+         TabStop         =   False
+         Text            =   "Keep Shortcuts:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   61
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   98
+      End
+      Begin DesktopTextField TextKeepShortcuts
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   106
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   18
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   "TextKeepShortcuts"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   "Seperate with a pipe | character"
+         Top             =   61
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   393
+      End
+      Begin DesktopCheckBox CheckKeepFolder
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Keep In Folder"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   504
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   16
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   31
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   117
+      End
+      Begin DesktopCheckBox CheckKeepAll
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Keep All"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   28
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   504
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   17
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   60
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   117
+      End
+      Begin DesktopTextField TextDefaultMenuPath
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   27
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   106
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   15
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Text            =   "TextDefaultMenuPath"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   31
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   393
+      End
+      Begin DesktopTextArea TextAppExtensions
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   True
+         AllowStyledText =   True
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         HasHorizontalScrollbar=   False
+         HasVerticalScrollbar=   True
+         Height          =   33
+         HideSelection   =   True
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   119
+         LineHeight      =   0.0
+         LineSpacing     =   1.0
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         MaximumCharactersAllowed=   0
+         Multiline       =   True
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   51
+         TabPanelIndex   =   4
+         TabStop         =   True
+         Text            =   ""
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   428
+         Transparent     =   False
+         Underline       =   False
+         UnicodeMode     =   1
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   100
+      End
+      Begin DesktopLabel LabelAppExtensions
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   7
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   9
+         TabPanelIndex   =   4
+         TabStop         =   False
+         Text            =   "App. Extensions:"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   452
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   108
+      End
+      Begin DesktopLabel Is_NT10
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   8
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   26
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Text            =   "#Is_NT10#"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   455
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   69
+      End
+      Begin DesktopButton ButtonSaveLLFile
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Save LLFile"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   44
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   10
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   False
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   78
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   427
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   149
+      End
+      Begin DesktopButton Advanced
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Advanced"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   11
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   30
+         TabPanelIndex   =   2
+         TabStop         =   True
+         Tooltip         =   "Advanced Options for each link"
+         Top             =   336
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   85
+      End
+      Begin DesktopButton ButtonBrowseInstaller1
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "[ ]"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   29
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   539
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   47
+         TabPanelIndex   =   3
+         TabStop         =   True
+         Tooltip         =   "Press to get Arguments for the installer"
+         Top             =   117
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   30
+      End
+      Begin DesktopLabel LabelPublisher
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   331
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   81
+         TabPanelIndex   =   6
+         TabStop         =   False
+         Text            =   "Publisher:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   86
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   74
+      End
+      Begin DesktopLabel LabelReleaseVersion
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   305
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   82
+         TabPanelIndex   =   6
+         TabStop         =   False
+         Text            =   "Release Version:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   116
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
+      End
+      Begin DesktopLabel LabelReleaseDate
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   305
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   83
+         TabPanelIndex   =   6
+         TabStop         =   False
+         Text            =   "Release Date:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   146
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
+      End
+      Begin DesktopLabel LabelBuilder
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   305
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   84
+         TabPanelIndex   =   6
+         TabStop         =   False
+         Text            =   "Builder:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   176
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
+      End
+      Begin DesktopLabel LabelInstallSize
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   305
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   85
+         TabPanelIndex   =   6
+         TabStop         =   False
+         Text            =   "Installed Size:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   "Click to attempt to get size. InstalledSize is stored in bytes for all item types."
+         Top             =   207
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
+      End
+      Begin DesktopLabel LabelLanguage
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   4
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   86
+         TabPanelIndex   =   6
+         TabStop         =   False
+         Text            =   "Language:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   117
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   74
+      End
+      Begin DesktopLabel LabelRating
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   4
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   87
+         TabPanelIndex   =   6
+         TabStop         =   False
+         Text            =   "Rating:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   147
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   74
+      End
+      Begin DesktopLabel LabelPlayers
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   4
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   88
+         TabPanelIndex   =   6
+         TabStop         =   False
+         Text            =   "Players:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   177
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   74
+      End
+      Begin DesktopLabel LabelLicense
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   4
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   89
+         TabPanelIndex   =   6
+         TabStop         =   False
+         Text            =   "License:"
+         TextAlignment   =   3
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   206
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   74
+      End
+      Begin DesktopComboBox ComboTags
+         AllowAutoComplete=   False
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         InitialValue    =   "ComboTags"
+         Italic          =   False
+         Left            =   4
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   90
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   56
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   196
+      End
+      Begin DesktopButton ButtonAddTag
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Add"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   202
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   91
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   56
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   42
+      End
+      Begin DesktopTextField TextLanguage
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   82
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   92
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Text            =   "TextLanguage"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   116
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   211
+      End
+      Begin DesktopTextField TextRating
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   82
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   93
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Text            =   "TextRating"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   146
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   211
+      End
+      Begin DesktopTextField TextPlayers
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   82
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   94
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Text            =   "TextPlayers"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   176
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   211
+      End
+      Begin DesktopComboBox ComboLicense
+         AllowAutoComplete=   True
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         InitialValue    =   "Unknown\nPaid\nFree\nOpen\n"
+         Italic          =   False
+         Left            =   82
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         SelectedRowIndex=   0
+         TabIndex        =   95
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   206
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   211
+      End
+      Begin DesktopTextField TextInstalledSize
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   413
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   96
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Text            =   "TextInstalledSize"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   "The installed size in bytes. All build types (LLApp, LLGame, ppApp, ppGame, ssApp) use bytes. Displayed as MB in the store (bytes / 1,000,000)."
+         Top             =   206
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   208
+      End
+      Begin DesktopButton ButtonImportSize
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "Import"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   26
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   568
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   97
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   236
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   53
+      End
+      Begin DesktopTextField TextBuilder
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   413
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   98
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Text            =   "TextBuilder"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   176
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   208
+      End
+      Begin DesktopTextField TextReleaseDate
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   413
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   99
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Text            =   "TextReleaseDate"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   146
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   208
+      End
+      Begin DesktopTextField TextReleaseVersion
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   413
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   100
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Text            =   "TextReleaseVersion"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   116
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   208
+      End
+      Begin DesktopTextField TextPublisher
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   413
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   101
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Text            =   "TextPublisher"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   86
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   208
+      End
+      Begin DesktopTextField TextTags
+         AllowAutoDeactivate=   True
+         AllowFocusRing  =   True
+         AllowSpellChecking=   False
+         AllowTabs       =   False
+         BackgroundColor =   &cFFFFFF
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Format          =   ""
+         HasBorder       =   True
+         Height          =   26
+         Hint            =   ""
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   245
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         MaximumCharactersAllowed=   0
+         Password        =   False
+         ReadOnly        =   False
+         Scope           =   0
+         TabIndex        =   102
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Text            =   "TextTags"
+         TextAlignment   =   0
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   56
+         Transparent     =   False
+         Underline       =   False
+         ValidationMask  =   ""
+         Visible         =   True
+         Width           =   376
+      End
+      Begin DesktopLabel LabelMetaData
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   9
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   103
+         TabPanelIndex   =   6
+         TabStop         =   False
+         Text            =   "Metadata: -"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   28
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   74
+      End
+      Begin DesktopLabel LabelBuildFolders
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   9
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Multiline       =   False
+         Scope           =   0
+         Selectable      =   False
+         TabIndex        =   104
+         TabPanelIndex   =   6
+         TabStop         =   False
+         Text            =   "Build Folders: - (* The Build To Folder gets compressed and then deleted)"
+         TextAlignment   =   1
+         TextColor       =   &c000000
+         Tooltip         =   ""
+         Top             =   308
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   595
+      End
+      Begin DesktopCheckBox CheckForceDERefresh
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Force DE Refresh"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   24
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   447
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   38
+         TabPanelIndex   =   1
+         TabStop         =   True
+         Tooltip         =   "This will force the desktop to refresh once all apps are installed"
+         Top             =   279
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   172
+      End
+      Begin DesktopCheckBox CheckGetSizeComp
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Caption         =   "Get Size Compress"
+         Enabled         =   True
+         FontName        =   "Arial"
+         FontSize        =   12.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "TabPanelEditor"
+         Italic          =   False
+         Left            =   417
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   False
+         LockRight       =   True
+         LockTop         =   True
+         Scope           =   0
+         TabIndex        =   105
+         TabPanelIndex   =   6
+         TabStop         =   True
+         Tooltip         =   "This will automatically get the size once compressed internal archives"
+         Top             =   242
+         Transparent     =   False
+         Underline       =   False
+         Value           =   False
+         Visible         =   True
+         VisualState     =   0
+         Width           =   135
+      End
+   End
+   Begin DesktopLabel Status
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "Arial"
+      FontSize        =   12.0
+      FontUnit        =   0
+      Height          =   18
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   71
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   False
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   1
+      TabPanelIndex   =   0
+      TabStop         =   False
+      Text            =   "Status"
+      TextAlignment   =   2
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   493
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   559
+   End
+   Begin DesktopButton OpenFile
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Open"
+      Default         =   True
+      Enabled         =   True
+      FontName        =   "Arial"
+      FontSize        =   12.0
+      FontUnit        =   0
+      Height          =   21
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   7
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   False
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   2
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   "Open Existing LLFile"
+      Top             =   492
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   59
+   End
+End
+#tag EndDesktopWindow
+
+#tag WindowCode
+	#tag Event
+		Function CancelClosing(appQuitting As Boolean) As Boolean
+		  If ForceQuit = True Then Return False ' Always abandon everything if force quitting
+		  
+		  AdvancedLink.Hide
+		  
+		  'Test if changes and ask to save here?
+		  
+		  If EditorOnly = True Then
+		    ForceQuit = True
+		    'EditorOnly = False 'No
+		    EditingItem = False
+		    Editor.Hide
+		    'QuitApp
+		    Return False ' Just let it quit
+		  End If
+		  
+		  If ForceQuit = False Then
+		    EditingItem = False
+		    Me.Hide
+		    Return True
+		  End If
+		End Function
+	#tag EndEvent
+
+	#tag Event
+		Sub Closing()
+		  Debug("-- Editor Closed")
+		  If Not ForceQuit And Not EditorOnly Then Main.Items.SetFocus
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Sub Opening()
+		  If Debugging Then Debug("--- Starting Editor Opening ---")
+		  LoadCatalogs() 'This will populate the Data so the Catalogs work
+		  ComboTags.RemoveAllRows 'Remove them, need to Add a list file sooner or later or use all the ones loaded into existing apps/games? Glenn
+		  
+		  If ForceQuit = True Then Return 'Don't bother even opening if set to quit
+		End Sub
+	#tag EndEvent
+
+
+	#tag Method, Flags = &h0
+		Sub BuildLLFile()
+		  Dim Success As Boolean
+		  Dim Suc As Boolean
+		  Dim BT As String = ItemLLItem.BuildType
+		  Dim OutFile, InFile, RootPath, InFolder, OutFolder As String
+		  Dim CompressedFileOut As String
+		  Dim Commands As String
+		  Dim IsLLFile As String
+		  Dim F As FolderItem
+		  Dim I As Integer
+		  Dim FC As Integer
+		  Dim VersIncl As String
+		  Dim Res As String
+		  
+		  Dim InputFolder As String
+		  Dim OutputFile As String
+		  Dim SevenZip As String
+		  
+		  Dim Sh As New Shell
+		  Sh.TimeOut = -1
+		  Sh.ExecuteMode = Shell.ExecuteModes.Asynchronous
+		  
+		  GlobalCompressedFileOut = "" 'Clear last build name
+		  
+		  ' Note: Notification.StartBuild() and window hiding are done by PrepareToBuild()
+		  ' which is called BEFORE BuildTimer fires this method, so the notification is
+		  ' already visible and painted before any compression work begins here.
+		  ' BT icon was resolved in PrepareToBuild() — keep a local copy for FinishBuild.
+		  Dim BuildIconFile As String = ""
+		  Dim IconCandidates(2) As String
+		  IconCandidates(0) = Slash(TextIncludeFolder.Text) + BT + ".png"
+		  IconCandidates(1) = Slash(TextBuildToFolder.Text) + BT + ".png"
+		  IconCandidates(2) = Slash(AppPath) + BT + ".png"
+		  For Each ic As String In IconCandidates
+		    If ic <> "" And Exist(ic) Then
+		      BuildIconFile = ic
+		      Exit
+		    End If
+		  Next
+		  
+		  'DISABLE setting Dekstop or HOME as BuildTo folders as it does a clean up of the files, which deletes everything off the desktop etc, BAD!
+		  Dim BuildTo As String
+		  Dim FailBuild As Boolean = False
+		  BuildTo =  NoSlash(Editor.TextBuildToFolder.Text)
+		  If BuildTo = "/" Then FailBuild = True
+		  If Len(BuildTo) <= 3 Then FailBuild = True
+		  If BuildTo = NoSlash(HomePath) Then FailBuild = True
+		  If BuildTo = Slash(HomePath)+"Desktop" Then FailBuild = True
+		  If Right(BuildTo, 14) = "LLAppsInstalls" Then FailBuild = True
+		  If Right(BuildTo, 15) = "LLGamesInstalls" Then FailBuild = True
+		  If Right(BuildTo, 14) = "ssAppsInstalls" Then FailBuild = True
+		  If Right(BuildTo, 15) = "ppGamesInstalls" Then FailBuild = True
+		  
+		  If FailBuild = True Then
+		    Status.Text = "Failed to Build LLFile"
+		    If Debugging Then Debug ("Built Failed! Output path: " + BuildTo)
+		    Notification.FinishBuild(False, BuildIconFile)
+		    Return
+		  End If
+		  
+		  Notification.UpdateBuildStatus("Saving LLFile...")
+		  Success = SaveLLFileComplete 'This also updates Compressed Item resources
+		  
+		  If Success = True Then 'Check if saved correctly and build only if required (May need for 7z if can't just update them like the tar files
+		    If ItemLLItem.Compressed = True Then 'Just update it again
+		      'Do Nothing, it's done with the "SaveLLFileComplete" Routine to save repeating code
+		    Else ' If the items wasn't compressed, check to see if we need to compress it (Build)
+		      'Build here and clean up
+		      If Debugging Then Debug (Chr(10)+"Item not compressed, compressing...")
+		      
+		      'Compress Patch folder to 7z file
+		      OutFolder = Slash(TextBuildToFolder.Text)
+		      If Exist (OutFolder+"Patch") Then
+		        Status.Text =  "Compressing Patch..."
+		        Notification.UpdateBuildStatus("Compressing Patch...")
+		        SevenZip = Linux7z
+		        If TargetWindows Then SevenZip = Win7z
+		        Commands = SevenZip +" a -m0=lzma2 -mx=2 "+Chr(34)+OutFolder+"Patch.7z"+Chr(34)+" "+Chr(34)+Slash(OutFolder+"Patch")+"*"+Chr(34)  ' -m0=lzma2 -mx=2  Faster but less compressed
+		        If Debugging Then Debug (Commands)
+		        Res = RunCommandResults(Commands)
+		        If Debugging Then Debug (Res)
+		        If Exist(OutFolder+"Patch.7z") Then Deltree (OutFolder+"Patch") 'Remove the folder once compressed successfully
+		      End If
+		      
+		      Select Case BT
+		      Case"LLApp", "LLGame"
+		        If Exist (Slash(TextBuildToFolder.Text)+"LLApp.tar.gz") = True Or Exist (Slash(TextBuildToFolder.Text)+"LLApp.tar.gz") = True Then
+		          'Do Nothing
+		        Else 'Only compress if not already compressed file found
+		          OutFile = OutFolder+BT+".tar.gz"
+		          InFolder = Slash(TextIncludeFolder.Text)
+		          InFile = InFolder+BT+".tar.gz"
+		          RootPath = Slash(Left(NoSlash(OutFolder), InStrRev(NoSlash(OutFolder), "/") - 1)) 'LLFiles use forward Slash
+		          
+		          If Debugging Then Debug ("OutFile: " + OutFile +" Include File To Test: " + InFile+" Root Path: "+ RootPath +" InFolder: "+ InFolder)
+		          If InFolder = OutFolder Then
+		            
+		            If Not Exist(OutFile) Then 'If doesn't have the compressed file make it still
+		              If Not Exist(InFile) Then 'If doesn't have the compressed file make it still
+		                If ItemLLItem.NoInstall = False Then 
+		                  Status.Text =  "Compressing Files..."
+		                  Notification.UpdateBuildStatus("Compressing Files...")
+		                  'Commands = "cd "+Chr(34)+InFolder+Chr(34)+" && tar " + "--exclude=" +BT+".* "+"--exclude=Patch.7z "+"--exclude=*.jpg "+ "--exclude=*.png "+"--exclude=*.mp4 "+"--exclude=*.svg "+"--exclude=*.ico "+"-czf "+Chr(34)+OutFile+Chr(34)+" *"
+		                  Commands = "cd "+Chr(34)+InFolder+Chr(34)+" && tar " + "--exclude=" +BT+".* "+"--exclude=Patch.7z "+"-czf "+Chr(34)+OutFile+Chr(34)+" *" 'Can NOT exclude all png's etc, it leaves them missing from the sub folders too, they may be needed
+		                  Sh.Execute (Commands)
+		                  While Sh.IsRunning
+		                    App.DoEvents(20)
+		                  Wend
+		                End If
+		                
+		              Else 'Just copy it
+		                If InFile <> OutFile Then 'Don't Copy Self
+		                  If OutFile <> "/" And Exist(OutFile) Then Deltree(OutFile)
+		                  Suc = Copy (InFile, OutFile)
+		                End If
+		              End If
+		            Else 'Do Nothing so far as it's already existing
+		            End If
+		          Else 'In Folder is different to build folder so work from in folder instead
+		            If Not Exist(InFile) Then 'If doesn't have the compressed file make it still
+		              If  ItemLLItem.NoInstall = False Then 
+		                Status.Text =  "Compressing Files..."
+		                Notification.UpdateBuildStatus("Compressing Files...")
+		                'Commands = "cd "+Chr(34)+InFolder+Chr(34)+" && tar " + "--exclude=" +BT+".* "+"--exclude=Patch.7z "+"--exclude=*.jpg "+ "--exclude=*.png "+"--exclude=*.mp4 "+"--exclude=*.svg "+"--exclude=*.ico "+"-czf "+Chr(34)+OutFile+Chr(34)+" *"
+		                Commands = "cd "+Chr(34)+InFolder+Chr(34)+" && tar " + "--exclude=" +BT+".* "+"--exclude=Patch.7z "+"-czf "+Chr(34)+OutFile+Chr(34)+" *"
+		                Sh.Execute (Commands)
+		                While Sh.IsRunning
+		                  App.DoEvents(20)
+		                Wend
+		              End If
+		            Else 'Copy Existing Only
+		              If InFile <> OutFile Then 'Don't Copy Self
+		                If OutFile <> "/" And Exist(OutFile) Then Deltree(OutFile)
+		                Suc = Copy (InFile, OutFile)
+		              End If
+		            End If
+		          End If
+		          
+		          'Check if build path is the same as Source Path and delete original uncompressed files if so
+		          
+		          'STOP * If the user makes a script only build then this will remove important files, need a checkbox for them
+		          
+		          If ItemLLItem.NoInstall = True Then
+		            'No install, do nothing
+		          Else ' Is installer, clean up?
+		            If InFolder = OutFolder Then      
+		              If Exist(OutFile) Then 'Now if compressed file is in tact, remove all other files except BuildType.* Then
+		                F = GetFolderItem(OutFolder, FolderItem.PathTypeNative)
+		                If F <> Nil Then
+		                  FC = F.Count
+		                  Status.Text = "Clean Up Files..."
+		                  Notification.UpdateBuildStatus("Cleaning Up Files...")
+		                  ' Collect top-level items to delete. Windows: per-file rmdir/del commands.
+		                  ' Linux: build an array and execute rm -rf in batches of 20 to avoid ARG_MAX
+		                  '  limits. rm -rf handles each subfolder recursively so we only need the
+		                  '  top-level path - no need to enumerate files inside subfolders.
+		                  Dim WinCmds As String = ""
+		                  Dim LinuxItems() As String
+		                  For I = 1 To FC
+		                    If Left(F.Item(I).Name, 5) = Left(BT, 5) Or Left(F.Item(I).Name, 5) = "LLScr" Or Left(F.Item(I).Name, 8) = "Patch.7z" Then 'Keep
+		                    Else
+		                      If Right(F.Item(I).Name, 4) <> ".jpg" And Right(F.Item(I).Name, 4) <> ".mp4" And _
+		                        Right(F.Item(I).Name, 4) <> ".png" And Right(F.Item(I).Name, 4) <> ".svg" And _
+		                        Right(F.Item(I).Name, 4) <> ".ico" Then
+		                        WinCmds = WinCmds + "rmdir /q /s " + Chr(34) + F.Item(I).NativePath + Chr(34) + Chr(10)
+		                        WinCmds = WinCmds + "del /f /q " + Chr(34) + F.Item(I).NativePath + Chr(34) + Chr(10)
+		                        LinuxItems.Add(Chr(34) + F.Item(I).NativePath + Chr(34))
+		                      End If
+		                    End If
+		                  Next
+		                  If TargetWindows Then
+		                    If WinCmds.Trim <> "" Then RunCommand(WinCmds)
+		                    ' .lnk files: Xojo resolves shortcuts on Windows so NativePath points to the target, not
+		                    ' the .lnk itself. Use a wildcard del to catch them directly by path construction instead.
+		                    RunCommand("del /f /q " + Chr(34) + NoSlash(OutFolder) + "\*.lnk" + Chr(34))
+		                  Else
+		                    ' Execute rm -rf in batches of 20 top-level paths. Since rm -rf recurses into
+		                    ' any subfolder automatically, there's no need to list files inside them.
+		                    ' Batching keeps each shell call to a manageable size.
+		                    Dim LLBatchSize As Integer = 20
+		                    Dim LLBatchJ As Integer = 0
+		                    While LLBatchJ < LinuxItems.Count
+		                      Dim LLBatchCmd As String = "rm -rf"
+		                      Dim LLBatchEnd As Integer = LLBatchJ + LLBatchSize - 1
+		                      If LLBatchEnd >= LinuxItems.Count Then LLBatchEnd = LinuxItems.Count - 1
+		                      Dim LLBatchK As Integer
+		                      For LLBatchK = LLBatchJ To LLBatchEnd
+		                        LLBatchCmd = LLBatchCmd + " " + LinuxItems(LLBatchK)
+		                      Next LLBatchK
+		                      Sh.Execute(LLBatchCmd)
+		                      While Sh.IsRunning
+		                        App.DoEvents(20)
+		                      Wend
+		                      LLBatchJ = LLBatchJ + LLBatchSize
+		                    Wend
+		                  End If
+		                End If
+		              End If
+		            End If
+		            
+		          End If
+		          
+		        End If
+		        
+		        
+		        
+		        '-----------------------------------------------------------------------------------------------------************************************************************
+		        'Update INI with compress size
+		        'If CheckGetSizeComp.Value = True Then
+		        
+		        'End If
+		        
+		        
+		        
+		        'Now Compress to a single tar if checked;
+		        If CheckCompress.Value = True Then 'Tar overwrites existing, so no need to check for it
+		          'Make a single tar Title_Version_BuildType.tar
+		          VersIncl = ""
+		          If ItemLLItem.Version.Trim <> "" Then
+		            VersIncl = ItemLLItem.Version.Trim + "_" 'Make sure the output filename has no spaces, just for uniform results and to upload easier.
+		            VersIncl = VersIncl.ReplaceAll(" ",".")
+		          End If
+		          'CompressedFileOut = Slash(RootPath) + Replace(ItemLLItem.TitleName, " ", ".") + "_" + VersIncl + BT + ".tar"
+		          
+		          If CheckInternetRequired.Value = True Then VersIncl = VersIncl + "Online_" 'Add Online to output file, so you can tell it requires internet
+		          VersIncl = VersIncl + ComboArch.Text.ReplaceAll("x86 + x64","x64+x86") + "_" 'Show what Arch it is in filename
+		          
+		          CompressedFileOut = ItemLLItem.TitleName + "_" + VersIncl + BT + ".tar"
+		          CompressedFileOut = Slash(RootPath) + CompressedFileOut.ReplaceAll(" ", ".")
+		          
+		          
+		          Commands = "cd "+Chr(34)+OutFolder+Chr(34)+" && tar -cf " +Chr(34)+CompressedFileOut+Chr(34)+" *"
+		          Status.Text =  "Compressing to " + CompressedFileOut
+		          Notification.UpdateBuildStatus("Compressing Archive...")
+		          If Debugging Then Debug("Compressing to file: "+CompressedFileOut)
+		          Sh.Execute (Commands)
+		          While Sh.IsRunning
+		            App.DoEvents(20)
+		          Wend
+		          
+		          If Exist(CompressedFileOut) Then 'If Successful, delete the uncompressed version
+		            Deltree (OutFolder) 'If the compressed file is made from the OutFolder, just delete it
+		            GlobalCompressedFileOut = CompressedFileOut
+		          End If
+		        End If
+		        
+		      Case Else 'ss/pp App/Game ----------------------------------------------------------------
+		        
+		        '----------- Always do this as it's empty? -----------------------------
+		        ' Select the correct 7z binary for the current OS.
+		        ' Using Win7z (7z.exe) on Linux is wrong - it requires Wine and produces
+		        ' excessive stdout that causes a pipe buffer deadlock in RunCommandResults.
+		        SevenZip = Linux7z
+		        If TargetWindows Then SevenZip = Win7z
+		        OutFolder = Slash(TextBuildToFolder.Text)
+		        InFolder = Slash(TextIncludeFolder.Text)
+		        
+		        If TargetWindows Then
+		          OutFolder = OutFolder.ReplaceAll("/","\")
+		          InFolder = InFolder.ReplaceAll("/","\")
+		          RootPath = Slash(Left(NoSlash(OutFolder), InStrRev(NoSlash(OutFolder), "\") - 1)) 'LLFiles use back Slash
+		          RootPath = RootPath.ReplaceAll("/","\")
+		        Else
+		          OutFolder = OutFolder.ReplaceAll("\","/")
+		          InFolder = InFolder.ReplaceAll("\","/")
+		          RootPath = Slash(Left(NoSlash(OutFolder), InStrRev(NoSlash(OutFolder), "/") - 1)) 'LLFiles use forward Slash
+		          RootPath = RootPath.ReplaceAll("\","/")
+		        End If
+		        
+		        OutFile = OutFolder+BT+".7z"
+		        InFile = InFolder+BT+".7z"
+		        
+		        InputFolder = InFolder
+		        OutputFile = OutFile
+		        
+		        If Debugging Then Debug ("OutFile: " + OutFile +" Include File To Test: " + InFile)
+		        If Debugging Then Debug ("Root Path: "+ RootPath +" InFolder: "+ InFolder)
+		        If Debugging Then Debug ("NoInstall: "+ItemLLItem.NoInstall.ToString+ " BT: "+ BT)
+		        '--------------------
+		        
+		        If Exist (Slash(TextBuildToFolder.Text)+BT+".7z") = True Then
+		          If Debugging Then Debug (Chr(10)+"Found: "+ Slash(TextBuildToFolder.Text)+BT+".7z")
+		          'Do Nothing
+		        Else 'Only compress if not already compressed file found
+		          
+		          If InFolder = OutFolder Then
+		            If Debugging Then Debug ("Infolder = OutFolder")
+		            If Not Exist(OutFile) Then 'If doesn't have the compressed file make it still
+		              If Not Exist(InFile) Then 'If doesn't have the compressed file make it still
+		                If BT <> "ssApp" Then 'ssApp is Windows NoInstall
+		                  Status.Text =  "Compressing Files..."
+		                  Notification.UpdateBuildStatus("Compressing Files...")
+		                  Commands = SevenZip +" a -m0=lzma2 -mx=2 "+Chr(34)+OutFile+Chr(34)+" "+Chr(34)+InFolder+"*"+Chr(34)+" -x!"+BT+".*" ' -m0=lzma2 -mx=2  Faster but less compressed
+		                  If Debugging Then Debug (Commands)
+		                  Res = RunCommandResults(Commands)
+		                  If Debugging Then Debug (Res)
+		                End If
+		                
+		              Else 'Just copy it
+		                If InFile <> OutFile Then 'Don't Copy Self
+		                  If Len(OutFile)>=3 Then
+		                    If OutFile <> "/" And Exist(OutFile) Then Deltree(OutFile)
+		                  End If
+		                  Suc = Copy (InFile, OutFile)
+		                End If
+		              End If
+		            Else 'Do Nothing so far as it's already existing
+		            End If
+		          Else 'In Folder is different to build folder so work from in folder instead
+		            If Not Exist(InFile) Then 'If doesn't have the compressed file make it still
+		              If ItemLLItem.NoInstall = False Then 
+		                Status.Text =  "Compressing Files..."
+		                Notification.UpdateBuildStatus("Compressing Files...")
+		                'Commands = Win7z +" a -m0=lzma2 -mx=2 "+Chr(34)+OutFile+Chr(34)+" "+InFolder+"* "+"-x!"+BT+".* "+"-x!"+"*.jpg "+"-x!"+"*.png "+"-x!"+"*.mp4 "+"-x!"+"*.svg "+"-x!"+"*.ico" ' -m0=lzma2 -mx=2  Faster but less compressed
+		                Commands = SevenZip +" a -m0=lzma2 -mx=2 "+Chr(34)+OutFile+Chr(34)+" "+Chr(34)+InFolder+"*"+Chr(34)+" -x!"+BT+".* " ' -m0=lzma2 -mx=2  Faster but less compressed
+		                If Debugging Then Debug (Commands)
+		                Res = RunCommandResults(Commands)
+		                If Debugging Then Debug (Res)
+		              End If
+		            Else 'Copy Existing Only
+		              If InFile <> OutFile Then 'Don't Copy Self
+		                If Len(OutFile)>=3 Then
+		                  If OutFile <> "/" And Exist(OutFile) Then Deltree(OutFile)
+		                End If
+		                Suc = Copy (InFile, OutFile)
+		              End If
+		            End If
+		          End If
+		          
+		          'Check if build path is the same as Source Path and delete original uncompressed files if so
+		          
+		          'STOP * If the user makes a script only build then this will remove important files, need a checkbox for them
+		          
+		          If BT = "ssApp" Then 'ssApp is Windows NoInstall
+		            'No install, do nothing
+		          Else ' Is installer, clean up?
+		            If InFolder = OutFolder Then      
+		              If Exist(OutFile) Then 'Now if compressed file is in tact, remove all other files except BuildType.* Then
+		                F = GetFolderItem(OutFolder, FolderItem.PathTypeNative)
+		                If F <> Nil Then
+		                  FC = F.Count
+		                  Status.Text = "Clean Up Files..."
+		                  Notification.UpdateBuildStatus("Cleaning Up Files...")
+		                  ' Collect top-level items to delete. Windows: per-file rmdir/del commands.
+		                  ' Linux: build an array and execute rm -rf in batches of 20 to avoid ARG_MAX
+		                  '  limits. rm -rf handles each subfolder recursively so we only need the
+		                  '  top-level path - no need to enumerate files inside subfolders.
+		                  Dim WinCmds As String = ""
+		                  Dim LinuxItems() As String
+		                  For I = 1 To FC
+		                    If Left(F.Item(I).Name, 5) = Left(BT, 5) Then 'Keep
+		                    Else
+		                      If Right(F.Item(I).Name, 4) <> ".jpg" And Right(F.Item(I).Name, 4) <> ".mp4" And _
+		                        Right(F.Item(I).Name, 4) <> ".png" And Right(F.Item(I).Name, 4) <> ".svg" And _
+		                        Right(F.Item(I).Name, 4) <> ".ico" Then
+		                        WinCmds = WinCmds + "rmdir /q /s " + Chr(34) + F.Item(I).NativePath + Chr(34) + Chr(10)
+		                        WinCmds = WinCmds + "del /f /q " + Chr(34) + F.Item(I).NativePath + Chr(34) + Chr(10)
+		                        LinuxItems.Add(Chr(34) + F.Item(I).NativePath + Chr(34))
+		                      End If
+		                    End If
+		                  Next
+		                  If TargetWindows Then
+		                    If WinCmds.Trim <> "" Then RunCommand(WinCmds)
+		                    ' .lnk files: Xojo resolves shortcuts on Windows so NativePath points to the target, not
+		                    ' the .lnk itself. Use a wildcard del to catch them directly by path construction instead.
+		                    RunCommand("del /f /q " + Chr(34) + NoSlash(OutFolder) + "\*.lnk" + Chr(34))
+		                  Else
+		                    ' Execute rm -rf in batches of 20 top-level paths. Since rm -rf recurses into
+		                    ' any subfolder automatically, there's no need to list files inside them.
+		                    ' Batching keeps each shell call to a manageable size.
+		                    Dim LLBatchSize As Integer = 20
+		                    Dim LLBatchJ As Integer = 0
+		                    While LLBatchJ < LinuxItems.Count
+		                      Dim LLBatchCmd As String = "rm -rf"
+		                      Dim LLBatchEnd As Integer = LLBatchJ + LLBatchSize - 1
+		                      If LLBatchEnd >= LinuxItems.Count Then LLBatchEnd = LinuxItems.Count - 1
+		                      Dim LLBatchK As Integer
+		                      For LLBatchK = LLBatchJ To LLBatchEnd
+		                        LLBatchCmd = LLBatchCmd + " " + LinuxItems(LLBatchK)
+		                      Next LLBatchK
+		                      Sh.Execute(LLBatchCmd)
+		                      While Sh.IsRunning
+		                        App.DoEvents(20)
+		                      Wend
+		                      LLBatchJ = LLBatchJ + LLBatchSize
+		                    Wend
+		                  End If
+		                End If
+		              End If
+		            End If
+		            
+		          End If
+		          
+		        End If
+		        
+		        '-----------------------------------------------------------------------------------------------------************************************************************
+		        'Update INI with compress size
+		        If CheckGetSizeComp.Value = True Then
+		          If Exist (OutFile) Then
+		            Notification.UpdateBuildStatus("Getting Compressed Size...")
+		            TextInstalledSize.Text = GetUnCompressedSize(OutFile) 'ZippedOut
+		            '''''MsgBox GetUnCompressedSize (OutFile)
+		            
+		            'Resave the LLFile with the new size
+		            If SaveLLFile (Slash(TextBuildToFolder.Text)) = True Then
+		              'Success
+		            End If
+		          End If
+		        End If
+		        
+		        'Now Compress to a single 7z if checked;
+		        If CheckCompress.Value = True Then 'Tar overwrites existing, so no need to check for it, but does 7z?
+		          Dim ExtOut As String
+		          If BT = "ppGame" Then
+		            ExtOut = ".pgz"
+		          Else
+		            ExtOut = ".apz"
+		          End If
+		          'Make a single tar Title_Version_BuildType .apz or .pgz
+		          VersIncl = ""
+		          'If ItemLLItem.Version.Trim <> "" Then VersIncl = Replace(ItemLLItem.Version.Trim + "_", " ", ".") 'Make sure the output filename has no spaces, just for uniform results and to upload easier.
+		          'CompressedFileOut = Slash(RootPath) + Replace(ItemLLItem.TitleName, " ", ".") + "_" + VersIncl + BT + ExtOut
+		          
+		          If ItemLLItem.Version.Trim <> "" Then
+		            VersIncl = ItemLLItem.Version.Trim + "_" 'Make sure the output filename has no spaces, just for uniform results and to upload easier.
+		            VersIncl = VersIncl.ReplaceAll(" ",".")
+		          End If
+		          
+		          If CheckInternetRequired.Value = True Then VersIncl = VersIncl + "Online_" 'Add Online to output file, so you can tell it requires internet
+		          
+		          If  ComboArch.Text <> "" Then
+		            VersIncl = VersIncl + ComboArch.Text.ReplaceAll("x86 + x64","x64+x86") + "_" 'Show what Arch it is in filename
+		          End If
+		          CompressedFileOut = ItemLLItem.TitleName + "_" + VersIncl + BT + ExtOut
+		          CompressedFileOut = Slash(RootPath) + CompressedFileOut.ReplaceAll(" ", ".")
+		          
+		          If TargetWindows Then
+		            CompressedFileOut = CompressedFileOut.ReplaceAll("/","\")
+		          End If
+		          
+		          Status.Text =  "Compressing to " + CompressedFileOut
+		          Notification.UpdateBuildStatus("Compressing Final Archive...")
+		          
+		          Commands = SevenZip +" a -mx0 "+Chr(34)+CompressedFileOut+Chr(34)+" "+Chr(34)+InputFolder+"*"+Chr(34) '-mx0 is store
+		          If Debugging Then Debug (Commands)
+		          Res = RunCommandResults(Commands)
+		          If Debugging Then Debug (Res)
+		          
+		          If Exist(CompressedFileOut) Then 'If Successful, delete the uncompressed version
+		            Deltree (OutFolder) 'If the compressed file is made from the OutFolder, just delete it
+		            GlobalCompressedFileOut = CompressedFileOut
+		          End If
+		        End If
+		      End Select
+		      
+		    End If
+		    Status.Text = "Built Successfully"
+		    If Debugging Then Debug ("Built Successfully")
+		    
+		    ' After a successful build while editing an existing item, reload the freshly-written
+		    ' LLFile back into ItemLLItem and refresh the editor fields so the in-memory state
+		    ' matches what was just saved. The user handles any DB refresh themselves.
+		    If EditingItem Then
+		      Dim ReloadINI As String
+		      If ItemLLItem.Compressed Then
+		        ' Compressed items: the loose INI is already in ItemTempPath from the initial load
+		        Select Case BT
+		        Case "ppGame" 
+		          ReloadINI = Slash(ItemTempPath) + BT + ".ppg"
+		        Case "ssApp", "ppApp" 
+		          ReloadINI = Slash(ItemTempPath) + BT + ".app"
+		        Case "LLApp" 
+		          ReloadINI = Slash(ItemTempPath) + "LLApp.lla"
+		        Case "LLGame" 
+		          ReloadINI = Slash(ItemTempPath) + "LLGame.llg"
+		        End Select
+		      Else
+		        ' Uncompressed items: read from the build-to folder directly
+		        Select Case BT
+		        Case "ppGame" 
+		          ReloadINI = Slash(TextBuildToFolder.Text) + BT + ".ppg"
+		        Case "ssApp", "ppApp" 
+		          ReloadINI = Slash(TextBuildToFolder.Text) + BT + ".app"
+		        Case "LLApp" 
+		          ReloadINI = Slash(TextBuildToFolder.Text) + "LLApp.lla"
+		        Case "LLGame" 
+		          ReloadINI = Slash(TextBuildToFolder.Text) + "LLGame.llg"
+		        End Select
+		      End If
+		      If ReloadINI <> "" And Exist(ReloadINI) Then
+		        Notification.UpdateBuildStatus("Reloading metadata...")
+		        ' Capture the original FileINI BEFORE LoadLLFile overwrites ItemLLItem.FileINI
+		        Dim ColFileINI As Integer = Data.GetDBHeader("FileINI")
+		        Dim TargetFileINI As String = ItemLLItem.FileINI
+		        Success = LoadLLFile(ReloadINI) ' EditingItem is still True so paths won't be expanded
+		        If Debugging Then Debug("Reloaded after build: " + ReloadINI)
+		        
+		        ' Find the matching Data.Items row via Main.Items CellTags, matching on
+		        ' the original FileINI captured above (before LoadLLFile replaced it).
+		        Dim R As Integer = -1
+		        Dim VI As Integer
+		        For VI = 0 To Main.Items.LastRowIndex
+		          Dim DataRow As Integer = Main.Items.CellTagAt(VI, 0)
+		          If Data.Items.CellTextAt(DataRow, ColFileINI) = TargetFileINI Then
+		            R = DataRow
+		            Exit
+		          End If
+		        Next
+		        If Debugging Then Debug("Metadata row found: " + Str(R) + " (FileINI=" + TargetFileINI + ")")
+		        If R >= 0 Then
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("TitleName"))        = ItemLLItem.TitleName
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("Version"))          = ItemLLItem.Version
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("Description"))      = ItemLLItem.Descriptions
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("URL"))              = ItemLLItem.URL
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("Categories"))       = ItemLLItem.Categories
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("Catalog"))          = ItemLLItem.Catalog
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("License"))          = Str(ItemLLItem.License)
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("InstalledSize"))    = Str(ItemLLItem.InstallSize)
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("Tags"))             = ItemLLItem.Tags
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("Publisher"))        = ItemLLItem.Publisher
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("Language"))         = ItemLLItem.Language
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("Rating"))           = Str(ItemLLItem.Rating)
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("ReleaseVersion"))   = ItemLLItem.ReleaseVersion
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("ReleaseDate"))      = ItemLLItem.ReleaseDate
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("RequiredRuntimes")) = ItemLLItem.RequiredRuntimes
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("Builder"))          = ItemLLItem.Builder
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("Flags"))            = ItemLLItem.Flags
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("Additional"))       = ItemLLItem.Additional
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("Players"))          = Str(ItemLLItem.Players)
+		          Data.Items.CellTextAt(R, Data.GetDBHeader("Dependencies"))     = ItemLLItem.Dependencies
+		          Main.ChangeItem(R) ' Refresh MetaData panel with the reloaded values
+		        End If
+		      End If
+		    End If
+		    
+		    Notification.FinishBuild(True, BuildIconFile)
+		  Else
+		    Status.Text = "Failed to Build LLFile"
+		    If Debugging Then Debug ("Built Failed")
+		    Notification.FinishBuild(False, BuildIconFile)
+		  End If
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub GetSizeOfItem()
+		  ' InstalledSize is stored as raw bytes for ALL build types (LLApp, LLGame, ppApp, ppGame, ssApp).
+		  ' Main displays: bytes / 1,000,000 → MB.
+		  ' GetUnCompressedSize returns raw bytes (from "7z t" → "Size:" line) — store as-is.
+		  ' GetFolderSize now returns raw bytes — store as-is.
+		  
+		  If ItemLLItem.Compressed = True Then
+		    Dim UnSize As Int64
+		    UnSize = GetUnCompressedSize(ItemLLItem.PathINI).ToInt64
+		    TextInstalledSize.Text = UnSize.ToString 'Store raw bytes
+		  Else
+		    TextInstalledSize.Text = GetFolderSize(TextIncludeFolder.Text).ToString 'Store raw bytes
+		  End If
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetUnCompressedSize(CompFile As String) As String
+		  If Not Exist (CompFile) Then Return "0" 'Dud Item
+		  
+		  Dim Res, FinalRes As String
+		  Dim Sp() As String
+		  Dim I As Integer
+		  
+		  Dim Sh As New Shell
+		  Sh.ExecuteMode = Shell.ExecuteModes.Synchronous
+		  Sh.TimeOut = -1
+		  
+		  
+		  If TargetWindows Then
+		    Sh.Execute(Win7z +" t "+Chr(34)+CompFile+Chr(34))
+		  Else ' Linux
+		    Sh.Execute(Linux7z +" t "+Chr(34)+CompFile+Chr(34))
+		  End If
+		  
+		  FinalRes = "0" ' Will return 0 if size not returned
+		  
+		  Res = Sh.ReadAll
+		  Sp = Res.Split(EndOfLine)
+		  If Sp.Count >=0 Then
+		    For I = 0 To Sp.Count -1
+		      Sp(I) = Sp(I).Trim
+		      If Left(Sp(I),5) = "Size:" Then
+		        FinalRes =Right(Sp(I),Len(Sp(I))-5)
+		        FinalRes = FinalRes.Trim
+		        Exit
+		      End If
+		    Next I
+		  End If
+		  Return FinalRes
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub LoadCatalogs()
+		  Dim FileIn As String
+		  FileIn = Slash(ToolPath) + "MenuCatalogApps.ini"
+		  If Exist(FileIn) = True Then
+		    LLCatalogApps = LoadDataFromFile(FileIn).Split(Chr(10))
+		  End If
+		  FileIn = Slash(ToolPath) + "MenuCatalogGames.ini"
+		  If Exist(FileIn) = True Then
+		    LLCatalogGames = LoadDataFromFile(FileIn).Split(Chr(10))
+		  End If
+		  FileIn = Slash(ToolPath) + "MenuCategoriesssApps.ini"
+		  If Exist(FileIn) = True Then
+		    SSCategoriesApps = LoadDataFromFile(FileIn).Split(Chr(10))
+		  End If
+		  
+		  FileIn = Slash(ToolPath) + "MenuCatalogssApps.ini"
+		  If Exist(FileIn) = True Then
+		    SSCatalogsApps = LoadDataFromFile(FileIn).Split(Chr(10))
+		  End If
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub PopulateData()
+		  Dim Ext As String
+		  Dim BT As String
+		  Dim F As FolderItem
+		  Dim I As Integer
+		  Dim CleanTheCat As String
+		  Dim Sp() As String
+		  
+		  
+		  EditingLnk = -1 'Start with -1 so you can edit the Main item Catalogs
+		  Populating = True 'Make sure not to allow blanks to overwrite the data before it's populated
+		  
+		  BT = ItemLLItem.BuildType
+		  
+		  'Defaults
+		  If BT = "" Then ComboBuildType.SelectedRowIndex = 0 'Default to LLApp if none loaded in
+		  
+		  'Set the Size first so I can uncheck the Auto Getting size on the Build Tab
+		  CheckGetSizeComp.Value = False
+		  TextInstalledSize.Text = ItemLLItem.InstallSize.ToString
+		  
+		  'Main Window 1 - General
+		  ComboBuildType.RemoveAllRows
+		  ComboBuildType.AddRow ("LLApp")
+		  ComboBuildType.AddRow ("ssApp")
+		  ComboBuildType.AddRow ("ppApp")
+		  ComboBuildType.AddRow ("LLGame")
+		  ComboBuildType.AddRow ("ppGame")
+		  
+		  TextTitle.Text = ItemLLItem.TitleName
+		  TextVersion.Text = ItemLLItem.Version
+		  TextURLs.Text = ItemLLItem.URL.ReplaceAll("|", Chr(13))
+		  ComboBuildType.Text = ItemLLItem.BuildType
+		  Dim MI As New DesktopMenuItem
+		  MI.Text = ItemLLItem.BuildType
+		  SelectionChangedLoadCats(MI)
+		  'I need to load in the correct Catalogs so the user can only add the correct types
+		  TextPriority.Text = ItemLLItem.Priority.ToString
+		  ComboCategory.Text = ItemLLItem.Categories
+		  CheckNoInstall.Value = ItemLLItem.NoInstall
+		  TextDE.Text = ItemLLItem.DECompatible
+		  TextPM.Text = ItemLLItem.PMCompatible
+		  'Move below combo popluation
+		  'ComboArch.SelectedRowIndex = 2 'Get off all items before setting text so it can jump to real one
+		  'ComboArch.Text = ItemLLItem.ArchCompatible
+		  'MsgBox ItemLLItem.ArchCompatible
+		  CheckInternetRequired.Value = ItemLLItem.InternetRequired
+		  CheckForceDERefresh.Value = ItemLLItem.ForceDERefresh
+		  CheckHideInLauncher.Value = ItemLLItem.HideInLauncher
+		  TextDescription.Text = ItemLLItem.Descriptions.ReplaceAll(Chr(30), Chr(13))
+		  
+		  If TextPriority.Text = "" Or TextPriority.Text = "0" Then TextPriority.Text = "5" 'Default
+		  
+		  'Load in Combo's
+		  'Categories are in the BuildType Combo Selection Action
+		  
+		  'SysAvailableDesktops
+		  ComboDE.RemoveAllRows
+		  AdvancedLink.ComboDE.RemoveAllRows
+		  For I = 0 To SysAvailableDesktops.Count-1
+		    ComboDE.AddRow(SysAvailableDesktops(I))
+		    AdvancedLink.ComboDE.AddRow(SysAvailableDesktops(I))
+		  Next
+		  ComboDE.SelectedRowIndex = 0 'All Default
+		  AdvancedLink.ComboDE.SelectedRowIndex = 0 'All Default
+		  
+		  'SysAvailablePackageManagers
+		  ComboPM.RemoveAllRows
+		  AdvancedLink.ComboPM.RemoveAllRows
+		  For I = 0 To SysAvailablePackageManagers.Count-1
+		    ComboPM.AddRow(SysAvailablePackageManagers(I))
+		    AdvancedLink.ComboPM.AddRow(SysAvailablePackageManagers(I))
+		  Next
+		  ComboPM.SelectedRowIndex = 0 'All Default
+		  AdvancedLink.ComboPM.SelectedRowIndex = 0 'All Default
+		  
+		  'SysAvailableArchitectures
+		  ComboArch.RemoveAllRows
+		  AdvancedLink.ComboArch.RemoveAllRows
+		  For I = 0 To SysAvailableArchitectures.Count-1
+		    ComboArch.AddRow(SysAvailableArchitectures(I))
+		    AdvancedLink.ComboArch.AddRow(SysAvailableArchitectures(I))
+		  Next
+		  ComboArch.SelectedRowIndex = 0 'All Default
+		  AdvancedLink.ComboArch.SelectedRowIndex = 0 'All Default
+		  
+		  'Set Arch to loaded in text
+		  ComboArch.Text = ItemLLItem.ArchCompatible
+		  
+		  
+		  'Main Window 2 - Links
+		  TextDefaultMenuPath.Text = ItemLLItem.StartMenuSourcePath 'This is required to use Keep in Folder and also to have Unsorted ssApps/ppApps.
+		  'TextKeepShortcuts.Text = ""
+		  CheckKeepFolder.Value = ItemLLItem.KeepInFolder
+		  CheckKeepAll.Value = ItemLLItem.KeepAll
+		  ComboShortcut.Text = ""
+		  TextNewShortcut.Text = ""
+		  TextComment.Text = ""
+		  TextExecute.Text = ""
+		  TextRunInPath.Text = ""
+		  TextIcon.Text = ""
+		  TextFileTypes.Text = ""
+		  TextDescriptionLink.Text = ""
+		  TextFlags.Text = ""
+		  'ComboMenuCatalog.Text = ""
+		  'TextMenuCatalog.Text = ""
+		  CheckRunInTerminal.Value = False
+		  CheckShowDesktop.Value = False
+		  CheckShowPanel.Value = False
+		  CheckSendTo.Value = False
+		  CheckShowFavorites.Value = False
+		  
+		  'KeepShortcuts list
+		  TextKeepShortcuts.Text = ItemLLItem.ShortCutNamesKeep
+		  'Do Catalogs for main item in the Link section if no link detected? - May need own section
+		  If EditingLnk < 0 Then
+		    CleanTheCat = ItemLLItem.Catalog.ReplaceAll("|",";") 'Change to Linux style for this part
+		    CleanTheCat = CleanTheCat.ReplaceAll(" ;",";")
+		    CleanTheCat = CleanTheCat.ReplaceAll("; ",";")
+		    TextMenuCatalog.Text = CleanTheCat.ReplaceAll(";",Chr(13)) 'Show the main Items Catalog, once set you can't get back to it though so I may add it to a variable as you go
+		  Else
+		    CleanTheCat = ItemLnk(EditingLnk).Categories.ReplaceAll("|",";") 'Change to Linux style for this part
+		    CleanTheCat = CleanTheCat.ReplaceAll(" ;",";")
+		    CleanTheCat = CleanTheCat.ReplaceAll("; ",";")
+		    TextMenuCatalog.Text = CleanTheCat.ReplaceAll(";",Chr(13)) 'Show the main Items Catalog, once set you can't get back to it though so I may add it to a variable as you go
+		    
+		    'TextMenuCatalog.Text = ItemLnk(EditingLnk).Categories.ReplaceAll(";", Chr(13)) 'Make Multi Line, not ; seperated
+		  End If
+		  
+		  
+		  ComboShortcut.RemoveAllRows 'Clear the Existing Shortcuts
+		  
+		  'Add Main item to Link 0
+		  ComboShortcut.AddRow("Main Item")
+		  EditingCBLnk = ComboShortcut.LastAddedRowIndex
+		  ComboShortcut.RowTagAt(EditingCBLnk) = 0
+		  EditingLnk = 0
+		  ItemLnk(0).Title = "Main Item"
+		  ItemLnk(0).Categories = ItemLLItem.Catalog
+		  
+		  
+		  If LnkCount >= 1 Then
+		    For I = 1 To LnkCount
+		      If ItemLnk(I).Title <> "" Then 'Blank Items get ignored
+		        If ItemLnk(I).LinuxLink And (ItemLLItem.BuildType = "ppGame" Or ItemLLItem.BuildType = "ppApp" Or ItemLLItem.BuildType = "ssApp") Then
+		          ComboShortcut.AddRow(ItemLnk(I).Title + " [Linux]")
+		        Else
+		          ComboShortcut.AddRow(ItemLnk(I).Title)
+		        End If
+		        EditingCBLnk = ComboShortcut.LastAddedRowIndex
+		        ComboShortcut.RowTagAt(EditingCBLnk) = I
+		        EditingLnk = I
+		      End If
+		    Next
+		    ComboShortcut.SelectedRowIndex = 0 'Pick first item to populate the Link Data
+		  End If
+		  
+		  'Set initial Linux Link checkbox state based on build type
+		  UpdateLinuxLinkCheckbox
+		  
+		  
+		  'Main Window 3 - Assembly
+		  
+		  'MsgBox ItemLLItem.PathApp 'It's already expanded by here ,So I'll need to set the LLFileLoad to not expand the app path when in Edit Mode.
+		  
+		  TextInstallToFolder.Text = CompPath(ItemLLItem.PathApp, True) 'This is breaking it in Linux as editing ssApps it'll change %ProgramFiles% To $HOME/.wine/drive_c/Program Files
+		  
+		  
+		  TextAssembly.Text = ItemLLItem.Assembly.ReplaceAll(Chr(30), Chr(13)) ' Try 13 first as 10 was off before
+		  
+		  TextInstaller.Text = ""
+		  TextUsage.Text = ""
+		  
+		  
+		  'Main Window 4 - Post-Processing
+		  If Exist(Slash(ItemTempPath)+"LLScript.sh") Then TextUserScript.Text = LoadDataFromFile(Slash(ItemTempPath)+"LLScript.sh")
+		  If Exist(Slash(ItemTempPath)+BT+".cmd") Then TextUserScript.Text = LoadDataFromFile(Slash(ItemTempPath)+BT+".cmd")
+		  
+		  If Exist(Slash(ItemTempPath)+"LLScript_Sudo.sh") Then TextSudoScript.Text = LoadDataFromFile(Slash(ItemTempPath)+"LLScript_Sudo.sh")
+		  If Exist(Slash(ItemTempPath)+BT+".reg") Then TextSudoScript.Text = LoadDataFromFile(Slash(ItemTempPath)+BT+".reg")
+		  
+		  
+		  'Main Window 5 - Graphics
+		  If Exist(Slash(ItemTempPath)+BT+".jpg") Then
+		    F = GetFolderItem(Slash(ItemTempPath)+BT+".jpg",FolderItem.PathTypeNative)
+		    CanvasScreenshot.Backdrop = Picture.Open (F)
+		  End If
+		  
+		  If Exist(Slash(ItemTempPath)+BT+".ico") Then
+		    F = GetFolderItem(Slash(ItemTempPath)+BT+".ico",FolderItem.PathTypeNative)
+		    CanvasIcon.Backdrop = Picture.Open (F)
+		  End If
+		  
+		  If Exist(Slash(ItemTempPath)+BT+".svg") Then
+		    F = GetFolderItem(Slash(ItemTempPath)+BT+".svg",FolderItem.PathTypeNative)
+		    CanvasIcon.Backdrop = Picture.Open (F)
+		  End If
+		  
+		  If Exist(Slash(ItemTempPath)+BT+".png") Then
+		    F = GetFolderItem(Slash(ItemTempPath)+BT+".png",FolderItem.PathTypeNative)
+		    CanvasFader.Backdrop = Picture.Open (F)
+		  End If
+		  
+		  TextMovieFile.Text = ItemLLItem.FileMovie
+		  
+		  
+		  'Main Window 6 - MetaData
+		  ComboTags.Text = "" 'Need to populate these here
+		  TextTags.Text = ItemLLItem.Tags
+		  TextPublisher.Text = ItemLLItem.Publisher
+		  TextLanguage.Text = ItemLLItem.Language
+		  TextRating.Text = ItemLLItem.Rating.ToString
+		  TextPlayers.Text = ItemLLItem.Players.ToString
+		  
+		  If ItemLLItem.License = 0 Then ComboLicense.Text = "Unknown"
+		  If ItemLLItem.License = 1 Then ComboLicense.Text = "Paid"
+		  If ItemLLItem.License = 2 Then ComboLicense.Text = "Free"
+		  If ItemLLItem.License = 3 Then ComboLicense.Text = "Open"
+		  'ComboLicense.Text = ItemLLItem.License.ToString 'Fix this to show right one
+		  
+		  TextReleaseVersion.Text = ItemLLItem.ReleaseVersion
+		  TextReleaseDate.Text = ItemLLItem.ReleaseDate
+		  TextBuilder.Text = ItemLLItem.Builder
+		  'TextInstalledSize.Text = ItemLLItem.InstallSize.ToString 'Move to the Top so I can select the Get size auto by default
+		  
+		  
+		  'Main Window 7 - Build Tab
+		  If TargetWindows Then
+		    ItemTempPath = ItemTempPath.ReplaceAll("/","\")
+		  Else
+		    ItemTempPath = ItemTempPath.ReplaceAll("\","/")
+		  End If
+		  
+		  TextIncludeFolder.Text = ItemTempPath 'Fix to use correct path depending on job
+		  TextBuildToFolder.Text = ItemTempPath 'Fix to use correct path depending on job
+		  CheckCompress.Value = ItemLLItem.Compressed 'If already compressed then check it again so you know
+		  
+		  If ItemLLItem.Compressed Then
+		    CheckGetSizeComp.Enabled = False 'Fully disable it, not possible to do automated unless I extract the whole damn thing
+		    CheckGetSizeComp.Value = False
+		  End If
+		  
+		  RefreshImportSizeButton() ' Show Import whenever any usable source exists
+		  
+		  
+		  Populating = False 'Now you can edit without overwriting the Item Data.
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Quote(s As String)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function Quote(s As String) As String
+		  Return """" + s + """"
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub RefreshImportSizeButton()
+		  ' Finds the best source for importing the installed size and shows the Import button
+		  ' whenever it can produce a meaningful result. Priority order:
+		  '   1. Compressed archive in the build-to folder   (BuildType.tar.gz / .7z)
+		  '   2. Compressed archive in the include folder    (same names)
+		  '   3. The item's own PathINI archive (Compressed=True items already stored as archive)
+		  '   4. Include folder file-count fallback          (always available when folder exists)
+		  '
+		  ' ZippedOut is set to the archive path for cases 1-3, or "" for the folder fallback.
+		  ' The button is hidden only when the include folder is also empty/missing.
+		  
+		  Dim BT  As String = ComboBuildType.Text
+		  If BT = "" Then BT = ItemLLItem.BuildType
+		  
+		  Dim Ext As String
+		  Select Case BT
+		  Case "ssApp", "ppApp", "ppGame"
+		    Ext = ".7z"
+		  Case "LLApp", "LLGame"
+		    Ext = ".tar.gz"
+		  Case Else
+		    Ext = ".7z"  ' Reasonable default for unknown types
+		  End Select
+		  
+		  Dim BuildFolder   As String = Slash(TextBuildToFolder.Text)
+		  Dim IncludeFolder As String = Slash(TextIncludeFolder.Text)
+		  
+		  ' Check each source in priority order
+		  Dim ArchiveInBuild   As String = BuildFolder   + BT + Ext
+		  Dim ArchiveInInclude As String = IncludeFolder + BT + Ext
+		  Dim PathINIArchive   As String = ItemLLItem.PathINI
+		  
+		  If TargetWindows Then
+		    ArchiveInBuild   = ArchiveInBuild.ReplaceAll("/", "\")
+		    ArchiveInInclude = ArchiveInInclude.ReplaceAll("/", "\")
+		  End If
+		  
+		  If Exist(ArchiveInBuild) Then
+		    ZippedOut = ArchiveInBuild
+		    ButtonImportSize.Visible = True
+		    ButtonImportSize.Tooltip = "Import uncompressed size from " + BT + Ext + " in build folder"
+		    
+		  ElseIf Exist(ArchiveInInclude) Then
+		    ZippedOut = ArchiveInInclude
+		    ButtonImportSize.Visible = True
+		    ButtonImportSize.Tooltip = "Import uncompressed size from " + BT + Ext + " in include folder"
+		    
+		  ElseIf ItemLLItem.Compressed And PathINIArchive <> "" And Exist(PathINIArchive) _
+		    And Left(PathINIArchive, 4).Lowercase <> "http" Then
+		    ' Item was already packaged (Compressed=True) — can still query the archive
+		    ZippedOut = PathINIArchive
+		    ButtonImportSize.Visible = True
+		    ButtonImportSize.Tooltip = "Import uncompressed size from packaged archive"
+		    
+		  ElseIf IncludeFolder <> "" And IncludeFolder <> "/" And IncludeFolder <> "\" And Exist(IncludeFolder) Then
+		    ' No archive found — fall back to counting files in the include folder
+		    ZippedOut = "" ' Signals Pressed handler to use folder counting
+		    ButtonImportSize.Visible = True
+		    ButtonImportSize.Tooltip = "Calculate installed size by summing files in include folder"
+		    
+		  Else
+		    ZippedOut = ""
+		    ButtonImportSize.Visible = False
+		    ButtonImportSize.Tooltip = ""
+		  End If
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function SaveLLFileComplete() As Boolean
+		  If Debugging Then Debug("--- Starting SaveLLFileComplete ---")
+		  
+		  Dim INIFile As String
+		  Dim I As Integer
+		  
+		  Dim BTF As String = Slash(TextBuildToFolder.Text)
+		  Dim BT As String = ItemLLItem.BuildType
+		  Dim SF, SSF As String
+		  Dim Res As String
+		  
+		  Dim FlagsOut As String
+		  
+		  If Exist (BTF) Then 'Only build if a good output path
+		    
+		    'Build Item Flags
+		    FlagsOut = ""
+		    If ItemLLItem.Hidden = True Then FlagsOut = FlagsOut + "hidden "
+		    If ItemLLItem.HiddenAlways = True Then FlagsOut = FlagsOut + "alwayshide "
+		    If ItemLLItem.ShowSetupOnly = True Then  FlagsOut = FlagsOut + "showsetuponly "
+		    If ItemLLItem.InternetRequired = True Then  FlagsOut = FlagsOut + "internetrequired "
+		    If ItemLLItem.NoInstall = True Then  FlagsOut = FlagsOut + "noinstall "
+		    If ItemLLItem.KeepAll = True Then  FlagsOut = FlagsOut + "keepall "
+		    If ItemLLItem.KeepInFolder = True Then  FlagsOut = FlagsOut + "keepinfolder "
+		    If ItemLLItem.ForceDERefresh = True Then  FlagsOut = FlagsOut + "forcederefresh "
+		    ItemLLItem.Flags = FlagsOut.Trim
+		    
+		    'Only update the item choice here, not each time it's changed
+		    ItemLLItem.ArchCompatible = ComboArch.Text
+		    
+		    'Build Link Flags - This is moved to SaveLLFile, I think
+		    'If LnkCount >= 1 Then
+		    'For I = 1 To LnkCount
+		    'If ItemLnk(I).Title.Trim <> "" Then
+		    'Skipping Flags for now
+		    'FlagsOut = ""
+		    ''If ItemLnk(I).Desktop = True Then FlagsOut = FlagsOut + "hidden "
+		    'ItemLnk(I).Flags = FlagsOut.Trim
+		    
+		    'Case "terminal"
+		    'If LineData = "True" Then ItemLnk(LnkEditing).Terminal= True Else ItemLnk(LnkEditing).Terminal= False
+		    '
+		    'Case "showon"
+		    'If OrigLine.IndexOf("desktop") >= 1 Then ItemLnk(LnkEditing).Desktop = True Else ItemLnk(LnkEditing).Desktop = False
+		    'If OrigLine.IndexOf("panel") >= 1  Then ItemLnk(LnkEditing).Panel = True Else ItemLnk(LnkEditing).Panel = False
+		    'If OrigLine.IndexOf("favorite") >= 1 Then ItemLnk(LnkEditing).Favorite = True Else ItemLnk(LnkEditing).Favorite = False
+		    
+		    'End If
+		    'Next
+		    'End If
+		    
+		    'Update Catalogs back
+		    If ItemLLItem.BuildType = "ssApp" Or ItemLLItem.BuildType = "ppApp" Or ItemLLItem.BuildType = "ppGame" Then ItemLLItem.Catalog = ItemLLItem.Catalog.ReplaceAll(";","|") ' Make it SetupS Compatible
+		    
+		    If SaveLLFile (BTF) = True Then '''''''''************************** Actual Save to file here *********************************************
+		      'Grab the name of the INI file
+		      Select Case BT
+		      Case "ppGame"
+		        INIFile = BT+".ppg"
+		        SF = BT+".cmd"
+		        SSF = BT+".reg"
+		      Case "ssApp"
+		        INIFile = BT+".app"
+		        SF = BT+".cmd"
+		        SSF = BT+".reg"
+		      Case  "ppApp"
+		        INIFile = BT+".app"
+		        SF = BT+".cmd"
+		        SSF = BT+".reg"
+		      Case "LLApp"
+		        INIFile = BT+".lla"
+		        SF = "LLScript.sh"
+		        SSF = "LLScript_Sudo.sh"
+		      Case "LLGame"
+		        INIFile = BT+".llg"
+		        SF = "LLScript.sh"
+		        SSF = "LLScript_Sudo.sh"
+		      End Select
+		      
+		      'Save Scripts
+		      If TextUserScript.Text.Trim <> "" Then 'Normal
+		        SaveDataToFile(TextUserScript.Text.Trim, BTF+SF)
+		      End If
+		      
+		      If TextSudoScript.Text.Trim <> "" Then 'Sudo or reg
+		        SaveDataToFile(TextSudoScript.Text.Trim, BTF+SSF)
+		      End If
+		      
+		      If ItemLLItem.Compressed = True Then 'Just Update the existing compressed item
+		        Select Case BT
+		        Case "LLApp", "LLGame" 'Tar's
+		          If TargetWindows Then
+		            Status.Text =  "Failed, LLApps and LLGames can only be edited in Linux"
+		            MsgBox "Failed, LLApps and LLGames can only be edited in Linux"
+		            Return False
+		            
+		            ''Tar is built into Windows 10 and above, but can't delete files at all, only Add a 2nd copy, would need to extract and repackage if I want to add that feature
+		            'Res = RunCommandResults ("cd " + Chr(34) + BTF + Chr(34) + Chr(10) + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + INIFile + Chr(34))
+		            '
+		            'If Debugging Then Debug(Res)
+		            '
+		            'If Exist(BTF+BT+".jpg" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".jpg"  + Chr(34) )
+		            'If Exist(BTF+BT+".png" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".png"  + Chr(34) )
+		            'If Exist(BTF+BT+".ico" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".ico"  + Chr(34) )
+		            'If Exist(BTF+BT+".svg" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".svg"  + Chr(34) )
+		            'If Exist(BTF+BT+".mp4" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".mp4"  + Chr(34) )
+		            'If Exist(BTF+"LLScript.sh" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + "LLScript.sh"  + Chr(34) )
+		            'If Exist(BTF+"LLScript_Sudo.sh" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + "LLScript_Sudo.sh"  + Chr(34) )
+		            
+		          Else 'Linux or mac
+		            'Remove Existing Files from inside the .tar
+		            ShellFast.Execute("tar --delete -f " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + INIFile + Chr(34)) 'FileINI is the name of the .tar, IniFile is the name of the .ini file only
+		            ShellFast.Execute("tar --delete -f " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".jpg" + Chr(34))
+		            ShellFast.Execute("tar --delete -f " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".png" + Chr(34))
+		            ShellFast.Execute("tar --delete -f " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".ico" + Chr(34))
+		            ShellFast.Execute("tar --delete -f " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".svg" + Chr(34))
+		            ShellFast.Execute("tar --delete -f " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".mp4" + Chr(34))
+		            ShellFast.Execute("tar --delete -f " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + "LLScript.sh" + Chr(34))
+		            ShellFast.Execute("tar --delete -f " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + "LLScript_Sudo.sh" + Chr(34)) 
+		            'Add files back to the .tar, if they exist
+		            ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + INIFile + Chr(34) )
+		            
+		            If Debugging Then Debug(ShellFast.ReadAll)
+		            
+		            'MsgBox INIFile
+		            
+		            If Exist(BTF+INIFile) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + INIFile + Chr(34) ) 'Put updated ini file into the tar
+		            If Exist(BTF+BT+".jpg" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".jpg"  + Chr(34) )
+		            If Exist(BTF+BT+".png" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".png"  + Chr(34) )
+		            If Exist(BTF+BT+".ico" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".ico"  + Chr(34) )
+		            If Exist(BTF+BT+".svg" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".svg"  + Chr(34) )
+		            If Exist(BTF+BT+".mp4" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BT+".mp4"  + Chr(34) )
+		            If Exist(BTF+"LLScript.sh" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + "LLScript.sh"  + Chr(34) )
+		            If Exist(BTF+"LLScript_Sudo.sh" ) Then ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + " && " + "tar -uf " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + "LLScript_Sudo.sh"  + Chr(34) )
+		          End If
+		        Case Else '7zip not tar
+		          If TargetWindows Then
+		            If Debugging Then Debug("Updating: "+ItemLLItem.FileINI + " With: " + BTF+INIFile)
+		            Res = RunCommandResults (Win7z +" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+INIFile + Chr(34))
+		            If Debugging Then Debug(Res)
+		            
+		            If Exist(BTF+INIFile) Then Res = RunCommandResults (Win7z +" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+INIFile + Chr(34)) 'Upgrade .ini File in 7z
+		            If Exist(BTF+BT+".jpg") Then Res = RunCommandResults (Win7z +" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".jpg" + Chr(34))
+		            If Debugging Then Debug(Res)
+		            If Exist(BTF+BT+".png") Then Res = RunCommandResults (Win7z +" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".png" + Chr(34))
+		            If Exist(BTF+BT+".ico") Then Res = RunCommandResults (Win7z +" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".ico" + Chr(34))
+		            If Exist(BTF+BT+".svg") Then Res = RunCommandResults (Win7z +" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".svg" + Chr(34))
+		            If Exist(BTF+BT+".mp4") Then Res = RunCommandResults (Win7z +" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".mp4" + Chr(34))
+		            If Exist(BTF+BT+".cmd") Then Res = RunCommandResults (Win7z +" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".cmd" + Chr(34))
+		            If Exist(BTF+BT+".reg") Then Res = RunCommandResults (Win7z +" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".reg" + Chr(34))
+		            
+		          Else 'Linux
+		            If Debugging Then Debug("Updating: "+ItemLLItem.FileINI + " With: " + BTF+INIFile)
+		            'ShellFast.Execute ("cd " + Chr(34) + BTF + Chr(34) + Chr(10) + Linux7z+" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+INIFile + Chr(34)) '7z doesn't need the cd command to make the files in the root of archive
+		            ShellFast.Execute (Linux7z+" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+INIFile + Chr(34))
+		            If Debugging Then Debug(ShellFast.ReadAll)
+		            
+		            If Exist(BTF+INIFile) Then ShellFast.Execute (Linux7z+" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+INIFile + Chr(34)) 'Upgrade .ini File in 7z
+		            If Exist(BTF+BT+".jpg") Then ShellFast.Execute (Linux7z+" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".jpg" + Chr(34))
+		            If Debugging Then Debug(ShellFast.ReadAll)
+		            If Exist(BTF+BT+".png") Then ShellFast.Execute (Linux7z+" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".png" + Chr(34))
+		            If Exist(BTF+BT+".ico") Then ShellFast.Execute (Linux7z+" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".ico" + Chr(34))
+		            If Exist(BTF+BT+".svg") Then ShellFast.Execute (Linux7z+" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".svg" + Chr(34))
+		            If Exist(BTF+BT+".mp4") Then ShellFast.Execute (Linux7z+" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".mp4" + Chr(34))
+		            If Exist(BTF+BT+".cmd") Then ShellFast.Execute (Linux7z+" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".cmd" + Chr(34))
+		            If Exist(BTF+BT+".reg") Then ShellFast.Execute (Linux7z+" u " + Chr(34) + ItemLLItem.FileINI + Chr(34) + " " + Chr(34) + BTF+BT+".reg" + Chr(34))
+		            
+		          End If
+		          Status.Text =  "Saved Successfully: " + ItemLLItem.FileINI
+		          Return True 'Success
+		          
+		        End Select
+		      End If
+		      Status.Text =  "Saved Successfully: " + ItemLLItem.FileINI
+		      Return True 'Success
+		    Else
+		      Status.Text =  "Failed to Save: " + ItemLLItem.FileINI
+		    End If
+		  Else
+		    Status.Text =  "Failed, No Build To Output Path Set"
+		    MsgBox "Failed, No Build To Output Path Set"
+		  End If
+		  Return False
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SearchTitleOnGoogle(Title As String)
+		  Dim encodedTitle As String
+		  Dim url As String
+		  Dim Err As Integer
+		  
+		  // Basic URL encoding: escape special characters
+		  encodedTitle = EncodeURLComponent(Title+" summary") 'Add summary so the first results can be used to grab Description
+		  
+		  // Replace %20 (spaces) with + for Google search readability
+		  encodedTitle = ReplaceAll(encodedTitle, "%20", "+")
+		  
+		  // Build Google search URL
+		  url = "https://www.google.com/search?q=" + encodedTitle
+		  
+		  #If TargetWindows Then
+		    // Windows: use ShellExecute
+		    Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" ( _
+		    hwnd As Integer, lpOperation As CString, lpFile As CString, lpParameters As CString, lpDirectory As CString, nShowCmd As Integer) As Integer
+		    
+		    Err=ShellExecute(0, "open", url, "", "", 1)
+		    
+		  #ElseIf TargetLinux Then
+		    // Linux: use xdg-open
+		    Dim sh As New Shell
+		    sh.Execute("xdg-open " + Quote(url))
+		    
+		  #ElseIf TargetMacOS Then
+		    // macOS: use OpenURL
+		    OpenURL(url)
+		  #EndIf
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SelectionChangedLoadCats(Item As DesktopMenuItem)
+		  'Dim TempText As String
+		  
+		  If Item.Text = "ComboBuildType" Then
+		    ButtonSaveLLFile.Caption = "Save LLFile"
+		  Else
+		    ButtonSaveLLFile.Caption = "Save "+ Item.Text+" File"
+		  End If
+		  
+		  Dim CatFileToUse As String
+		  
+		  'TempText= ComboCategory.Text
+		  
+		  ComboCategory.RemoveAllRows
+		  ComboMenuCatalog.RemoveAllRows
+		  If Item.Text = "ppGame" Or Item.Text = "LLGame" Then
+		    ComboCategory.AddAllRows(LLCatalogGames())
+		    ComboMenuCatalog.AddAllRows(LLCatalogGames())
+		  Else 'It's a App
+		    If Item.Text = "LLApp" Or Item.Text = "LLGame" Then
+		      ComboCategory.AddAllRows(LLCatalogApps())
+		      ComboMenuCatalog.AddAllRows(LLCatalogApps())
+		    Else 'ssApp or ppApp, both use windows Catalogs
+		      ComboCategory.AddAllRows(SSCategoriesApps())
+		      ComboMenuCatalog.AddAllRows(SSCatalogsApps())
+		    End If
+		  End If
+		  'ComboCategory.Text = TempText 'Put original text back after clearing all rows
+		  ComboCategory.Text = ItemLLItem.Categories
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub UpdateLinuxLinkCheckbox()
+		  'Show the Linux Link checkbox for all SS types; disable it on "Main Item", enable on real links.
+		  'Never shown for LLApp/LLGame (those always use .desktop so no choice needed).
+		  Dim BT As String = ItemLLItem.BuildType
+		  If BT = "ppGame" Or BT = "ppApp" Or BT = "ssApp" Then
+		    CheckBoxLinuxLink.Visible = True
+		    If EditingLnk > 0 Then
+		      CheckBoxLinuxLink.Enabled = True
+		      Populating = True 'Suppress ValueChanged while we set the value
+		      CheckBoxLinuxLink.Value = ItemLnk(EditingLnk).LinuxLink
+		      Populating = False
+		    Else
+		      CheckBoxLinuxLink.Enabled = False
+		      Populating = True
+		      CheckBoxLinuxLink.Value = False
+		      Populating = False
+		    End If
+		  Else
+		    CheckBoxLinuxLink.Visible = False
+		  End If
+		End Sub
+	#tag EndMethod
+
+
+	#tag Property, Flags = &h0
+		EditingCBLnk As Integer = -1
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		LLCatalogApps(2048) As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		LLCatalogGames(2048) As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		Populating As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		SSCatalogsApps(2048) As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		SSCategoriesApps(2048) As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		ZippedOut As String
+	#tag EndProperty
+
+	#tag Method, Flags = &h0
+		Function UpdateSizeAndSave() As Boolean
+		  ' Batch helper called by Main.UpdateSizesInItems().
+		  ' 1. Resolves the best size source via RefreshImportSizeButton()
+		  ' 2. Imports the uncompressed byte count into TextInstalledSize
+		  ' 3. Calls SaveLLFileComplete() which handles BOTH cases:
+		  '      - Uncompressed items  → writes the plain .lla/.llg/.app/.ppg
+		  '      - Compressed items    → fast in-place update (tar -uf / 7z u)
+		  '    so no full re-compression is needed even for archived items.
+		  ' Returns True when a size was found and the file saved successfully.
+		  
+		  ' Resolve the best archive / folder source so ZippedOut is correct
+		  RefreshImportSizeButton()
+		  
+		  ' --- Same logic as ButtonImportSize.Pressed() ---
+		  Dim GotSize As Boolean = False
+		  
+		  If ZippedOut <> "" And Exist(ZippedOut) Then
+		    ' Archive path available: ask 7z/tar for the uncompressed total
+		    Dim RawBytes As Int64 = GetUnCompressedSize(ZippedOut).ToInt64
+		    If RawBytes > 0 Then
+		      TextInstalledSize.Text = RawBytes.ToString
+		      CheckGetSizeComp.Value = False
+		      GotSize = True
+		    Else
+		      ' 7z returned nothing useful — fall back to folder count
+		      Dim FolderBytes As Int64 = GetFolderSize(TextIncludeFolder.Text)
+		      If FolderBytes > 0 Then
+		        TextInstalledSize.Text = FolderBytes.ToString
+		        CheckGetSizeComp.Value = False
+		        GotSize = True
+		      End If
+		    End If
+		  Else
+		    ' No archive — count files in the include folder
+		    Dim FolderBytes As Int64 = GetFolderSize(TextIncludeFolder.Text)
+		    If FolderBytes > 0 Then
+		      TextInstalledSize.Text = FolderBytes.ToString
+		      CheckGetSizeComp.Value = False
+		      GotSize = True
+		    End If
+		  End If
+		  
+		  If Not GotSize Then Return False ' No size source found, skip this item
+		  
+		  ' Save/update the file.  SaveLLFileComplete already does the right thing:
+		  '   Compressed = True  → tar -uf or 7z u  (fast, no full re-pack)
+		  '   Compressed = False → plain .lla / .llg / .app / .ppg write
+		  Return SaveLLFileComplete()
+		End Function
+	#tag EndMethod
+
+
+#tag EndWindowCode
+
+#tag Events TabPanelEditor
+	#tag Event
+		Sub PanelChanged()
+		  Select Case TabPanelEditor.SelectedPanelIndex
+		  Case 2 'Assembly
+		    If TextInstallToFolder.Text = "" Then
+		      If TextTitle.Text <> "" Then
+		        Select Case ComboBuildType.Text
+		        Case "ppApp"
+		          TextInstallToFolder.Text = "%ppApps%/"+TextTitle.Text.ReplaceAll(" ",".")
+		        Case "LLApp"
+		          TextInstallToFolder.Text = "%LLApps%/"+TextTitle.Text.ReplaceAll(" ",".")
+		        Case "ppGame"
+		          TextInstallToFolder.Text = "%ppGames%/"+TextTitle.Text.ReplaceAll(" ",".")
+		        Case "LLGame"
+		          TextInstallToFolder.Text = "%LLGames%/"+TextTitle.Text.ReplaceAll(" ",".")
+		        End Select
+		      End If
+		    End If
+		  End Select
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events LabelTitle
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Return True
+		End Function
+	#tag EndEvent
+	#tag Event
+		Sub MouseUp(x As Integer, y As Integer)
+		  If TextTitle.Text <> "" Then
+		    SearchTitleOnGoogle(TextTitle.Text)
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextTitle
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.TitleName = Me.Text.Trim
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextVersion
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.Version = Me.Text.Trim
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextURLs
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.URL = Me.Text.Trim
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ComboCategory
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.Categories = ComboCategory.Text
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub SelectionChanged(item As DesktopMenuItem)
+		  If ItemLnk(0).Categories = "" Then ItemLnk(0).Categories = ComboCategory.Text ' If you pick a Category set the default Catalog to be the same, it's easy to modify if it's wrong.
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CheckInternetRequired
+	#tag Event
+		Sub ValueChanged()
+		  ItemLLItem.InternetRequired = CheckInternetRequired.Value
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextDescription
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.Descriptions = Me.Text.Trim
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextPriority
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.Priority = Me.Text.Trim.ToDouble
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonBrowseIncludeFolder
+	#tag Event
+		Sub Pressed()
+		  Dim G As FolderItem
+		  
+		  If TextIncludeFolder.Text <>"" Then
+		    If Exist(TextIncludeFolder.Text) Then
+		      G = GetFolderItem(TextIncludeFolder.Text,FolderItem.PathTypeNative)
+		    Else
+		      G = SpecialFolder.Desktop
+		    End If
+		  End If
+		  
+		  Var dlg As New SelectFolderDialog
+		  dlg.ActionButtonCaption = "Select"
+		  dlg.Title = "Select a Path for your LLFile Item to include in the build"
+		  dlg.PromptText = "Make sure it's a valid path"
+		  dlg.InitialFolder = G
+		  
+		  Var f As FolderItem
+		  f = dlg.ShowModal
+		  If f <> Nil Then
+		    ' Use the folderitem here
+		    TextIncludeFolder.Text = Slash(F.NativePath)
+		  Else
+		    ' User cancelled, do nothing
+		  End If
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonBrowseBuildToFolder
+	#tag Event
+		Sub Pressed()
+		  Dim G As FolderItem
+		  
+		  If TextBuildToFolder.Text <>"" Then
+		    If Exist(TextBuildToFolder.Text) Then
+		      G = GetFolderItem(TextBuildToFolder.Text,FolderItem.PathTypeNative)
+		    Else
+		      G = SpecialFolder.Desktop
+		    End If
+		  End If
+		  
+		  Var dlg As New SelectFolderDialog
+		  dlg.ActionButtonCaption = "Select"
+		  dlg.Title = "Select the Output Path for your LLFile Item to be built to"
+		  dlg.PromptText = "Make sure it's a valid path"
+		  dlg.InitialFolder = G
+		  
+		  Var f As FolderItem
+		  f = dlg.ShowModal
+		  If f <> Nil Then
+		    ' Use the folderitem here
+		    TextBuildToFolder.Text = Slash(F.NativePath)
+		  Else
+		    ' User cancelled, do nothing
+		  End If
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonBuild
+	#tag Event
+		Sub Pressed()
+		  ' Show the Notification FIRST while this process is still the foreground window.
+		  ' On Windows, showing a window while you are already foreground is guaranteed to work.
+		  ' Hiding the Editor AFTER means the notification is already painted before the
+		  ' Editor disappears — Windows won't silently send focus elsewhere mid-show.
+		  PrepareToBuild()
+		  
+		  ' Now hide the GUI windows
+		  Editor.Hide
+		  If Not AutoBuild Then
+		    If Main.Visible Then Main.Hide
+		  End If
+		  
+		  ' Arm the timer and return — BuildTimer.Action handles BuildLLFile() + close
+		  Loading.BuildTimer.RunMode = Timer.RunModes.Single
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextNewShortcut
+	#tag Event
+		Sub KeyUp(key As String)
+		  Dim NewShortName As String
+		  Select Case Asc(key)
+		  Case 3, 13 ' Enter Pressed
+		    'Add new shortcut
+		    NewShortName = TextNewShortcut.Text
+		    If TextNewShortcut.Text.Trim <> "" Then ' Only if Valid
+		      LnkCount = LnkCount + 1 'Add one
+		      ItemLnk(LnkCount).Title = TextNewShortcut.Text.Trim
+		      If ItemLnk(LnkCount).LinuxLink And (ItemLLItem.BuildType = "ppGame" Or ItemLLItem.BuildType = "ppApp" Or ItemLLItem.BuildType = "ssApp") Then
+		        ComboShortcut.AddRow(ItemLnk(LnkCount).Title + " [Linux]")
+		      Else
+		        ComboShortcut.AddRow(ItemLnk(LnkCount).Title)
+		      End If
+		      EditingCBLnk = ComboShortcut.LastAddedRowIndex
+		      ComboShortcut.SelectedRowIndex = EditingCBLnk 'Jumps to newly added item
+		      ComboShortcut.RowTagAt(EditingCBLnk) = LnkCount
+		      EditingLnk = LnkCount
+		      UpdateLinuxLinkCheckbox 'Show checkbox enabled for this new link
+		    End If
+		    
+		    'Clear Text Field and hide it again
+		    TextNewShortcut.Text = ""
+		    TextNewShortcut.Visible = False
+		    
+		    
+		    TextComment.Text = ""
+		    TextExecute.Text = ""
+		    'TextRunInPath.Text = "" 'Leave this one behind, will keep it default for all apps and give path to copy from
+		    TextIcon.Text = ""
+		    TextFileTypes.Text = ""
+		    TextDescriptionLink.Text = ""
+		    TextFlags.Text = ""
+		    'TextMenuCatalog.Text = "" 'Leave This off so that all shortcuts default to the same set path as the previous items
+		    CheckRunInTerminal.Value = False
+		    CheckSendTo.Value = False
+		    CheckShowDesktop.Value  = False
+		    CheckShowFavorites.Value  = False
+		    CheckSendTo.Value = False
+		    CheckShowPanel.Value  = False
+		    
+		  End Select
+		  
+		  Return  'Make sure the keypress doesn't go to another control
+		  
+		  
+		  
+		  ''Main Window 2 - Links
+		  'ComboShortcut.RemoveAllRows 'Clear the Existing Shortcuts
+		  '
+		  'TextDefaultMenuPath.Text = ""
+		  'TextKeepShortcuts.Text = ""
+		  'CheckKeepFolder.Value = False
+		  'CheckKeepAll.Value = False
+		  'ComboShortcut.Text = ""
+		  'TextComment.Text = ""
+		  'TextExecute.Text = ""
+		  'TextRunInPath.Text = ""
+		  'TextIcon.Text = ""
+		  'TextFileTypes.Text = ""
+		  'TextDescriptionLink.Text = ""
+		  'TextFlags.Text = ""
+		  'ComboMenuCatalog.Text = ""
+		  'TextMenuCatalog.Text = ""
+		  'CheckRunInTerminal.Value = False
+		  'CheckShowDesktop.Value = False
+		  'CheckShowPanel.Value = False
+		  'CheckSendTo.Value = False
+		  'CheckShowFavorites.Value = False
+		  '
+		  'If LnkCount >= 1 Then
+		  'For I = 1 To LnkCount
+		  'ComboShortcut.AddRow(ItemLnk(I).Title)
+		  'Next
+		  'ComboShortcut.SelectedRowIndex = 0 'Pick first item to populate the Link Data
+		  'End If
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Function KeyDown(key As String) As Boolean
+		  Select Case Asc(key)
+		  Case 3, 13 ' Enter Pressed
+		    Return True 'Take Keypress from the main form
+		  End Select
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonBrowseShortcut
+	#tag Event
+		Sub Pressed()
+		  Dim ImageIn As String
+		  Dim RL As String
+		  Dim Sp() As String
+		  Dim I As Integer
+		  'Dim F As FolderItem
+		  
+		  Dim NewShortName As String
+		  Dim Name As String
+		  Dim Exec As String
+		  Dim Icon As String
+		  Dim Comment As String
+		  Dim Path As String
+		  Dim Categories As String
+		  Dim FileTypes As String
+		  Dim Term As Boolean
+		  
+		  Dim F As FolderItem
+		  
+		  'Maybe add Include Folder from shortcut selection??? would only work in Windows as I can't get the .lnk target yet (only .desktop)
+		  
+		  
+		  If TargetWindows Then
+		    'List All start menu items to pick one - just copy the .lnk files from all users and current user then follow the lnk to the actual EXE etc, but use lnk for Title name, icon etc
+		    
+		    Dim iniType As New FileType
+		    iniType.Name = "link/desktop"
+		    iniType.MacType = "DESKTOP;LNK"
+		    iniType.Extensions = "desktop;lnk"
+		    
+		    ImageIn = SpecialFolder.Desktop.NativePath
+		    
+		    ImageIn = ImageIn.ReplaceAll("/","\")
+		    
+		    ImageIn = OpenFileDialog(iniType, "Select Desktop File to Use as Shortcut", ImageIn) ' browse for one 
+		    If ImageIn <> "" Then
+		      
+		      If Right(ImageIn.Lowercase,4) = ".lnk" Then 'Windows Lnk file
+		        
+		        F = GetFolderItem(ImageIn)
+		        
+		        If Debugging Then Debug("Grab shortcut Data from: "+ ImageIn)
+		        
+		        Name = Right(ImageIn, Len(ImageIn) - InStrRev(ImageIn,"\")) 'Remove Path
+		        Name = Left(Name, Len(Name)-4) 'Remove .lnk
+		        Exec = Right(F.NativePath, Len(F.NativePath) - InStrRev(F.NativePath,"\")) 'Remove Path
+		        
+		        If Name <> "" Then 'Add item, select it and fill data
+		          
+		          'Add new shortcut
+		          TextNewShortcut.Text = Name 'Set from .desktop file
+		          NewShortName = TextNewShortcut.Text
+		          If TextNewShortcut.Text.Trim <> "" Then ' Only if Valid
+		            LnkCount = LnkCount + 1 'Add one
+		            ItemLnk(LnkCount).Title = TextNewShortcut.Text.Trim
+		            ComboShortcut.AddRow(ItemLnk(LnkCount).Title)
+		            EditingCBLnk = ComboShortcut.LastAddedRowIndex
+		            ComboShortcut.SelectedRowIndex = EditingCBLnk 'Jumps to newly added item
+		            ComboShortcut.RowTagAt(EditingCBLnk) = LnkCount
+		            EditingLnk = LnkCount
+		          End If
+		          
+		          'Clear Text Field and hide it again
+		          TextNewShortcut.Text = ""
+		          TextNewShortcut.Visible = False
+		          
+		          TextComment.Text = ""
+		          TextExecute.Text = ""
+		          TextRunInPath.Text = "" 'Leave this one behind, will keep it default for all apps and give path to copy from
+		          TextIcon.Text = ""
+		          TextFileTypes.Text = ""
+		          TextDescriptionLink.Text = ""
+		          TextFlags.Text = ""
+		          TextMenuCatalog.Text = "" 'Leave This off so that all shortcuts default to the same set path as the previous items
+		          CheckRunInTerminal.Value = False
+		          CheckSendTo.Value = False
+		          CheckShowDesktop.Value  = False
+		          CheckShowFavorites.Value  = False
+		          CheckSendTo.Value = False
+		          CheckShowPanel.Value  = False
+		          
+		          'Add Data from loaded .desktop file
+		          TextExecute.Text = Exec
+		          TextComment.Text  = Comment
+		          TextIcon.Text = Icon
+		          TextRunInPath.Text = Path
+		          Categories = Categories.ReplaceAll(";", ";"+Chr(10))
+		          TextMenuCatalog.Text = Categories
+		          CheckRunInTerminal.Value = Term
+		        End If
+		      End If
+		    End If
+		    
+		    
+		  Else 'Linux
+		    'List All .desktop file and let user pick on to populate the fields on the form (has it all written in itself)
+		    'For now you can browse for a .desktop file in the usual places or even the desktop
+		    
+		    Dim iniType As New FileType
+		    iniType.Name = "link/desktop"
+		    iniType.MacType = "DESKTOP;LNK"
+		    iniType.Extensions = "desktop;lnk"
+		    
+		    ImageIn = SpecialFolder.Desktop.NativePath
+		    
+		    If TargetWindows = True Then
+		      ImageIn = ImageIn.ReplaceAll("/","\")
+		    Else
+		      ImageIn = ImageIn.ReplaceAll("\","/")
+		    End If
+		    
+		    ImageIn = OpenDialog(iniType, "Select Desktop File to Use as Shortcut", ImageIn) ' browse for one 
+		    If ImageIn <> "" Then
+		      
+		      If Right(ImageIn.Lowercase,4) = ".lnk" Then 'Windows Lnk file
+		        If Debugging Then Debug("Grab shortcut Data from: "+ ImageIn)
+		        
+		        Name = Right(ImageIn, Len(ImageIn) - InStrRev(ImageIn,"/")) 'Remove Path
+		        Name = Left(Name, Len(Name)-4) 'Remove .lnk
+		        
+		        'Can't get much from shortcut in Linux yet
+		        
+		      End If
+		      
+		      If Right(ImageIn,4) = "ktop" Then
+		        If Debugging Then Debug("Load shortcut Data from: "+ ImageIn)
+		        RL = LoadDataFromFile(ImageIn)
+		        Sp = RL.Split(Chr(10))
+		        For I = 0 To Sp.Count - 1
+		          If Left (Sp(I),5) = "Name=" Then
+		            Name = Right(Sp(I), Len(Sp(I))-5)
+		            Name = Name.Trim
+		          End If
+		          If Left (Sp(I),5) = "Exec=" Then Exec = Right(Sp(I), Len(Sp(I))-5)
+		          If Left (Sp(I),8) = "Comment=" Then Comment = Right(Sp(I), Len(Sp(I))-8)
+		          If Left (Sp(I),5) = "Icon=" Then Icon = Right(Sp(I), Len(Sp(I))-5)
+		          If Left (Sp(I),5) = "Path=" Then Path = Right(Sp(I), Len(Sp(I))-5)
+		          If Left (Sp(I),11) = "Categories=" Then
+		            Categories = Right(Sp(I), Len(Sp(I))-11)
+		            
+		          End If
+		          If Left (Sp(I),9) = "Terminal=" Then
+		            If IsTrue(Right(Sp(I), Len(Sp(I))-9)) Then
+		              Term = True
+		            Else
+		              Term = False
+		            End If
+		          End If
+		        Next
+		      End If
+		      
+		      If Name <> "" Then 'Add item, select it and fill data
+		        
+		        'Add new shortcut
+		        TextNewShortcut.Text = Name 'Set from .desktop file
+		        NewShortName = TextNewShortcut.Text
+		        If TextNewShortcut.Text.Trim <> "" Then ' Only if Valid
+		          LnkCount = LnkCount + 1 'Add one
+		          ItemLnk(LnkCount).Title = TextNewShortcut.Text.Trim
+		          ComboShortcut.AddRow(ItemLnk(LnkCount).Title)
+		          EditingCBLnk = ComboShortcut.LastAddedRowIndex
+		          ComboShortcut.SelectedRowIndex = EditingCBLnk 'Jumps to newly added item
+		          ComboShortcut.RowTagAt(EditingCBLnk) = LnkCount
+		          EditingLnk = LnkCount
+		        End If
+		        
+		        'Clear Text Field and hide it again
+		        TextNewShortcut.Text = ""
+		        TextNewShortcut.Visible = False
+		        
+		        
+		        TextComment.Text = ""
+		        TextExecute.Text = ""
+		        TextRunInPath.Text = "" 'Leave this one behind, will keep it default for all apps and give path to copy from
+		        TextIcon.Text = ""
+		        TextFileTypes.Text = ""
+		        TextDescriptionLink.Text = ""
+		        TextFlags.Text = ""
+		        TextMenuCatalog.Text = "" 'Leave This off so that all shortcuts default to the same set path as the previous items
+		        CheckRunInTerminal.Value = False
+		        CheckSendTo.Value = False
+		        CheckShowDesktop.Value  = False
+		        CheckShowFavorites.Value  = False
+		        CheckSendTo.Value = False
+		        CheckShowPanel.Value  = False
+		        
+		        'Add Data from loaded .desktop file
+		        TextExecute.Text = Exec
+		        TextComment.Text  = Comment
+		        TextIcon.Text = Icon
+		        TextRunInPath.Text = Path
+		        Categories = Categories.ReplaceAll(";", ";"+Chr(10))
+		        TextMenuCatalog.Text = Categories
+		        CheckRunInTerminal.Value = Term
+		      End If
+		    End If
+		  End If
+		  
+		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonAddShortcut
+	#tag Event
+		Sub Pressed()
+		  TextNewShortcut.Visible = True
+		  TextNewShortcut.SetFocus
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonRemoveShortcut
+	#tag Event
+		Sub Pressed()
+		  Dim I As Integer
+		  If EditingLnk <= 0 Then Return 'Nothing Selected, just get out of here
+		  
+		  ItemLnk(EditingLnk).Title = "" 'Settings to blank pretty much deletes it
+		  ComboShortcut.RemoveAllRows 'Clear the Existing Shortcuts
+		  
+		  'Add Main item to Link 0
+		  ComboShortcut.AddRow("Main Item")
+		  EditingCBLnk = ComboShortcut.LastAddedRowIndex
+		  ComboShortcut.RowTagAt(EditingCBLnk) = 0
+		  EditingLnk = 0
+		  ItemLnk(0).Title = "Main Item"
+		  ItemLnk(0).Categories = ItemLLItem.Catalog
+		  
+		  If LnkCount >= 1 Then
+		    For I = 1 To LnkCount
+		      If ItemLnk(I).Title <> "" Then 'Blank Items get ignored
+		        If ItemLnk(I).LinuxLink And (ItemLLItem.BuildType = "ppGame" Or ItemLLItem.BuildType = "ppApp" Or ItemLLItem.BuildType = "ssApp") Then
+		          ComboShortcut.AddRow(ItemLnk(I).Title + " [Linux]")
+		        Else
+		          ComboShortcut.AddRow(ItemLnk(I).Title)
+		        End If
+		        EditingCBLnk = ComboShortcut.LastAddedRowIndex
+		        ComboShortcut.RowTagAt(EditingCBLnk) = I
+		        EditingLnk = I
+		      End If
+		    Next
+		    ComboShortcut.SelectedRowIndex = 0 'Pick first item to populate the Link Data
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CheckBoxLinuxLink
+	#tag Event
+		Sub ValueChanged()
+		  If Populating Then Return 'Suppress during population
+		  If EditingLnk <= 0 Then Return 'Main Item has no LinuxLink flag
+		  
+		  ItemLnk(EditingLnk).LinuxLink = Me.Value
+		  
+		  'Update the combo row display text to reflect the new state
+		  If ItemLLItem.BuildType = "ppGame" Or ItemLLItem.BuildType = "ppApp" Or ItemLLItem.BuildType = "ssApp" Then
+		    Dim DisplayText As String = ItemLnk(EditingLnk).Title
+		    If Me.Value Then DisplayText = DisplayText + " [Linux]"
+		    'Replace the row in-place: remove then insert at same position to keep row order
+		    ComboShortcut.RemoveRowAt(EditingCBLnk)
+		    ComboShortcut.AddRowAt(EditingCBLnk, DisplayText)
+		    ComboShortcut.RowTagAt(EditingCBLnk) = EditingLnk
+		    Populating = True 'Guard: don't let SelectedRowIndex trigger a recursive ValueChanged
+		    ComboShortcut.SelectedRowIndex = EditingCBLnk
+		    Populating = False
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ComboShortcut
+	#tag Event
+		Sub SelectionChanged(item As DesktopMenuItem)
+		  Dim CleanTheCat As String
+		  
+		  EditingCBLnk = ComboShortcut.SelectedRowIndex
+		  EditingLnk = ComboShortcut.RowTagAt(EditingCBLnk)
+		  
+		  TextComment.Text = ItemLnk(EditingLnk).Link.Description '+1 because it's 0 based
+		  TextExecute.Text = ItemLnk(EditingLnk).Link.TargetPath
+		  TextRunInPath.Text = ItemLnk(EditingLnk).Link.WorkingDirectory
+		  TextIcon.Text = ItemLnk(EditingLnk).Link.IconLocation
+		  TextFileTypes.Text = ItemLnk(EditingLnk).Associations
+		  TextDescriptionLink.Text = ItemLnk(EditingLnk).Description.ReplaceAll(Chr(30), Chr(13)) '13 instead of 10 for Text Areas
+		  CheckRunInTerminal.Value = ItemLnk(EditingLnk).Terminal
+		  CheckShowDesktop.Value = ItemLnk(EditingLnk).Desktop
+		  CheckShowPanel.Value = ItemLnk(EditingLnk).Panel
+		  CheckShowFavorites.Value = ItemLnk(EditingLnk).Favorite
+		  
+		  TextFlags.Text = ItemLnk(EditingLnk).Flags
+		  
+		  'Update Linux Link checkbox state for SS types
+		  UpdateLinuxLinkCheckbox
+		  
+		  If EditingLnk <= 0 Then
+		    'MsgBox ItemLLItem.Catalog.ReplaceAll(";",Chr(13))
+		    
+		    CleanTheCat = ItemLLItem.Catalog.ReplaceAll("|",";") 'Change to Linux style for this part
+		    CleanTheCat = CleanTheCat.ReplaceAll(" ;",";")
+		    CleanTheCat = CleanTheCat.ReplaceAll("; ",";")
+		    TextMenuCatalog.Text = CleanTheCat.ReplaceAll(";",Chr(13))'Show the main Items Catalog, once set you can't get back to it though so I may add it to a variable as you go
+		    
+		  Else
+		    
+		    CleanTheCat = ItemLnk(EditingLnk).Categories.ReplaceAll("|",";") 'Change to Linux style for this part
+		    CleanTheCat = CleanTheCat.ReplaceAll(" ;",";")
+		    CleanTheCat = CleanTheCat.ReplaceAll("; ",";")
+		    TextMenuCatalog.Text = CleanTheCat.ReplaceAll(";",Chr(13))'Show the main Items Catalog, once set you can't get back to it though so I may add it to a variable as you go
+		    
+		    'TextMenuCatalog.Text = ItemLnk(EditingLnk).Categories.ReplaceAll(" ", Chr(13)) 'Make Multi Line, not ; seperated
+		  End If
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub TextChanged()
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  // Detect a double click (usually within 20-30 ticks)
+		  If (System.Ticks - LastClickTicks) <= 30 Then
+		    // --- DOUBLE CLICK CODE HERE ---
+		    'EditingCBLnk = ComboShortcut.SelectedRowIndex
+		    'EditingLnk = ComboShortcut.RowTagAt(EditingCBLnk)
+		    
+		    Dim I As Integer
+		    Dim StartingLnk As Integer = EditingLnk
+		    If EditingLnk <= 0 Then Return True 'Nothing Selected, just get out of here
+		    
+		    'Strip display suffix before saving title - the combo shows " [Linux]" for LinuxLink items
+		    Dim RawTitle As String = ComboShortcut.Text
+		    If Right(RawTitle, 8) = " [Linux]" Then RawTitle = Left(RawTitle, Len(RawTitle)-8)
+		    ItemLnk(EditingLnk).Title = RawTitle 'Settings to blank pretty much deletes it
+		    ComboShortcut.RemoveAllRows 'Clear the Existing Shortcuts
+		    
+		    'Add Main item to Link 0
+		    ComboShortcut.AddRow("Main Item")
+		    EditingCBLnk = ComboShortcut.LastAddedRowIndex
+		    ComboShortcut.RowTagAt(EditingCBLnk) = 0
+		    EditingLnk = 0
+		    ItemLnk(0).Title = "Main Item"
+		    ItemLnk(0).Categories = ItemLLItem.Catalog
+		    
+		    If LnkCount >= 1 Then
+		      For I = 1 To LnkCount
+		        If ItemLnk(I).Title <> "" Then 'Blank Items get ignored
+		          If ItemLnk(I).LinuxLink And (ItemLLItem.BuildType = "ppGame" Or ItemLLItem.BuildType = "ppApp" Or ItemLLItem.BuildType = "ssApp") Then
+		            ComboShortcut.AddRow(ItemLnk(I).Title + " [Linux]")
+		          Else
+		            ComboShortcut.AddRow(ItemLnk(I).Title)
+		          End If
+		          EditingCBLnk = ComboShortcut.LastAddedRowIndex
+		          ComboShortcut.RowTagAt(EditingCBLnk) = I
+		        End If
+		      Next
+		      'Find the correct row by its RowTag (ItemLnk index) rather than assuming row index = ItemLnk index
+		      Dim TargetRow As Integer = 0
+		      Dim RR As Integer
+		      For RR = 0 To ComboShortcut.LastAddedRowIndex
+		        If ComboShortcut.RowTagAt(RR) = StartingLnk Then
+		          TargetRow = RR
+		          Exit
+		        End If
+		      Next RR
+		      EditingLnk = StartingLnk
+		      ComboShortcut.SelectedRowIndex = TargetRow
+		    End If
+		    
+		    // Reset so a third click isn't counted as another double
+		    LastClickTicks = 0 
+		    Return False 'Don't pass click through
+		  Else
+		    // Store the time of this click for the next comparison
+		    LastClickTicks = System.Ticks
+		  End If
+		  
+		  // Return True to allow the control to process the click normally
+		  Return False
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextComment
+	#tag Event
+		Sub TextChanged()
+		  If ComboShortcut.RowCount >= 1 Then 'Only allow it to Save Changes if it's Got Link Items added
+		    If EditingLnk <= LnkCount And EditingLnk >= 0 Then ' Just a precaution
+		      ItemLnk(EditingLnk).Link.Description = Me.Text.Trim
+		    End If
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextExecute
+	#tag Event
+		Sub TextChanged()
+		  If ComboShortcut.RowCount >= 1 Then 'Only allow it to Save Changes if it's Got Link Items added
+		    If EditingLnk <= LnkCount  And EditingLnk >= 0 Then ' Just a precaution
+		      ItemLnk(EditingLnk).Link.TargetPath = Me.Text.Trim
+		    End If
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextRunInPath
+	#tag Event
+		Sub TextChanged()
+		  If ComboShortcut.RowCount >= 1 Then 'Only allow it to Save Changes if it's Got Link Items added
+		    If EditingLnk <= LnkCount And EditingLnk >= 0  Then ' Just a precaution
+		      ItemLnk(EditingLnk).Link.WorkingDirectory = Me.Text.Trim
+		    End If
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextIcon
+	#tag Event
+		Sub TextChanged()
+		  If ComboShortcut.RowCount >= 1 Then 'Only allow it to Save Changes if it's Got Link Items added
+		    If EditingLnk <= LnkCount And EditingLnk >= 0  Then ' Just a precaution
+		      ItemLnk(EditingLnk).Link.IconLocation = Me.Text.Trim
+		    End If
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextFileTypes
+	#tag Event
+		Sub TextChanged()
+		  If ComboShortcut.RowCount >= 1 Then 'Only allow it to Save Changes if it's Got Link Items added
+		    If EditingLnk <= LnkCount  And EditingLnk >= 0 Then ' Just a precaution
+		      ItemLnk(EditingLnk).Associations = Me.Text.Trim
+		    End If
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextDescriptionLink
+	#tag Event
+		Sub TextChanged()
+		  If ComboShortcut.RowCount >= 1 Then 'Only allow it to Save Changes if it's Got Link Items added
+		    If EditingLnk <= LnkCount  And EditingLnk >= 0 Then ' Just a precaution
+		      ItemLnk(EditingLnk).Description = Me.Text.Trim
+		    End If
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonAddCatalog
+	#tag Event
+		Sub Pressed()
+		  Dim AddThis As String
+		  If Not TextMenuCatalog.Text.IndexOf (ComboMenuCatalog.Text) >=0 Then
+		    AddThis = ComboMenuCatalog.Text
+		    If Right (AddThis, 1) <> ";" Then AddThis = AddThis +";"
+		    TextMenuCatalog.Text = TextMenuCatalog.Text.Trim.ReplaceAll(Chr(10)+Chr(10),Chr(10)) 'Remove Duplicated lines/blanks
+		    TextMenuCatalog.Text =  TextMenuCatalog.Text.Trim + Chr(10)+AddThis
+		    TextMenuCatalog.Text = TextMenuCatalog.Text.Trim
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextMenuCatalog
+	#tag Event
+		Sub TextChanged()
+		  'Set Global/Default Catalog 'Move to below to make it possible to use a different catalog for the main item if you so want.
+		  'ItemLLItem.Catalog = Me.Text.Trim.ReplaceAll(Chr(10),"; ")' Drop the  EOL and keep it spaced like used in the LLFile
+		  'ItemLLItem.Catalog = ItemLLItem.Catalog.ReplaceAll(Chr(13),"; ")
+		  'ItemLLItem.Catalog = ItemLLItem.Catalog.ReplaceAll(";;",";")
+		  'ItemLLItem.Catalog = ItemLLItem.Catalog.ReplaceAll("; ;",";")
+		  
+		  
+		  'Set Per Link Catalogs
+		  If ComboShortcut.RowCount >= 1 Then 'Only allow it to Save Changes if it's Got Link Items added
+		    If EditingLnk <= LnkCount  And EditingLnk > 0 Then ' Just a precaution
+		      ItemLnk(EditingLnk).Categories = Me.Text.Trim.ReplaceAll(Chr(13),Chr(10))
+		      ItemLnk(EditingLnk).Categories = ItemLnk(EditingLnk).Categories.ReplaceAll(Chr(10)+Chr(10),Chr(10))
+		      ItemLnk(EditingLnk).Categories = ItemLnk(EditingLnk).Categories.ReplaceAll(Chr(10),"; ")' Drop the  EOL and keep it spaced like used in the LLFile
+		      ItemLnk(EditingLnk).Categories = ItemLnk(EditingLnk).Categories.ReplaceAll(Chr(13),"; ")
+		      ItemLnk(EditingLnk).Categories=ItemLnk(EditingLnk).Categories.ReplaceAll(";;",";")
+		      ItemLnk(EditingLnk).Categories=ItemLnk(EditingLnk).Categories.ReplaceAll("; ;",";")
+		      If ItemLLItem.BuildType = "ssApp" Or ItemLLItem.BuildType = "ppApp" Or ItemLLItem.BuildType = "ppGame" Then ItemLnk(EditingLnk).Categories = ItemLnk(EditingLnk).Categories.ReplaceAll(";","|") ' Make it SetupS Compatible
+		    End If
+		    If EditingLnk = 0 Then ' Update Main Item
+		      ItemLLItem.Catalog = Me.Text.Trim.ReplaceAll(Chr(13),Chr(10))
+		      ItemLLItem.Catalog = ItemLLItem.Catalog.ReplaceAll(Chr(10)+Chr(10),Chr(10))
+		      ItemLLItem.Catalog = ItemLLItem.Catalog.ReplaceAll(Chr(10),"; ")' Drop the  EOL and keep it spaced like used in the LLFile
+		      
+		      ItemLLItem.Catalog = ItemLLItem.Catalog.ReplaceAll(Chr(10),"; ")' Drop the  EOL and keep it spaced like used in the LLFile
+		      ItemLLItem.Catalog = ItemLLItem.Catalog.ReplaceAll(";;",";")
+		      ItemLLItem.Catalog = ItemLLItem.Catalog.ReplaceAll("; ;",";")
+		      If ItemLLItem.BuildType = "ssApp" Or ItemLLItem.BuildType = "ppApp" Or ItemLLItem.BuildType = "ppGame" Then ItemLLItem.Catalog = ItemLLItem.Catalog.ReplaceAll(";","|") ' Make it SetupS Compatible
+		    End If
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CheckRunInTerminal
+	#tag Event
+		Sub ValueChanged()
+		  If ComboShortcut.RowCount >= 1 Then 'Only allow it to Save Changes if it's Got Link Items added
+		    If EditingLnk <= LnkCount  And EditingLnk >= 0 Then ' Just a precaution
+		      ItemLnk(EditingLnk).Terminal = Me.Value
+		    End If
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CheckShowDesktop
+	#tag Event
+		Sub ValueChanged()
+		  #Pragma BreakOnExceptions Off
+		  Try
+		    If ComboShortcut.RowCount >= 1 Then 'Only allow it to Save Changes if it's Got Link Items added
+		      If EditingLnk <= LnkCount  And LnkCount >= 0Then ' Just a precaution
+		        ItemLnk(EditingLnk).Desktop = Me.Value
+		      End If
+		    End If
+		  Catch
+		  End Try
+		  #Pragma BreakOnExceptions On
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CheckShowPanel
+	#tag Event
+		Sub ValueChanged()
+		  If ComboShortcut.RowCount >= 1 Then 'Only allow it to Save Changes if it's Got Link Items added
+		    If EditingLnk <= LnkCount  And EditingLnk >= 0 Then ' Just a precaution
+		      ItemLnk(EditingLnk).Panel = Me.Value
+		    End If
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CheckShowFavorites
+	#tag Event
+		Sub ValueChanged()
+		  If ComboShortcut.RowCount >= 1 Then 'Only allow it to Save Changes if it's Got Link Items added
+		    If EditingLnk <= LnkCount  And EditingLnk >= 0 Then ' Just a precaution
+		      ItemLnk(EditingLnk).Favorite = Me.Value
+		    End If
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CheckSendTo
+	#tag Event
+		Sub ValueChanged()
+		  ItemLnk(LnkEditing).LnkSendTo = Me.Value
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonLoadUserScript
+	#tag Event
+		Sub Pressed()
+		  Dim ImageIn As String
+		  
+		  Dim iniType As New FileType
+		  iniType.Name = "text/script"
+		  iniType.MacType = "SH;CMD"
+		  iniType.Extensions = "sh;cmd"
+		  
+		  ImageIn = Slash(TextIncludeFolder.Text)
+		  ImageIn = ImageIn.ReplaceAll("\","/")
+		  
+		  If ImageIn = "" Then ImageIn = SpecialFolder.Desktop.NativePath
+		  If TargetWindows = True Then
+		    ImageIn = ImageIn.ReplaceAll("/","\")
+		  Else
+		    ImageIn = ImageIn.ReplaceAll("\","/")
+		  End If
+		  
+		  ImageIn = OpenDialog(iniType, "Select Script File", ImageIn) ' browse for one 
+		  If ImageIn <> "" Then
+		    TextUserScript.Text = LoadDataFromFile(ImageIn)
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonLoadSudoOrReg
+	#tag Event
+		Sub Pressed()
+		  Dim ImageIn As String
+		  
+		  Dim iniType As New FileType
+		  iniType.Name = "text/script"
+		  iniType.MacType = "SH;CMD;REG"
+		  iniType.Extensions = "sh;cmd;reg"
+		  
+		  ImageIn = Slash(TextIncludeFolder.Text)
+		  ImageIn = ImageIn.ReplaceAll("\","/")
+		  
+		  If ImageIn = "" Then ImageIn = SpecialFolder.Desktop.NativePath
+		  If TargetWindows = True Then
+		    ImageIn = ImageIn.ReplaceAll("/","\")
+		  Else
+		    ImageIn = ImageIn.ReplaceAll("\","/")
+		  End If
+		  
+		  ImageIn = OpenDialog(iniType, "Select Sudo Script Or Registry File", ImageIn) ' browse for one 
+		  If ImageIn <> "" Then
+		    TextSudoScript.Text = LoadDataFromFile(ImageIn)
+		  End If
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonBrowseMovieFile
+	#tag Event
+		Sub Pressed()
+		  Dim ImageIn As String
+		  Dim F As FolderItem
+		  
+		  Dim iniType As New FileType
+		  iniType.Name = "movie/mp4"
+		  iniType.MacType = "MP4"
+		  iniType.Extensions = "mp4"
+		  
+		  ImageIn = TextMovieFile.Text
+		  If ImageIn = "" Then ImageIn = ItemLLItem.FileMovie
+		  ImageIn = ImageIn.ReplaceAll("\","/")
+		  ImageIn = Left(ImageIn,InStrRev(ImageIn,"/") -1) 'Get Parent
+		  
+		  If ImageIn = "" Then ImageIn = SpecialFolder.Desktop.NativePath
+		  If TargetWindows = True Then
+		    ImageIn = ImageIn.ReplaceAll("/","\")
+		  Else
+		    ImageIn = ImageIn.ReplaceAll("\","/")
+		  End If
+		  
+		  ImageIn = OpenDialog(iniType, "Select Movie mp4 File", ImageIn) ' browse for one 
+		  If ImageIn <> "" Then
+		    TextMovieFile.Text = ImageIn
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CanvasFader
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Return True
+		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Sub MouseUp(x As Integer, y As Integer)
+		  Dim ImageIn As String
+		  Dim F As FolderItem
+		  
+		  Dim iniType As New FileType
+		  iniType.Name = "image/png"
+		  iniType.MacType = "PNG"
+		  iniType.Extensions = "png"
+		  
+		  ImageIn = NewFileFader
+		  If ImageIn = "" Then ImageIn = ItemLLItem.FileFader
+		  ImageIn = ImageIn.ReplaceAll("\","/")
+		  ImageIn = Left(ImageIn,InStrRev(ImageIn,"/") -1) 'Get Parent
+		  
+		  If ImageIn = "" Then ImageIn = SpecialFolder.Desktop.NativePath
+		  If TargetWindows = True Then
+		    ImageIn = ImageIn.ReplaceAll("/","\")
+		  Else
+		    ImageIn = ImageIn.ReplaceAll("\","/")
+		  End If
+		  
+		  ImageIn = OpenDialog(iniType, "Select Fader PNG File", ImageIn) ' browse for one 
+		  If ImageIn <> "" Then
+		    NewFileFader = ImageIn
+		    F = GetFolderItem(ImageIn, FolderItem.PathTypeNative)
+		    CanvasFader.Backdrop = Picture.Open(F)
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CanvasScreenshot
+	#tag Event
+		Sub MouseUp(x As Integer, y As Integer)
+		  Dim ImageIn As String
+		  Dim F As FolderItem
+		  
+		  Dim iniType As New FileType
+		  iniType.Name = "image/jpg"
+		  iniType.MacType = "JPG"
+		  iniType.Extensions = "jpg"
+		  
+		  ImageIn = NewFileScreenshot
+		  If ImageIn = "" Then ImageIn = ItemLLItem.FileFader
+		  ImageIn = ImageIn.ReplaceAll("\","/")
+		  ImageIn = Left(ImageIn,InStrRev(ImageIn,"/") -1) 'Get Parent
+		  
+		  If ImageIn = "" Then ImageIn = SpecialFolder.Desktop.NativePath
+		  If TargetWindows = True Then
+		    ImageIn = ImageIn.ReplaceAll("/","\")
+		  Else
+		    ImageIn = ImageIn.ReplaceAll("\","/")
+		  End If
+		  
+		  ImageIn = OpenDialog(iniType, "Select Screenshot File", ImageIn) ' browse for one 
+		  If ImageIn <> "" Then
+		    NewFileScreenshot = ImageIn
+		    F = GetFolderItem(ImageIn, FolderItem.PathTypeNative)
+		    CanvasScreenshot.Backdrop = Picture.Open(F)
+		  End If
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Return True
+		  
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events CanvasIcon
+	#tag Event
+		Sub MouseUp(x As Integer, y As Integer)
+		  Dim ImageIn As String
+		  Dim F As FolderItem
+		  
+		  Dim iniType As New FileType
+		  iniType.Name = "image/ico"
+		  iniType.MacType = "ICO"
+		  iniType.Extensions = "ico"
+		  
+		  ImageIn = NewFileFader
+		  If ImageIn = "" Then ImageIn = ItemLLItem.FileIcon
+		  ImageIn = ImageIn.ReplaceAll("\","/")
+		  ImageIn = Left(ImageIn,InStrRev(ImageIn,"/") -1) 'Get Parent
+		  
+		  If ImageIn = "" Then ImageIn = SpecialFolder.Desktop.NativePath
+		  If TargetWindows = True Then
+		    ImageIn = ImageIn.ReplaceAll("/","\")
+		  Else
+		    ImageIn = ImageIn.ReplaceAll("\","/")
+		  End If
+		  
+		  ImageIn = OpenDialog(iniType, "Select Icon File", ImageIn) ' browse for one 
+		  If ImageIn <> "" Then
+		    NewFileIcon = ImageIn
+		    F = GetFolderItem(ImageIn, FolderItem.PathTypeNative)
+		    CanvasIcon.Backdrop = Picture.Open(F)
+		  End If
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Return True
+		  
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonLinkScreenshot
+	#tag Event
+		Sub Pressed()
+		  MsgBox "Not Yet Implemented"
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CheckNoInstall
+	#tag Event
+		Sub ValueChanged()
+		  ItemLLItem.NoInstall = CheckNoInstall.Value
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonAddPM
+	#tag Event
+		Sub Pressed()
+		  If Not TextPM.Text.IndexOf(ComboPM.Text) >= 0 Then
+		    TextPM.Text = TextPM.Text.Trim + " "+ComboPM.Text
+		    TextPM.Text = TextPM.Text.Trim
+		  End If
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextPM
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.PMCompatible = Me.Text.Trim
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonAddDE
+	#tag Event
+		Sub Pressed()
+		  If Not TextDE.Text.IndexOf(ComboDE.Text) >= 0 Then
+		    TextDE.Text = TextDE.Text.Trim + " "+ComboDE.Text
+		    TextDE.Text = TextDE.Text.Trim
+		    
+		    If ComboDE.Text = "Explorer" Then
+		      If TextPM.Text = "" Then TextPM.Text = "winget"
+		    End If
+		  End If
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextDE
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.DECompatible = Me.Text.Trim
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ComboArch
+	#tag Event
+		Sub TextChanged()
+		  'ItemLLItem.ArchCompatible = ComboArch.Text
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextFlags
+	#tag Event
+		Sub TextChanged()
+		  If ComboShortcut.RowCount >= 1 Then 'Only allow it to Save Changes if it's Got Link Items added
+		    If EditingLnk <= LnkCount And EditingLnk >= 0  Then ' Just a precaution
+		      ItemLnk(EditingLnk).Flags = Me.Text.Trim
+		    End If
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextInstallToFolder
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.PathApp = Me.Text
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonBrowseInstallToFolder
+	#tag Event
+		Sub Pressed()
+		  Dim G As FolderItem
+		  
+		  Dim Pat As String
+		  
+		  Pat = ExpPath(TextInstallToFolder.Text)
+		  
+		  If Pat <>"" Then
+		    If Exist(Pat) Then
+		      G = GetFolderItem(Pat,FolderItem.PathTypeNative)
+		    Else
+		      G = SpecialFolder.Desktop
+		    End If
+		  End If
+		  
+		  Var dlg As New SelectFolderDialog
+		  dlg.ActionButtonCaption = "Select"
+		  dlg.Title = "Select the Path your Item will install to"
+		  dlg.PromptText = "Make sure it's a valid path"
+		  dlg.InitialFolder = G
+		  
+		  Var F As FolderItem
+		  F = dlg.ShowModal
+		  If F <> Nil Then
+		    ' Use the folderitem here
+		    TextInstallToFolder.Text = Slash(F.NativePath)
+		    TextInstallToFolder.Text = CompPath(TextInstallToFolder.Text, True)
+		    ItemLLItem.PathApp = TextInstallToFolder.Text
+		  Else
+		    ' User cancelled, do nothing
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonBrowseInstaller
+	#tag Event
+		Sub Pressed()
+		  Dim ImageIn As String
+		  
+		  Dim iniType As New FileType
+		  iniType.Name = "exe/executable"
+		  iniType.MacType = "EXE;MSI"
+		  iniType.Extensions = "exe;msi"
+		  
+		  ImageIn = Slash(TextInstaller.Text)
+		  ImageIn = ImageIn.ReplaceAll("\","/")
+		  ImageIn = Left(ImageIn,InStrRev(ImageIn,"/") -1) 'Get Parent (no exe file)
+		  
+		  If ImageIn = "" Then ImageIn = SpecialFolder.Desktop.NativePath
+		  If TargetWindows = True Then
+		    ImageIn = ImageIn.ReplaceAll("/","\")
+		  Else
+		    ImageIn = ImageIn.ReplaceAll("\","/")
+		  End If
+		  
+		  ImageIn = OpenDialog(iniType, "Select Installer EXE/MSI File", ImageIn) ' browse for one 
+		  If ImageIn <> "" Then
+		    TextInstaller.Text = ImageIn
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonAddInstaller
+	#tag Event
+		Sub Pressed()
+		  Dim Installer As String
+		  
+		  Installer = TextInstaller.Text.Trim +" "+ TextUsage.Text.Trim
+		  Installer = Installer.Trim
+		  
+		  Installer = TextAssembly.Text.Trim + Chr(10)+ Installer
+		  
+		  If Installer <> "" Then TextAssembly.Text = Installer.Trim
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Is_x86
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Dim M As New Clipboard
+		  M.Text = Me.Text
+		  TextAssembly.Paste
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events Is_x64
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Dim M As New Clipboard
+		  M.Text = Me.Text
+		  TextAssembly.Paste
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events Is_ARM
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Dim M As New Clipboard
+		  M.Text = Me.Text
+		  TextAssembly.Paste
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events Is_NT5
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Dim M As New Clipboard
+		  M.Text = Me.Text
+		  TextAssembly.Paste
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events Is_NT6
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Dim M As New Clipboard
+		  M.Text = Me.Text
+		  TextAssembly.Paste
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events ProcessKill
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Dim M As New Clipboard
+		  M.Text = Me.Text
+		  TextAssembly.Paste
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events AddToHosts
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Dim M As New Clipboard
+		  M.Text = Me.Text
+		  TextAssembly.Paste
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events Extract
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Dim M As New Clipboard
+		  M.Text = Me.Text
+		  TextAssembly.Paste
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events ComboBuildType
+	#tag Event
+		Sub SelectionChanged(item As DesktopMenuItem)
+		  SelectionChangedLoadCats (Item)
+		  
+		  Select Case ComboBuildType.Text
+		  Case "ppApp"
+		    ItemLLItem.BuildType = ComboBuildType.Text
+		    CheckGetSizeComp.Enabled = True
+		    If TextInstalledSize.Text.ToInteger <= 0 Then CheckGetSizeComp.Value = True 'Only autoget by default if no size already given
+		  Case "ppGame"
+		    ItemLLItem.BuildType = ComboBuildType.Text
+		    CheckGetSizeComp.Enabled = True
+		    If TextInstalledSize.Text.ToInteger <= 0 Then CheckGetSizeComp.Value = True 'Only autoget by default if no size already given
+		  Case "LLGame"
+		    ItemLLItem.BuildType = ComboBuildType.Text
+		    CheckGetSizeComp.Enabled = True
+		    If TextInstalledSize.Text.ToInteger <= 0 Then CheckGetSizeComp.Value = True 'Only autoget by default if no size already given
+		  Case "LLApp", "ssApp"
+		    ItemLLItem.BuildType = ComboBuildType.Text
+		    CheckGetSizeComp.Enabled = True
+		    'If TextInstalledSize.Text.ToInteger <= 0 Then CheckGetSizeComp.Value = True 'Only autoget by default if no size already given 'As these are often not able to be used, I'll not auto select them
+		  Case Else
+		    CheckGetSizeComp.Enabled = True
+		    'If TextInstalledSize.Text.ToInteger <= 0 Then CheckGetSizeComp.Value = True 'Only autoget by default if no size already given 'As these are often not able to be used, I'll not auto select them
+		  End Select
+		  
+		  'Update Linux Link checkbox visibility based on new build type
+		  UpdateLinuxLinkCheckbox
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub TextChanged()
+		  Dim Ext As String
+		  Select Case ComboBuildType.Text
+		  Case "ppApp"
+		    ItemLLItem.BuildType = ComboBuildType.Text
+		    CheckGetSizeComp.Enabled = True
+		    If TextInstalledSize.Text.ToInteger <= 0 Then CheckGetSizeComp.Value = True 'Only autoget by default if no size already given
+		  Case "ppGame"
+		    ItemLLItem.BuildType = ComboBuildType.Text
+		    CheckGetSizeComp.Enabled = True
+		    If TextInstalledSize.Text.ToInteger <= 0 Then CheckGetSizeComp.Value = True 'Only autoget by default if no size already given
+		  Case "LLGame"
+		    ItemLLItem.BuildType = ComboBuildType.Text
+		    CheckGetSizeComp.Enabled = True
+		    If TextInstalledSize.Text.ToInteger <= 0 Then CheckGetSizeComp.Value = True 'Only autoget by default if no size already given
+		  Case "LLApp", "ssApp"
+		    ItemLLItem.BuildType = ComboBuildType.Text
+		    CheckGetSizeComp.Enabled = True
+		    'If TextInstalledSize.Text.ToInteger <= 0 Then CheckGetSizeComp.Value = True 'Only autoget by default if no size already given 'As these are often not able to be used, I'll not auto select them
+		  Case Else
+		    CheckGetSizeComp.Enabled = True
+		    'If TextInstalledSize.Text.ToInteger <= 0 Then CheckGetSizeComp.Value = True 'Only autoget by default if no size already given 'As these are often not able to be used, I'll not auto select them
+		  End Select
+		  
+		  
+		  RefreshImportSizeButton() ' Show Import whenever any usable source exists
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CheckHideInLauncher
+	#tag Event
+		Sub ValueChanged()
+		  ItemLLItem.HideInLauncher = CheckHideInLauncher.Value
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextKeepShortcuts
+	#tag Event
+		Sub TextChanged()
+		  If Not Populating Then ItemLLItem.ShortCutNamesKeep = Me.Text.Trim
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextDefaultMenuPath
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.StartMenuSourcePath = Me.Text.Trim
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Is_NT10
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Dim M As New Clipboard
+		  M.Text = Me.Text
+		  TextAssembly.Paste
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonSaveLLFile
+	#tag Event
+		Sub Pressed()
+		  Dim Success As Boolean
+		  Success = SaveLLFileComplete
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Advanced
+	#tag Event
+		Sub Pressed()
+		  'Center
+		  AdvancedLink.Left = (Screen(0).AvailableWidth /2) - (AdvancedLink.Width /2)
+		  AdvancedLink.Top = (Screen(0).AvailableHeight /2) - (AdvancedLink.Height /2)
+		  
+		  AdvancedLink.TextDE.Text = ItemLnk(EditingLnk).LnkDECompatible
+		  AdvancedLink.TextPM.Text = ItemLnk(EditingLnk).LnkPMCompatible
+		  AdvancedLink.ComboArch.Text = ItemLnk(EditingLnk).LnkArchCompatible
+		  
+		  AdvancedLink.Show
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonBrowseInstaller1
+	#tag Event
+		Sub Pressed()
+		  MsgBox "Not Yet Implemented"
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events LabelInstallSize
+	#tag Event
+		Sub MouseUp(x As Integer, y As Integer)
+		  GetSizeOfItem()
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  Return True
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonAddTag
+	#tag Event
+		Sub Pressed()
+		  Dim TXT As String
+		  
+		  TXT = TextTags.Text  +"; "+ComboTags.Text
+		  If Left(TXT, 1) = ";" Then TXT = Right(TXT, Len(TXT)-1).Trim
+		  TXT = TXT.ReplaceAll("; ;",";")
+		  TXT = TXT.ReplaceAll(";;",";")
+		  
+		  TextTags.Text = TXT
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextLanguage
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.Language = Me.Text.Trim
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextRating
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.Rating = Me.Text.Trim.ToDouble
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextPlayers
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.Players = Me.Text.Trim.ToInteger
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ComboLicense
+	#tag Event
+		Sub SelectionChanged(item As DesktopMenuItem)
+		  'License 3 Open Source, 2-Free, 1-Paid, 0 Unknown  
+		  'If Left(Trim(Data.Items[RefsID, Data.CLicense].Text)) = "0" Then Description.Text &= "License: Unknown" & "   "
+		  'If Left(Trim(Data.Items[RefsID, Data.CLicense].Text)) = "1" Then Description.Text &= "License: Paid" & "   "
+		  'If Left(Trim(Data.Items[RefsID, Data.CLicense].Text)) = "2" Then Description.Text &= "License: Free" & "   "
+		  'If Left(Trim(Data.Items[RefsID, Data.CLicense].Text)) = "3" Then Description.Text &= "License: Open" & "   "
+		  If ComboLicense.Text = "Unknown" Then ItemLLItem.License = 0
+		  If ComboLicense.Text = "Paid" Then ItemLLItem.License = 1
+		  If ComboLicense.Text = "Free" Then ItemLLItem.License = 2
+		  If ComboLicense.Text = "Open" Then ItemLLItem.License = 3
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextInstalledSize
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.InstallSize = Me.Text.Trim.ToInteger
+		  
+		  'If Me.Text.ToInteger < 0 Then
+		  'CheckGetSizeComp.Value = True
+		  'Else
+		  'CheckGetSizeComp.Value = False
+		  'End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ButtonImportSize
+	#tag Event
+		Sub Pressed()
+		  ' Import installed size from the best available source.
+		  ' InstalledSize is stored as raw bytes for ALL build types.
+		  ' Main displays: bytes / 1,000,000 → MB.
+		  
+		  If ZippedOut <> "" And Exist(ZippedOut) Then
+		    ' --- Archive path: ask 7z for the uncompressed total ---
+		    Dim RawBytes As Int64 = GetUnCompressedSize(ZippedOut).ToInt64
+		    If RawBytes > 0 Then
+		      TextInstalledSize.Text = RawBytes.ToString ' Store raw bytes
+		      CheckGetSizeComp.Value = False ' Size is now known, no need to re-fetch at build
+		    Else
+		      ' 7z gave nothing useful — fall through to folder count if possible
+		      Dim FolderBytes As Int64 = GetFolderSize(TextIncludeFolder.Text)
+		      If FolderBytes > 0 Then
+		        TextInstalledSize.Text = FolderBytes.ToString ' Store raw bytes
+		        CheckGetSizeComp.Value = False
+		      End If
+		    End If
+		    
+		  Else
+		    ' --- No archive: count files in the include folder ---
+		    Dim FolderBytes As Int64 = GetFolderSize(TextIncludeFolder.Text)
+		    If FolderBytes > 0 Then
+		      TextInstalledSize.Text = FolderBytes.ToString ' Store raw bytes
+		      CheckGetSizeComp.Value = False
+		    End If
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextBuilder
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.Builder = Me.Text.Trim
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextReleaseDate
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.ReleaseDate = Me.Text.Trim
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextReleaseVersion
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.ReleaseVersion = Me.Text.Trim
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextPublisher
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.Publisher = Me.Text.Trim
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events TextTags
+	#tag Event
+		Sub TextChanged()
+		  ItemLLItem.Tags = Me.Text.Trim
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CheckForceDERefresh
+	#tag Event
+		Sub ValueChanged()
+		  ItemLLItem.ForceDERefresh = CheckForceDERefresh.Value
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events OpenFile
+	#tag Event
+		Sub Pressed()
+		  If Debugging Then Debug("--- Open To Edit")
+		  
+		  Dim PresetIn As String
+		  
+		  Dim Success As Boolean
+		  
+		  Dim iniType As New FileType
+		  iniType.Name = "llfile/ini"
+		  iniType.MacType = "LLA;LLG;APP;PPG;TAR;APZ;PGZ"
+		  iniType.Extensions = "lla;llg;app;ppg;tar;apz;pgz"
+		  
+		  If PreviousPresetPath = "" Then PreviousPresetPath = Slash(AppPath)+"Presets"
+		  If TargetWindows = True Then
+		    PreviousPresetPath = PreviousPresetPath.ReplaceAll("/","\")
+		  Else
+		    PreviousPresetPath = PreviousPresetPath.ReplaceAll("\","/")
+		  End If
+		  
+		  If PresetIn = "" Then PresetIn = OpenDialog(iniType, "Select LLFile type File", PreviousPresetPath) ' browse for one 
+		  
+		  If TargetWindows Then
+		    PresetIn = PresetIn.ReplaceAll("/","\")
+		  Else
+		    PresetIn = PresetIn.ReplaceAll("\","/")
+		  End If
+		  
+		  If PresetIn <> "" Then
+		    If Debugging Then Debug("Opening To Edit: "+PresetIn)
+		    Success = LoadLLFile(PresetIn)
+		    If Debugging Then Debug("Opened To Edit: "+PresetIn +" "+Success.ToString)
+		    If Success Then Editor.PopulateData 'Populate if Data loaded successfully
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag ViewBehavior
+	#tag ViewProperty
+		Name="HasTitleBar"
+		Visible=true
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Name"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Interfaces"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Super"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Width"
+		Visible=true
+		Group="Size"
+		InitialValue="600"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Height"
+		Visible=true
+		Group="Size"
+		InitialValue="400"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MinimumWidth"
+		Visible=true
+		Group="Size"
+		InitialValue="64"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MinimumHeight"
+		Visible=true
+		Group="Size"
+		InitialValue="64"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MaximumWidth"
+		Visible=true
+		Group="Size"
+		InitialValue="32000"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MaximumHeight"
+		Visible=true
+		Group="Size"
+		InitialValue="32000"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Type"
+		Visible=true
+		Group="Frame"
+		InitialValue="0"
+		Type="Types"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Document"
+			"1 - Movable Modal"
+			"2 - Modal Dialog"
+			"3 - Floating Window"
+			"4 - Plain Box"
+			"5 - Shadowed Box"
+			"6 - Rounded Window"
+			"7 - Global Floating Window"
+			"8 - Sheet Window"
+			"9 - Modeless Dialog"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Title"
+		Visible=true
+		Group="Frame"
+		InitialValue="Untitled"
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasCloseButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasMaximizeButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasMinimizeButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasFullScreenButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Resizeable"
+		Visible=true
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Composite"
+		Visible=false
+		Group="OS X (Carbon)"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MacProcID"
+		Visible=false
+		Group="OS X (Carbon)"
+		InitialValue="0"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="FullScreen"
+		Visible=true
+		Group="Behavior"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="DefaultLocation"
+		Visible=true
+		Group="Behavior"
+		InitialValue="2"
+		Type="Locations"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Default"
+			"1 - Parent Window"
+			"2 - Main Screen"
+			"3 - Parent Window Screen"
+			"4 - Stagger"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Visible"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ImplicitInstance"
+		Visible=true
+		Group="Window Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasBackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="&cFFFFFF"
+		Type="ColorGroup"
+		EditorType="ColorGroup"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Backdrop"
+		Visible=true
+		Group="Background"
+		InitialValue=""
+		Type="Picture"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MenuBar"
+		Visible=true
+		Group="Menus"
+		InitialValue=""
+		Type="DesktopMenuBar"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MenuBarVisible"
+		Visible=true
+		Group="Deprecated"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="EditingCBLnk"
+		Visible=false
+		Group="Behavior"
+		InitialValue="-1"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Populating"
+		Visible=false
+		Group="Behavior"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ZippedOut"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+#tag EndViewBehavior

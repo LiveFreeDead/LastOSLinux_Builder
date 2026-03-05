@@ -1,0 +1,104 @@
+#!/bin/bash
+
+#LLStore Core v1.00 - User Level
+# Sourced by LLScript.sh at install time.
+# DO NOT add user-specific install logic here.
+
+#---------- Initialization ----------
+
+echo "Initializing User-Level Script..."
+echo
+
+#---------- Functions ----------
+
+# Install Flatpaks for the CURRENT USER only (no sudo required)
+# Usage: flatinst org.name.app1 org.name.app2 ...
+flatinst () {
+    if ! command -v flatpak &>/dev/null; then
+        echo "Error: Flatpak is not installed. User Flatpak install skipped."
+        return 1
+    fi
+
+    if [[ ":$PATH:" != *":$HOME/.local/share/flatpak/exports/bin:"* ]]; then
+        export PATH="$PATH:$HOME/.local/share/flatpak/exports/bin"
+    fi
+
+    if ! flatpak remotes --user 2>/dev/null | grep -q "flathub"; then
+        flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &>/dev/null || true
+    fi
+
+    for PKG in "$@"; do
+        if flatpak info --user "$PKG" &>/dev/null; then
+            echo "Flatpak (user) already installed, skipping: $PKG"
+            continue
+        fi
+        echo "Installing User Flatpak: $PKG"
+
+        TMPSCRIPT=$(mktemp /tmp/flatinst_XXXXXX.sh)
+        cat > "$TMPSCRIPT" << FLATSCRIPT
+#!/bin/bash
+yes 1 2>/dev/null | flatpak install --user -y --noninteractive --assumeyes flathub "$PKG"
+FLATSCRIPT
+        chmod +x "$TMPSCRIPT"
+
+        case "$OSTERM" in
+            gnome-terminal)              "$OSTERM" --wait -- bash "$TMPSCRIPT" ;;
+            ptyxis|mate-terminal|tilix)  "$OSTERM" -- bash "$TMPSCRIPT" ;;
+            alacritty)                   "$OSTERM" -- bash "$TMPSCRIPT" ;;
+            kitty|foot)                  "$OSTERM" bash "$TMPSCRIPT" ;;
+            terminator)                  "$OSTERM" -x bash "$TMPSCRIPT" ;;
+            *)                           "$OSTERM" -e bash "$TMPSCRIPT" ;;
+        esac
+
+        rm -f "$TMPSCRIPT"
+    done
+}
+
+#---------- System Detection ----------
+
+# Get Best Terminal
+TERMS=(ptyxis gnome-terminal konsole xfce4-terminal mate-terminal lxterminal qterminal tilix terminator alacritty kitty foot x-terminal-emulator xterm)
+OSTERM=""
+for t in "${TERMS[@]}"; do
+    if command -v "$t" &>/dev/null; then
+        OSTERM="$t"
+        break
+    fi
+done
+
+# Detect OS
+. /etc/os-release
+
+#---------- Write LLDesktopEnv.ini ----------
+# Saves the current desktop environment variables so that sudo-level scripts
+# can read them back (sudo strips XDG_* from the environment on most distros).
+# Also ensures SFX-built installers work on systems without LLStore installed.
+_LLDE_DIR="$HOME/zLastOSRepository"
+_LLDE_FILE="$_LLDE_DIR/LLDesktopEnv.ini"
+mkdir -p "$_LLDE_DIR" 2>/dev/null || true
+
+# Prefer printenv (catches vars set by the display manager but not exported
+# into sub-shells) then fall back to explicit expansion.
+if printenv XDG_SESSION_DESKTOP XDG_CURRENT_DESKTOP DESKTOP_SESSION GDMSESSION \
+        2>/dev/null | grep -q '='; then
+    printenv | grep -E '^(XDG_SESSION_DESKTOP|XDG_CURRENT_DESKTOP|DESKTOP_SESSION|GDMSESSION)=' \
+        > "$_LLDE_FILE" 2>/dev/null || true
+fi
+
+# If the file is still empty/missing, write what we can from the current shell
+if [ ! -s "$_LLDE_FILE" ]; then
+    {
+        [ -n "${XDG_SESSION_DESKTOP:-}" ] && echo "XDG_SESSION_DESKTOP=$XDG_SESSION_DESKTOP"
+        [ -n "${XDG_CURRENT_DESKTOP:-}"  ] && echo "XDG_CURRENT_DESKTOP=$XDG_CURRENT_DESKTOP"
+        [ -n "${DESKTOP_SESSION:-}"      ] && echo "DESKTOP_SESSION=$DESKTOP_SESSION"
+        [ -n "${GDMSESSION:-}"           ] && echo "GDMSESSION=$GDMSESSION"
+    } > "$_LLDE_FILE" 2>/dev/null || true
+fi
+
+unset _LLDE_DIR _LLDE_FILE
+
+echo
+echo -e "\033[1;4m            System Details            \033[0m"
+echo "Terminal Used:   ${OSTERM:-"None found"}"
+echo "Desktop:         ${XDG_SESSION_DESKTOP:-"Not detected"}"
+echo "OS ID:           $ID"
