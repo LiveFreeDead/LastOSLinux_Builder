@@ -3080,12 +3080,11 @@ End
 		  gSh.Execute("getent group lastos-users 2>/dev/null")
 		  Dim groupNeeded As Boolean = (gSh.Result.Trim = "")
 		  
-		  If Not groupNeeded Then
-		    gSh.Execute("whoami 2>/dev/null")
-		    Dim currentUser As String = gSh.Result.Trim
-		    gSh.Execute("id -nG " + Chr(34) + currentUser + Chr(34) + " 2>/dev/null")
-		    If Not gSh.Result.Trim.Contains("lastos-users") Then groupNeeded = True
-		  End If
+		  ' groupNeeded = True only when the group is genuinely absent from /etc/group.
+		  ' The 'group exists but session hasn't picked up the new GID yet' case is NOT
+		  ' a groupNeeded situation — it is handled by the sg lastos-users fast-path below.
+		  ' Setting groupNeeded=True for that case blocks the fast-path guard
+		  ' (If Not groupNeeded And needsSudo) and forces an unnecessary sudo prompt.
 		  
 		  ' NOTE: Group setup execution is deferred — handled below after needsSudo is known
 		  
@@ -3418,6 +3417,27 @@ End
 		      Else
 		        Debug("SetupUninstallTools: Running via RunSudoOnceDirect (group setup only)")
 		      End If
+		    End If
+		    
+		    ' ── sg fast-path: user IS in lastos-users per /etc/group but the current session was
+		    ' started before the group was added (no re-login yet).  The dir is root:lastos-users 775
+		    ' so group members can write directly, but the running process lacks the effective GID
+		    ' because PAM only applies groups at login time.
+		    ' sg lastos-users -c activates the GID for this single command — no root / polkit needed.
+		    ' This is the most common scenario on CachyOS/Arch after a fresh LLStore install.
+		    If Not groupNeeded And needsSudo Then
+		      If Debugging Then Debug("SetupUninstallTools: Trying sg lastos-users (group exists in /etc/group but not active in session)")
+		      Dim sgFastSh As New Shell
+		      sgFastSh.TimeOut = 30
+		      sgFastSh.ExecuteMode = Shell.ExecuteModes.Synchronous
+		      sgFastSh.Execute("sg lastos-users -c " + Chr(34) + "bash " + Chr(34) + tmpFile.NativePath + Chr(34) + Chr(34))
+		      If Exist(toolsDir + "/Uninstall.sh") And Exist(toolsDir + "/UninstallLauncher.sh") Then
+		        If Debugging Then Debug("SetupUninstallTools: sg lastos-users succeeded — scripts written")
+		        Dim sgTmpF As FolderItem = GetFolderItem(tmpFile.NativePath, FolderItem.PathTypeNative)
+		        If sgTmpF <> Nil And sgTmpF.Exists Then sgTmpF.Remove
+		        Return
+		      End If
+		      If Debugging Then Debug("SetupUninstallTools: sg path failed, falling back to RunSudoOnceDirect")
 		    End If
 		    
 		    ' If groupNeeded but NOT needsSudo, the script only contains group setup — still uses RunSudoOnceDirect
@@ -4332,6 +4352,16 @@ End
 		  'Get Consts
 		  If TargetLinux Then
 		    SysDesktopEnvironment = System.EnvironmentVariable("XDG_SESSION_DESKTOP").Lowercase
+		    If SysDesktopEnvironment = "" Then
+		      'XDG_SESSION_DESKTOP not set — try XDG_CURRENT_DESKTOP (may be multi-value e.g. "KDE:KDE", take first segment)
+		      Dim XCDRaw As String = System.EnvironmentVariable("XDG_CURRENT_DESKTOP").Lowercase
+		      Dim XCDParts() As String = Split(XCDRaw, ":")
+		      SysDesktopEnvironment = XCDParts(0).Trim
+		    End If
+		    'Normalise Wayland session variant: "plasmawayland" -> "plasma", "gnome-wayland" -> "gnome"
+		    SysDesktopEnvironment = SysDesktopEnvironment.ReplaceAll("plasmawayland", "plasma")
+		    SysDesktopEnvironment = SysDesktopEnvironment.ReplaceAll("gnome-wayland", "gnome")
+		    SysDesktopEnvironment = SysDesktopEnvironment.ReplaceAll("gnome-xorg", "gnome")
 		    If System.EnvironmentVariable("XDG_SESSION_TYPE").Lowercase.Trim = "wayland" Then Wayland = True
 		    SysPackageManager = ""
 		    SysTerminal = ""
@@ -4727,6 +4757,10 @@ End
 		        StoreMode = 4
 		        InstallStore = True
 		        
+		      Case "-uninstaller", "-u"
+		        StoreMode = 5
+		        UninstallerOnly = True
+		        
 		      Case "-keepsudo", "-ks"
 		        KeepSudo = True
 		        
@@ -4950,12 +4984,10 @@ End
 		  'Install Store Mode
 		  If OriginalStoreMode = 4 Or InstallStore = True Then
 		    Loading.Hide
-		    'Delete uninstall tools so they are recreated fresh after install
-		    If TargetLinux Then
-		      Deltree "/LastOS/Tools/Uninstall.sh"
-		      Deltree "/LastOS/Tools/UninstallLauncher.sh"
-		    End If
-		    
+		    ' NOTE: Do NOT delete uninstall scripts here. SetupUninstallTools (called
+		    ' above) already wrote them without sudo when the path was writable, and
+		    ' InstallLLStore embeds fresh copies in its own sudo script anyway.
+		    ' Deleting them here forced a redundant sudo prompt even when none was needed.
 		    InstallLLStore
 		    'PreQuitApp ' Save Debug etc
 		    'QuitApp 'Done installing, exit app, no need to continue
@@ -5042,6 +5074,14 @@ End
 		  End If
 		  
 		  'Show Loading Screen here if the Store Mode is 0
+		  If OriginalStoreMode = 5 Then
+		    Loading.Hide
+		    Uninstaller.Left = (Screen(0).AvailableWidth / 2) - (Uninstaller.Width / 2)
+		    Uninstaller.Top  = (Screen(0).AvailableHeight / 2) - (Uninstaller.Height / 2)
+		    Uninstaller.Show
+		    Return
+		  End If
+		  
 		  If OriginalStoreMode = 0 Then 
 		    If SortMenuStyle = False Then
 		      Loading.Visible = True 'Show the loading form here
@@ -5129,7 +5169,7 @@ End
 	#tag Event
 		Sub Action()
 		  If ForceQuit = True Then
-		    If EditorOnly Then 
+		    If EditorOnly Or UninstallerOnly Then
 		      PreQuitApp
 		      QuitApp
 		    End If
@@ -5207,10 +5247,13 @@ End
 		    
 		    If RunRefreshScript = True Or ForceDERefresh = True Then RunRefresh("cinnamon -r&")
 		    
-		    If SysDesktopEnvironment = "kde" Or SysDesktopEnvironment = "KDE" Then
+		    If SysDesktopEnvironment = "kde" Or SysDesktopEnvironment = "plasma" Then
 		      If RunRefreshScript = True Or ForceDERefresh = True Then
 		        ForceDERefresh = False
-		        RunRefresh("kquitapp plasmashell && plasmashell&")
+		        ' Rebuild KDE service cache so the new .desktop entry appears immediately.
+		        ' kbuildsycoca is non-destructive and works without restarting plasmashell.
+		        ' Try kbuildsycoca6 (KDE6) then kbuildsycoca5 (KDE5) in that order.
+		        ShellFast.Execute("bash -c 'timeout 15 kbuildsycoca6 --noincremental 2>/dev/null || timeout 15 kbuildsycoca5 --noincremental 2>/dev/null || true &'")
 		      End If
 		    End If
 		  End If
