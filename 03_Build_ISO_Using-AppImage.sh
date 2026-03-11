@@ -78,8 +78,8 @@ case $ID in
         # Copy Gamers Runtimes package into the Windows apps folder for Debian builds
         SRC="$MAINDIR/DebianFixes/LastOS.Gamers.Runtimes.Lite_v23.04_x64+x86_ssApp.apz"
         if [ -f "$SRC" ]; then
-            mkdir -p /LastOS/WindowsApps
-            cp "$SRC" /LastOS/WindowsApps/
+            mkdir -p /opt/LastOS/WindowsApps
+            cp "$SRC" /opt/LastOS/WindowsApps/
         else
             echo "Warning: Debian fix file not found: $SRC"
         fi
@@ -96,7 +96,7 @@ esac
 echo "Running Clean up from $MAINDIR/LLAppsInstalls/"
 CLEAN_TAR=$(ls "$MAINDIR/LLAppsInstalls/"LastOSLinux.Clean.Build_*_x64+x86_LLApp.tar 2>/dev/null | head -n 1)
 if [ -n "$CLEAN_TAR" ]; then
-    /LastOS/LLStore/llstore -i -q "$CLEAN_TAR"
+    /opt/LastOS/LLStore/llstore -i -q "$CLEAN_TAR"
 else
     echo "Warning: Clean build LLApp tar not found in $MAINDIR/LLAppsInstalls/"
 fi
@@ -104,7 +104,7 @@ fi
 echo "Running Build from $MAINDIR/LLAppsInstalls/"
 BUILD_TAR=$(ls "$MAINDIR/LLAppsInstalls/"LastOSLinux.Build.ISO_*_x64+x86_LLApp.tar 2>/dev/null | head -n 1)
 if [ -n "$BUILD_TAR" ]; then
-    /LastOS/LLStore/llstore -i -q "$BUILD_TAR"
+    /opt/LastOS/LLStore/llstore -i -q "$BUILD_TAR"
 else
     echo "Warning: Build ISO LLApp tar not found in $MAINDIR/LLAppsInstalls/"
 fi

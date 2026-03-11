@@ -98,22 +98,17 @@ sudo apt autoremove -y
 # ============================================================
 # Copy Wine downloaded MSI's into place for both user and skel
 # ============================================================
-if [ -f "$CurDir/wine/wine-gecko-2.47.4-x86.msi" ]; then
+#if [ -f "$CurDir/wine/wine-gecko-2.47.4-x86.msi" ]; then
     mkdir -p "$HOME/.cache/wine"
     cp -r "$CurDir/wine/." "$HOME/.cache/wine"
     sudo mkdir -p /etc/skel/.cache/wine
     sudo cp -r "$CurDir/wine/." "/etc/skel/.cache/wine/"
-fi
+#fi
 
 # Copy Google Chrome installer to /tmp for use by LLStore
 [ -f "$CurDir/google-chrome-stable_current_amd64.deb" ] && \
     cp "$CurDir/google-chrome-stable_current_amd64.deb" /tmp/
 
-# Install and set up the LL Store (keeps sudo alive internally via -KeepSudo)
-env GDK_BACKEND=x11 "$CurDir/LL_Store/llstore" -setup -KeepSudo
-
-# Fix permissions on the LLStore install directory
-sudo chmod -R 777 /LastOS/LLStore
 
 # ============================================================
 # Replace hardcoded path in the locations INI with the current
@@ -122,9 +117,9 @@ sudo chmod -R 777 /LastOS/LLStore
 sed "s!\/home/lastos/LastOSLinux-RC5/LLAppsInstalls!$CurDir/LLAppsInstalls!g" \
     "$CurDir/LLL_Store_Linux_Manual_Locations_Orig.ini" > "$CurDir/LLL_Store_Linux_Manual_Locations.ini"
 [ -f "$CurDir/LLL_Store_Linux_Manual_Locations.ini" ] && \
-    cp "$CurDir/LLL_Store_Linux_Manual_Locations.ini" /LastOS/LLStore
+    cp "$CurDir/LLL_Store_Linux_Manual_Locations.ini" /opt/LastOS/LLStore
 [ -f "$CurDir/LLL_Settings.ini" ] && \
-    cp "$CurDir/LLL_Settings.ini" /LastOS/LLStore
+    cp "$CurDir/LLL_Settings.ini" /opt/LastOS/LLStore
 
 # ============================================================
 # Icons and Fonts — done first as they can crash other things
@@ -132,10 +127,10 @@ sed "s!\/home/lastos/LastOSLinux-RC5/LLAppsInstalls!$CurDir/LLAppsInstalls!g" \
 # ============================================================
 
 # Install icons first (icon crashes block other installs)
-/LastOS/LLStore/llstore -i -q -KeepSudo -p "$CurDir/Icons_Preset.ini"
+/opt/LastOS/LLStore/llstore -i -q -KeepSudo -p "$CurDir/Icons_Preset.ini"
 
 # Install fonts first too (font crashes block other installs)
-/LastOS/LLStore/llstore -i -q -KeepSudo -p "$CurDir/Fonts_Preset.ini"
+/opt/LastOS/LLStore/llstore -i -q -KeepSudo -p "$CurDir/Fonts_Preset.ini"
 
 # Install VLC and Java font dependencies
 sudo apt -y install fonts-freefont-ttf fonts-dejavu-extra fonts-ipafont-gothic \
@@ -174,7 +169,7 @@ sudo apt -y remove firefox firefox-locale-en
 gsettings set org.cinnamon favorite-apps "['google-chrome.desktop', 'mintinstall.desktop', 'cinnamon-settings.desktop', 'llstore.desktop', 'org.gnome.Terminal.desktop', 'nemo.desktop']"
 
 # Install all apps from the main LastOS preset
-/LastOS/LLStore/llstore -i -p "$CurDir/LastOSLinux_Preset.ini"
+/opt/LastOS/LLStore/llstore -i -p "$CurDir/LastOSLinux_Preset.ini"
 #> $HOME/Desktop/LLStore-Results.txt
 #I removed -q (quit) from above after -i
 
@@ -183,7 +178,7 @@ echo "Done" > /tmp/LLSudoDone
 
 # Apply the overlay settings on top of the defaults
 [ -f "$CurDir/LLL_Settings-Overlay.ini" ] && \
-    cp "$CurDir/LLL_Settings-Overlay.ini" /LastOS/LLStore/LLL_Settings.ini
+    cp "$CurDir/LLL_Settings-Overlay.ini" /opt/LastOS/LLStore/LLL_Settings.ini
 
 # Clean up any LLStore debug logs left on the desktop
 [ -d "$HOME/Desktop/LLStore Debug-Logs" ] && \

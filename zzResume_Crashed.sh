@@ -33,4 +33,4 @@ fi
 # ============================================================
 # Resume a crashed or interrupted LLStore operation
 # ============================================================
-/LastOS/LLStore/llstore -continue
+/opt/LastOS/LLStore/llstore -continue
