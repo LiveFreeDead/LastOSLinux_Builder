@@ -98,16 +98,14 @@ sudo apt autoremove -y
 # ============================================================
 # Copy Wine downloaded MSI's into place for both user and skel
 # ============================================================
-#if [ -f "$CurDir/wine/wine-gecko-2.47.4-x86.msi" ]; then
+
     mkdir -p "$HOME/.cache/wine"
     cp -r "$CurDir/wine/." "$HOME/.cache/wine"
     sudo mkdir -p /etc/skel/.cache/wine
     sudo cp -r "$CurDir/wine/." "/etc/skel/.cache/wine/"
-#fi
 
 # Copy Google Chrome installer to /tmp for use by LLStore
-[ -f "$CurDir/google-chrome-stable_current_amd64.deb" ] && \
-    cp "$CurDir/google-chrome-stable_current_amd64.deb" /tmp/
+cp "$CurDir/google-chrome-stable_current_amd64.deb" /tmp/
 
 
 # ============================================================
