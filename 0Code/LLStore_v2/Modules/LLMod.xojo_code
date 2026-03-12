@@ -546,7 +546,7 @@ Protected Module LLMod
 		          'lnkObj.TargetPath = scTarget.NativePath
 		          lnkObj.TargetPath = Target 'Target may also have some Arguments, so use text not folder item.
 		          If Args <> "" Then lnkObj.Arguments = Args 'Target may also have some Arguments, so use text not folder item.
-		          lnkObj.WorkingDirectory = Slash(FixPath(scWorkingDir.NativePath))
+		          If scWorkingDir <> Nil Then lnkObj.WorkingDirectory = Slash(FixPath(scWorkingDir.NativePath))
 		          'IconFile = "D:\Documents\Desktop\ppGame.ico"
 		          If IconFile.IndexOf(".png") >=1 Then
 		            If Exist(IconFile.ReplaceAll(".png",".ico")) Then
@@ -688,8 +688,20 @@ Protected Module LLMod
 		  
 		  If TargetWindows Then Return 'No Need to be here, shouldn't be
 		  
+		  ' Re-entrancy guard: App.DoEvents inside the wait loops can cause timers to
+		  ' fire and call RunSudo → EnableSudoScript again before the first call has
+		  ' finished. The second call would launch a fresh terminal (second sudo prompt)
+		  ' and race with the first. Block any re-entrant call until we're done.
+		  If EnableSudoScriptRunning Then Return
+		  EnableSudoScriptRunning = True
+		  
 		  Dim F As FolderItem
 		  Dim Test As Boolean
+		  
+		  ' Remove any stale LLSudo launch-marker left by a previous crashed instance.
+		  ' Without this, EnableSudoScript sees the file and falls into the "wait for
+		  ' deletion" branch, times out, and never launches a new terminal.
+		  ShellFast.Execute("rm -f " + BaseDir + "/LLSudo")
 		  
 		  ShellFast.Execute ("echo "+Chr(34)+"HandShake"+Chr(34)+" > "+BaseDir+"/LLSudoHandShake")
 		  
@@ -698,6 +710,8 @@ Protected Module LLMod
 		  
 		  If SudoShellLoop.IsRunning Then 'Can check here if the current sessions one is running, no need to handshake if True
 		    SudoEnabled = True
+		    RegisterSudoBusy
+		    EnableSudoScriptRunning = False
 		    Return
 		  End If
 		  
@@ -706,6 +720,7 @@ Protected Module LLMod
 		    App.DoEvents(20)
 		    If Not Exist(BaseDir+"/LLSudoHandShake") Then 'If deleted by Sudo script it must be running
 		      SudoEnabled = True
+		      RegisterSudoBusy
 		      If Debugging Then Debug ("# Sudo Script Already Active")
 		      Exit 'Quit loop
 		    End If
@@ -713,7 +728,10 @@ Protected Module LLMod
 		  Wend
 		  Deltree(BaseDir+"/LLSudoHandShake") 'Confirm it's gone after timeout
 		  
-		  If SudoEnabled = True Then Return ' It's ready to go
+		  If SudoEnabled = True Then
+		    EnableSudoScriptRunning = False
+		    Return ' It's ready to go
+		  End If
 		  
 		  'Below can't be used remotely, so use above method to check instead
 		  'If Not SudoShellLoop.IsRunning Then 'Just a check
@@ -731,11 +749,6 @@ Protected Module LLMod
 		          ShellFast.Execute ("echo "+Chr(34)+"Unlock"+Chr(34)+" > "+BaseDir+"/LLSudo")
 		          SaveDataToFile("Unlock", BaseDir+"/LLSudo") 'Do 2 methods to make 100% sure it's made and waits
 		          
-		          'Don't do below line, if the Sudo Script needs a file, it'll have to use the full path, else it's changes out of the Installers Path to run Sudo script.
-		          'Test = ChDirSet(ToolPath) 'Make sure in the right folder to run script etc
-		          
-		          'Added -E to the following to pass Env Variables to the Sudo scripts.
-		          
 		          ' Absolute paths to avoid working-directory issues across terminals
 		          Dim AbsSudoScript As String = ToolPath + "sudo_script.sh"
 		          Dim AbsLLStoreSudo As String = ToolPath + "LLStore_Sudo.sh"
@@ -745,78 +758,86 @@ Protected Module LLMod
 		          '  -- bash -c  : GNOME-family terminals (VTE-based) that use -- to end their own args
 		          '  -e bash -c  : Most traditional terminals that accept -e <program> [args...]
 		          '  direct args : kitty / foot pass the command without any flag
+		          ' All terminals launched with nohup + & so they are fully detached from Xojo's
+		          ' process group. Without this, Xojo's Shell destructor sends SIGHUP to the group
+		          ' on exit, killing the terminal and the sudo listener regardless of KeepSudo.
+		          Dim NohupSuffix As String = " </dev/null >/dev/null 2>&1 &"
 		          If SysTerminal.Trim = "gnome-terminal" Then
 		            ' gnome-terminal needs --wait or it daemonizes and returns immediately
-		            SudoShellLoop.Execute(SysTerminal.Trim + " --wait -- bash -c " + Chr(34) + SudoCommand + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " --wait -- bash -c " + Chr(34) + SudoCommand + Chr(34) + NohupSuffix)
 		          ElseIf SysTerminal.Trim = "ptyxis" Then
 		            ' Ptyxis: GNOME default terminal (Ubuntu 24.10+ / Fedora 41+)
-		            SudoShellLoop.Execute(SysTerminal.Trim + " -- bash -c " + Chr(34) + SudoCommand + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " -- bash -c " + Chr(34) + SudoCommand + Chr(34) + NohupSuffix)
 		          ElseIf SysTerminal.Trim = "mate-terminal" Then
 		            ' MATE desktop terminal (VTE-based, same family as gnome-terminal)
-		            SudoShellLoop.Execute(SysTerminal.Trim + " -- bash -c " + Chr(34) + SudoCommand + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " -- bash -c " + Chr(34) + SudoCommand + Chr(34) + NohupSuffix)
 		          ElseIf SysTerminal.Trim = "tilix" Then
 		            ' Tilix tiling terminal (VTE-based)
-		            SudoShellLoop.Execute(SysTerminal.Trim + " -- bash -c " + Chr(34) + SudoCommand + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " -- bash -c " + Chr(34) + SudoCommand + Chr(34) + NohupSuffix)
 		          ElseIf SysTerminal.Trim = "konsole" Then
 		            ' KDE Konsole
-		            SudoShellLoop.Execute(SysTerminal.Trim + " -e bash -c " + Chr(34) + SudoCommand + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " -e bash -c " + Chr(34) + SudoCommand + Chr(34) + NohupSuffix)
 		          ElseIf SysTerminal.Trim = "xfce4-terminal" Then
 		            ' XFCE Terminal — -e requires a single string, not separate args
-		            SudoShellLoop.Execute(SysTerminal.Trim + " -e " + Chr(34) + "bash " + Chr(39) + AbsSudoScript + Chr(39) + " " + Chr(39) + AbsLLStoreSudo + Chr(39) + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " -e " + Chr(34) + "bash " + Chr(39) + AbsSudoScript + Chr(39) + " " + Chr(39) + AbsLLStoreSudo + Chr(39) + Chr(34) + NohupSuffix)
 		          ElseIf SysTerminal.Trim = "lxterminal" Then
 		            ' LXDE Terminal — same single-string -e requirement as xfce4-terminal
-		            SudoShellLoop.Execute(SysTerminal.Trim + " -e " + Chr(34) + "bash " + Chr(39) + AbsSudoScript + Chr(39) + " " + Chr(39) + AbsLLStoreSudo + Chr(39) + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " -e " + Chr(34) + "bash " + Chr(39) + AbsSudoScript + Chr(39) + " " + Chr(39) + AbsLLStoreSudo + Chr(39) + Chr(34) + NohupSuffix)
 		          ElseIf SysTerminal.Trim = "qterminal" Then
 		            ' LXQt Terminal — same single-string -e requirement as xfce4-terminal
-		            SudoShellLoop.Execute(SysTerminal.Trim + " -e " + Chr(34) + "bash " + Chr(39) + AbsSudoScript + Chr(39) + " " + Chr(39) + AbsLLStoreSudo + Chr(39) + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " -e " + Chr(34) + "bash " + Chr(39) + AbsSudoScript + Chr(39) + " " + Chr(39) + AbsLLStoreSudo + Chr(39) + Chr(34) + NohupSuffix)
 		          ElseIf SysTerminal.Trim = "terminator" Then
 		            ' Terminator: uses -x (execute and hold window open)
-		            SudoShellLoop.Execute(SysTerminal.Trim + " -x bash -c " + Chr(34) + SudoCommand + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " -x bash -c " + Chr(34) + SudoCommand + Chr(34) + NohupSuffix)
 		          ElseIf SysTerminal.Trim = "alacritty" Then
 		            ' Alacritty: GPU-accelerated, uses -- separator (v0.13+ deprecated -e)
-		            SudoShellLoop.Execute(SysTerminal.Trim + " -- bash -c " + Chr(34) + SudoCommand + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " -- bash -c " + Chr(34) + SudoCommand + Chr(34) + NohupSuffix)
 		          ElseIf SysTerminal.Trim = "kitty" Then
 		            ' Kitty: GPU-accelerated, passes command directly without flag
-		            SudoShellLoop.Execute(SysTerminal.Trim + " bash -c " + Chr(34) + SudoCommand + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " bash -c " + Chr(34) + SudoCommand + Chr(34) + NohupSuffix)
 		          ElseIf SysTerminal.Trim = "foot" Then
 		            ' Foot: Wayland-native, passes command directly without flag
-		            SudoShellLoop.Execute(SysTerminal.Trim + " bash -c " + Chr(34) + SudoCommand + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " bash -c " + Chr(34) + SudoCommand + Chr(34) + NohupSuffix)
 		          ElseIf SysTerminal.Trim = "xterm" Then
 		            ' xterm: universal fallback
-		            SudoShellLoop.Execute(SysTerminal.Trim + " -e bash -c " + Chr(34) + SudoCommand + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " -e bash -c " + Chr(34) + SudoCommand + Chr(34) + NohupSuffix)
 		          Else
 		            ' x-terminal-emulator (Debian/Ubuntu symlink) and any unknown terminals
-		            SudoShellLoop.Execute(SysTerminal.Trim + " -e bash -c " + Chr(34) + SudoCommand + Chr(34))
+		            SudoShellLoop.Execute("nohup " + SysTerminal.Trim + " -e bash -c " + Chr(34) + SudoCommand + Chr(34) + NohupSuffix)
 		          End If
 		          
-		          TimeOut = System.Microseconds + (5 *1000000) 'Set Timeout after 5 seconds
-		          While  Exist(BaseDir+"/LLSudo") 'First thing Sudo script does is delete this file, so we know it's ran ok
-		            'if SudoShellLoop.IsRunning = False Then Exit 'MsgBox "Closed Shell?" 'Disabled Line to FORCE it to wait
+		          ' With nohup+& the terminal is fully detached, so SudoShellLoop.IsRunning is
+		          ' always False immediately. Use the handshake file instead: the listener deletes
+		          ' LLSudo as its very first act, so absence = listener is up and running.
+		          ' No timeout — wait indefinitely for the user to enter their password.
+		          While Exist(BaseDir+"/LLSudo")
 		            App.DoEvents(20)
-		            If System.Microseconds >= TimeOut Then Exit 'Timeout after set seconds, Give up after 6 seconds? Testing Glenn
 		          Wend
 		          
-		          if SudoShellLoop.IsRunning = True Then
+		          If Not Exist(BaseDir+"/LLSudo") Then
 		            SudoEnabled = True
+		            RegisterSudoBusy
 		            
 		            If Exist(Slash(ToolPath)+"run-1080p") Then
-		              'If Not Exist("/usr/bin/run-1080p") Then 'Disabled check, just do it every time so I can easily update it.
-		              RunSudo("cp -f "+chr(34)+Slash(ToolPath)+"run-1080p"+chr(34)+"  /usr/bin/run-1080p&& chmod +x /usr/bin/run-1080p") 'Make run-1080p available if it's not already
-		              'End If
+		              If ImmutableOS Then
+		                ' /usr/bin is read-only on immutable distros — install to ~/.local/bin instead
+		                ShellFast.Execute("mkdir -p "+Chr(34)+Slash(HomePath)+".local/bin"+Chr(34))
+		                ShellFast.Execute("cp -f "+Chr(34)+Slash(ToolPath)+"run-1080p"+Chr(34)+" "+Chr(34)+Slash(HomePath)+".local/bin/run-1080p"+Chr(34)+" && chmod +x "+Chr(34)+Slash(HomePath)+".local/bin/run-1080p"+Chr(34))
+		              Else
+		                RunSudo("cp -f "+Chr(34)+Slash(ToolPath)+"run-1080p"+Chr(34)+"  /usr/bin/run-1080p && chmod +x /usr/bin/run-1080p")
+		              End If
 		            End If
 		            
 		            If Debugging Then Debug("Sudo Enabled: " +SudoEnabled.ToString)
 		          Else
 		            SudoEnabled = False
-		            
 		            If Debugging Then Debug("Sudo Enabled: " +SudoEnabled.ToString)
 		          End If
-		        Else 'File Exist, wait for a set time and continue
-		          TimeOut = System.Microseconds + (5 *1000000) 'Set Timeout after 5 seconds
-		          While  Exist(BaseDir+"/LLSudo") 'First thing Sudo script does is delete this file, so we know it's ran ok
-		            if SudoShellLoop.IsRunning = False Then Exit 'MsgBox "Closed Shell?"
+		          
+		        Else 'LLSudo file already exists — stale from a previous launch, wait for it
+		          ' No timeout — wait indefinitely for the user to enter their password.
+		          While Exist(BaseDir+"/LLSudo")
 		            App.DoEvents(20)
-		            If System.Microseconds >= TimeOut Then Exit 'Timeout after set seconds, Give up after 6 seconds? Testing Glenn
 		          Wend
 		          Deltree(BaseDir+"/LLSudo") 'Remove it, it's obviously not gonna work without user input
 		        End If
@@ -826,6 +847,7 @@ Protected Module LLMod
 		    SudoEnabled = False
 		    Deltree(BaseDir+"/LLSudo") 'Remove it, it's obviously not gonna work without user input
 		  End If
+		  EnableSudoScriptRunning = False
 		End Sub
 	#tag EndMethod
 
@@ -1588,7 +1610,7 @@ Protected Module LLMod
 		  If Right(OrigScript, 3) = ".sh" And Not TargetWindows Then
 		    If InStr(RL, "LLScript_Core") = 0 Then 'Only inject if not already sourcing the core
 		      '%ToolPath% is resolved by ExpPathScript (called per-line below) to wherever LLStore
-		      'is currently running from - USB or installed. The /LastOS/LLStore/ path is the
+		      'is currently running from - USB or installed. The /opt/LastOS/LLStore/ path is the
 		      'fallback for when LLStore is installed and ToolPath matches it anyway, but it also
 		      'covers edge cases where the core file exists installed but ToolPath pointed elsewhere.
 		      Dim CoreName As String
@@ -1598,9 +1620,9 @@ Protected Module LLMod
 		        CoreName = "LLScript_Core.sh"
 		      End If
 		      Dim Q As String = Chr(34)
-		      'Try /LastOS/LLStore/Tools/ first - stable installed path, works when user runs script manually.
+		      'Try /opt/LastOS/LLStore/Tools/ first - stable installed path, works when user runs script manually.
 		      'Fall back to %ToolPath%/ (USB/portable path resolved at install time) if not installed.
-		      Dim CoreSourceLine As String = "if [ -f "+Q+"%ToolPath%/"+CoreName+Q+" ]; then source "+Q+"%ToolPath%/"+CoreName+Q+"; elif [ -f "+Q+"/LastOS/LLStore/Tools/"+CoreName+Q+" ]; then source "+Q+"/LastOS/LLStore/Tools/"+CoreName+Q+"; fi #LLCore"
+		      Dim CoreSourceLine As String = "if [ -f "+Q+"%ToolPath%/"+CoreName+Q+" ]; then source "+Q+"%ToolPath%/"+CoreName+Q+"; elif [ -f "+Q+"/opt/LastOS/LLStore/Tools/"+CoreName+Q+" ]; then source "+Q+"/opt/LastOS/LLStore/Tools/"+CoreName+Q+"; fi #LLCore"
 		      'Insert at index 1 (after shebang) so it runs before any other script content.
 		      'The cd injection at I=1 means the actual execution order is: shebang, cd, source.
 		      Dim NewSp() As String
@@ -2711,7 +2733,7 @@ Protected Module LLMod
 		  If Debugging Then Debug("--- InstallLinuxContextMenus ---")
 		  
 		  Dim DE As String  = SysDesktopEnvironment.Trim.Lowercase
-		  Dim Icon As String = "/LastOS/LLStore/llstore Resources/appicon_256.png"
+		  Dim Icon As String = "/opt/LastOS/LLStore/llstore Resources/appicon_256.png"
 		  Dim LL As String   = "env GDK_BACKEND=x11 llfile"
 		  Dim NL As String   = Chr(10)
 		  Dim Q As String    = Chr(34)
@@ -3007,7 +3029,7 @@ Protected Module LLMod
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub InstallLinuxMenuSorting(KeepSudo2 As Boolean = True)
+		Sub InstallLinuxMenuSorting(ReleaseWhenDone As Boolean = True)
 		  Dim MainPath As String = Slash(AppPath)
 		  
 		  ' Note: EnableSudoScript is intentionally NOT called here.
@@ -3016,15 +3038,25 @@ Protected Module LLMod
 		  ' distros where the terminal takes time to re-open (e.g. Mint, KDE).
 		  ' If calling this standalone, call EnableSudoScript first yourself.
 		  
-		  RunSudo("cp  -R "+Chr(34)+MainPath+"Tools/LinuxMenuSorting/xdg/menus/applications-merged"+Chr(34)+" "+Chr(34)+"/etc/xdg/menus/"+Chr(34))
-		  RunSudo("cp  -R "+Chr(34)+MainPath+"Tools/LinuxMenuSorting/desktop-directories"+Chr(34)+" "+Chr(34)+"/usr/share/"+Chr(34))
+		  If ImmutableOS Then
+		    ' /usr/share and /etc/xdg are read-only on immutable/atomic distros.
+		    ' Fall back to user-level XDG paths which are always writable.
+		    Dim UserMenuDir As String = Slash(HomePath)+".config/menus/applications-merged/"
+		    Dim UserDeskDir As String = Slash(HomePath)+".local/share/desktop-directories/"
+		    ShellFast.Execute("mkdir -p "+Chr(34)+UserMenuDir+Chr(34)+" "+Chr(34)+UserDeskDir+Chr(34))
+		    ShellFast.Execute("cp -R "+Chr(34)+MainPath+"Tools/LinuxMenuSorting/xdg/menus/applications-merged/."+Chr(34)+" "+Chr(34)+UserMenuDir+Chr(34)+" 2>/dev/null || true")
+		    ShellFast.Execute("cp -R "+Chr(34)+MainPath+"Tools/LinuxMenuSorting/desktop-directories/."+Chr(34)+" "+Chr(34)+UserDeskDir+Chr(34)+" 2>/dev/null || true")
+		  Else
+		    RunSudo("cp  -R "+Chr(34)+MainPath+"Tools/LinuxMenuSorting/xdg/menus/applications-merged"+Chr(34)+" "+Chr(34)+"/etc/xdg/menus/"+Chr(34))
+		    RunSudo("cp  -R "+Chr(34)+MainPath+"Tools/LinuxMenuSorting/desktop-directories"+Chr(34)+" "+Chr(34)+"/usr/share/"+Chr(34))
+		    
+		    RunSudo("chmod 644 "+Chr(34)+"/etc/xdg/menus/applications-merged/LastOSLinux_Sorting.menu"+Chr(34)) 'Secure: system config file, root-owned, readable by all
+		    RunSudo("chmod 644 "+Chr(34)+"/usr/share/desktop-directories/cinnamon-disk.directory"+Chr(34)) 'Secure: system config file, root-owned, readable by all
+		  End If
 		  
-		  RunSudo("chmod 644 "+Chr(34)+"/etc/xdg/menus/applications-merged/LastOSLinux_Sorting.menu"+Chr(34)) 'Secure: system config file, root-owned, readable by all
-		  RunSudo("chmod 644 "+Chr(34)+"/usr/share/desktop-directories/cinnamon-disk.directory"+Chr(34)) 'Secure: system config file, root-owned, readable by all
 		  
-		  
-		  'Close Sudo Terminal
-		  If KeepSudo2 = False Then ShellFast.Execute ("echo "+Chr(34)+"Unlock"+Chr(34)+" > "+BaseDir+"/LLSudoDone") 'Quits Terminal after All items have been installed.
+		  'Close Sudo Terminal — only when called standalone, not mid-sequence inside InstallLLStore
+		  If ReleaseWhenDone Then ReleaseSudoListener()
 		  
 		End Sub
 	#tag EndMethod
@@ -3722,10 +3754,12 @@ Protected Module LLMod
 		  Else
 		    If Debugging Then Debug ("--- Installing LLStore in Linux ---")
 		    MainPath = MainPath.ReplaceAll("\","/")
-		    InstallPath = "/LastOS/LLStore/"
+		    InstallPath = "/opt/LastOS/LLStore/"
 		    Target = InstallPath+"llstore"
 		    App.DoEvents(7)
 		    NotifyStep("Step 1/10: Setting up sudo access...")
+		    ' Listener should already be open (opened in VeryFirstRunTimer before SetupUninstallTools).
+		    ' EnableSudoScript returns immediately via handshake if so — no second prompt.
 		    EnableSudoScript
 		    
 		    MakeFolder(Slash(HomePath)+".local/share/applications")
@@ -3768,8 +3802,11 @@ Protected Module LLMod
 		    InstallScript = InstallScript + "cp "+Chr(34)+MainPath+"libgthread-2.0.so.0.txt"+Chr(34)+" "+Chr(34)+InstallPath+Chr(34)+" 2>/dev/null || true" + Chr(10) + Chr(10)
 		    
 		    'Copy Icons for file types
+		    'Immutable OS: /usr/share/icons is read-only — the user-level copy (below) handles it instead.
 		    If Exist(MainPath+"Tools/hicolor") Then
-		      InstallScript = InstallScript + "cp -R "+Chr(34)+MainPath+"Tools/hicolor"+Chr(34)+" "+Chr(34)+"/usr/share/icons/"+Chr(34) + Chr(10)
+		      If Not ImmutableOS Then
+		        InstallScript = InstallScript + "cp -R "+Chr(34)+MainPath+"Tools/hicolor"+Chr(34)+" "+Chr(34)+"/usr/share/icons/"+Chr(34) + Chr(10)
+		      End If
 		    End If
 		    
 		    'Apply final permissions
@@ -3779,137 +3816,44 @@ Protected Module LLMod
 		    InstallScript = InstallScript + "  chmod -R 777 "+Chr(34)+InstallPath+Chr(34) + Chr(10)
 		    InstallScript = InstallScript + "fi" + Chr(10)
 		    
-		    ' Write /LastOS/Tools/Uninstall.sh and UninstallLauncher.sh while root is already active.
-		    ' This guarantees the files exist with correct ownership/perms regardless of whether
-		    ' SetupUninstallTools has run yet or whether the user's session has the lastos-users GID.
-		    InstallScript = InstallScript + Chr(10) + "mkdir -p /LastOS/Tools" + Chr(10)
-		    InstallScript = InstallScript + "chown root:lastos-users /LastOS /LastOS/Tools 2>/dev/null || true" + Chr(10)
-		    InstallScript = InstallScript + "chmod 775 /LastOS /LastOS/Tools" + Chr(10)
-		    InstallScript = InstallScript + Chr(10)
-		    ' ---- Uninstall.sh ----
-		    InstallScript = InstallScript + "cat << 'UNINSTALL_EOF' > /LastOS/Tools/Uninstall.sh" + Chr(10)
-		    InstallScript = InstallScript + "#!/usr/bin/env bash" + Chr(10)
-		    InstallScript = InstallScript + "DESKTOP=" + Chr(34) + "$1" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "SILENT=false" + Chr(10)
-		    InstallScript = InstallScript + "for ARG in " + Chr(34) + "$@" + Chr(34) + "; do" + Chr(10)
-		    InstallScript = InstallScript + "    [ " + Chr(34) + "$ARG" + Chr(34) + " = " + Chr(34) + "--silent" + Chr(34) + " ] && SILENT=true" + Chr(10)
-		    InstallScript = InstallScript + "done" + Chr(10)
-		    InstallScript = InstallScript + "say() { [ " + Chr(34) + "$SILENT" + Chr(34) + " = false ] && echo " + Chr(34) + "$@" + Chr(34) + "; }" + Chr(10)
-		    InstallScript = InstallScript + "if [ " + Chr(34) + "$SILENT" + Chr(34) + " = false ]; then" + Chr(10)
-		    InstallScript = InstallScript + "    clear" + Chr(10)
-		    InstallScript = InstallScript + "    echo" + Chr(10)
-		    InstallScript = InstallScript + "    echo " + Chr(34) + "======================================" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "    echo " + Chr(34) + "        LastOS Uninstaller" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "    echo " + Chr(34) + "======================================" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "    echo" + Chr(10)
-		    InstallScript = InstallScript + "fi" + Chr(10)
-		    InstallScript = InstallScript + "if [ ! -f " + Chr(34) + "$DESKTOP" + Chr(34) + " ]; then" + Chr(10)
-		    InstallScript = InstallScript + "    say " + Chr(34) + "Desktop file missing" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "    [ " + Chr(34) + "$SILENT" + Chr(34) + " = false ] && sleep 3" + Chr(10)
-		    InstallScript = InstallScript + "    exit 1" + Chr(10)
-		    InstallScript = InstallScript + "fi" + Chr(10)
-		    InstallScript = InstallScript + "NAME=$(grep " + Chr(34) + "^Name=" + Chr(34) + " " + Chr(34) + "$DESKTOP" + Chr(34) + " | head -1 | cut -d= -f2)" + Chr(10)
-		    InstallScript = InstallScript + "DESKEXEC=$(grep " + Chr(34) + "^Exec=" + Chr(34) + " " + Chr(34) + "$DESKTOP" + Chr(34) + " | head -1 | cut -d= -f2-)" + Chr(10)
-		    InstallScript = InstallScript + "DESKPATH=$(grep " + Chr(34) + "^Path=" + Chr(34) + " " + Chr(34) + "$DESKTOP" + Chr(34) + " | head -1 | cut -d= -f2-)" + Chr(10)
-		    InstallScript = InstallScript + "IS_SSAPP=false" + Chr(10)
-		    InstallScript = InstallScript + "if echo " + Chr(34) + "$DESKEXEC$DESKPATH" + Chr(34) + " | grep -qi " + Chr(34) + "\.wine\|ppApps\|ppGames" + Chr(34) + "; then" + Chr(10)
-		    InstallScript = InstallScript + "    IS_SSAPP=true" + Chr(10)
-		    InstallScript = InstallScript + "fi" + Chr(10)
-		    InstallScript = InstallScript + "say " + Chr(34) + "Application:" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "say " + Chr(34) + "$NAME" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "say" + Chr(10)
-		    InstallScript = InstallScript + "TARGETS=()" + Chr(10)
-		    InstallScript = InstallScript + "if [ -n " + Chr(34) + "$DESKPATH" + Chr(34) + " ] && [ -d " + Chr(34) + "$DESKPATH" + Chr(34) + " ]; then" + Chr(10)
-		    InstallScript = InstallScript + "    TARGETS+=(" + Chr(34) + "$DESKPATH" + Chr(34) + ")" + Chr(10)
-		    InstallScript = InstallScript + "fi" + Chr(10)
-		    InstallScript = InstallScript + "if [ ${#TARGETS[@]} -eq 0 ]; then" + Chr(10)
-		    InstallScript = InstallScript + "    for L in " + Chr(34) + "$HOME/LLApps/$NAME" + Chr(34) + " " + Chr(34) + "$HOME/LLGames/$NAME" + Chr(34) + " " + Chr(34) + "$HOME/.wine/drive_c/ppApps/$NAME" + Chr(34) + " " + Chr(34) + "$HOME/.wine/drive_c/ppGames/$NAME" + Chr(34) + "; do" + Chr(10)
-		    InstallScript = InstallScript + "        [ -d " + Chr(34) + "$L" + Chr(34) + " ] && TARGETS+=(" + Chr(34) + "$L" + Chr(34) + ")" + Chr(10)
-		    InstallScript = InstallScript + "    done" + Chr(10)
-		    InstallScript = InstallScript + "fi" + Chr(10)
-		    InstallScript = InstallScript + "if [ ${#TARGETS[@]} -eq 0 ]; then" + Chr(10)
-		    InstallScript = InstallScript + "    say " + Chr(34) + "Searching..." + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "    while IFS= read -r -d " + Chr(34) + "" + Chr(34) + " E; do TARGETS+=(" + Chr(34) + "$E" + Chr(34) + "); done < <(find " + Chr(34) + "$HOME/LLApps" + Chr(34) + " " + Chr(34) + "$HOME/LLGames" + Chr(34) + " " + Chr(34) + "$HOME/.wine/drive_c/ppApps" + Chr(34) + " " + Chr(34) + "$HOME/.wine/drive_c/ppGames" + Chr(34) + " -maxdepth 1 -type d -iname " + Chr(34) + "*$NAME*" + Chr(34) + " -print0 2>/dev/null)" + Chr(10)
-		    InstallScript = InstallScript + "fi" + Chr(10)
-		    InstallScript = InstallScript + "if [ ${#TARGETS[@]} -eq 0 ]; then" + Chr(10)
-		    InstallScript = InstallScript + "    say" + Chr(10)
-		    InstallScript = InstallScript + "    say " + Chr(34) + "Install not found" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "    say" + Chr(10)
-		    InstallScript = InstallScript + "    if [ " + Chr(34) + "$SILENT" + Chr(34) + " = false ] && [ " + Chr(34) + "$IS_SSAPP" + Chr(34) + " = true ]; then" + Chr(10)
-		    InstallScript = InstallScript + "        if command -v wine >/dev/null 2>&1; then" + Chr(10)
-		    InstallScript = InstallScript + "            wine uninstaller" + Chr(10)
-		    InstallScript = InstallScript + "        else" + Chr(10)
-		    InstallScript = InstallScript + "            echo " + Chr(34) + "Wine is not installed." + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "        fi" + Chr(10)
+		    ' ── Migrate /LastOS → /opt/LastOS and create backward-compat symlink ──────────
+		    ' Uninstall.sh and UninstallLauncher.sh are written by SetupUninstallTools —
+		    ' once before this runs (Loading startup) and once after RunSudo below (post-install,
+		    ' when the dir is freshly writable so no second sudo is needed).
+		    InstallScript = InstallScript + "# Migrate /LastOS → /opt/LastOS if needed" + Chr(10)
+		    InstallScript = InstallScript + "if [ -L /LastOS ]; then" + Chr(10)
+		    InstallScript = InstallScript + "    echo 'Migration: /LastOS is already a symlink, skipping.'" + Chr(10)
+		    InstallScript = InstallScript + "elif [ -d /LastOS ]; then" + Chr(10)
+		    InstallScript = InstallScript + "    echo 'Migration: Moving /LastOS → /opt/LastOS...'" + Chr(10)
+		    InstallScript = InstallScript + "    mkdir -p /opt/LastOS" + Chr(10)
+		    InstallScript = InstallScript + "    if command -v rsync >/dev/null 2>&1; then" + Chr(10)
+		    InstallScript = InstallScript + "        rsync -a /LastOS/ /opt/LastOS/ && _MOK=0 || _MOK=1" + Chr(10)
 		    InstallScript = InstallScript + "    else" + Chr(10)
-		    InstallScript = InstallScript + "        say " + Chr(34) + "Nothing to remove." + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "    fi" + Chr(10)
-		    InstallScript = InstallScript + "    [ " + Chr(34) + "$SILENT" + Chr(34) + " = false ] && sleep 3" + Chr(10)
-		    InstallScript = InstallScript + "    exit 0" + Chr(10)
-		    InstallScript = InstallScript + "fi" + Chr(10)
-		    InstallScript = InstallScript + "say" + Chr(10)
-		    InstallScript = InstallScript + "say " + Chr(34) + "Removing..." + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "for T in " + Chr(34) + "${TARGETS[@]}" + Chr(34) + "; do" + Chr(10)
-		    InstallScript = InstallScript + "    say " + Chr(34) + "$T" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "    rm -rf " + Chr(34) + "$T" + Chr(34) + Chr(10)
-		    InstallScript = InstallScript + "done" + Chr(10)
-		    InstallScript = InstallScript + "say" + Chr(10)
-		    InstallScript = InstallScript + "say " + Chr(34) + "Removing menu entry..." + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "rm -f " + Chr(34) + "$DESKTOP" + Chr(34) + Chr(10)
-		    InstallScript = InstallScript + "if command -v update-desktop-database >/dev/null 2>&1; then" + Chr(10)
-		    InstallScript = InstallScript + "    update-desktop-database " + Chr(34) + "$HOME/.local/share/applications" + Chr(34) + " 2>/dev/null" + Chr(10)
-		    InstallScript = InstallScript + "fi" + Chr(10)
-		    InstallScript = InstallScript + "say" + Chr(10)
-		    InstallScript = InstallScript + "say " + Chr(34) + "Uninstall Complete" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "say" + Chr(10)
-		    InstallScript = InstallScript + "if [ " + Chr(34) + "$SILENT" + Chr(34) + " = false ]; then" + Chr(10)
-		    InstallScript = InstallScript + "    echo " + Chr(34) + "Self closing in 3 seconds, press space to keep terminal open..." + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "    if read -r -s -n 1 -t 3 _KEY; then" + Chr(10)
-		    InstallScript = InstallScript + "        sleep 0.5" + Chr(10)
-		    InstallScript = InstallScript + "        while read -r -s -n 1 -t 0 _ 2>/dev/null; do :; done" + Chr(10)
-		    InstallScript = InstallScript + "        echo " + Chr(34) + "Press ESC to close" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "        while read -r -s -n 1 _KEY; do" + Chr(10)
-		    InstallScript = InstallScript + "            [ " + Chr(34) + "$_KEY" + Chr(34) + " = $'\\e' ] && break" + Chr(10)
+		    InstallScript = InstallScript + "        _MOK=0" + Chr(10)
+		    InstallScript = InstallScript + "        for _i in /LastOS/.[!.]* /LastOS/*; do" + Chr(10)
+		    InstallScript = InstallScript + "            [ -e " + Chr(34) + "$_i" + Chr(34) + " ] || continue" + Chr(10)
+		    InstallScript = InstallScript + "            cp -a " + Chr(34) + "$_i" + Chr(34) + " /opt/LastOS/ 2>/dev/null || _MOK=1" + Chr(10)
 		    InstallScript = InstallScript + "        done" + Chr(10)
 		    InstallScript = InstallScript + "    fi" + Chr(10)
-		    InstallScript = InstallScript + "fi" + Chr(10)
-		    InstallScript = InstallScript + "UNINSTALL_EOF" + Chr(10)
-		    InstallScript = InstallScript + "chmod 775 /LastOS/Tools/Uninstall.sh" + Chr(10)
-		    InstallScript = InstallScript + "chown root:lastos-users /LastOS/Tools/Uninstall.sh" + Chr(10)
-		    InstallScript = InstallScript + Chr(10)
-		    ' ---- UninstallLauncher.sh ----
-		    InstallScript = InstallScript + "cat << 'LAUNCHER_EOF' > /LastOS/Tools/UninstallLauncher.sh" + Chr(10)
-		    InstallScript = InstallScript + "#!/usr/bin/env bash" + Chr(10)
-		    InstallScript = InstallScript + "DESKTOP=" + Chr(34) + "$1" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "SILENT=" + Chr(34) + "$2" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "if [ " + Chr(34) + "$SILENT" + Chr(34) + " = " + Chr(34) + "--silent" + Chr(34) + " ]; then" + Chr(10)
-		    InstallScript = InstallScript + "    bash /LastOS/Tools/Uninstall.sh " + Chr(34) + "$DESKTOP" + Chr(34) + " --silent" + Chr(10)
-		    InstallScript = InstallScript + "    exit 0" + Chr(10)
-		    InstallScript = InstallScript + "fi" + Chr(10)
-		    InstallScript = InstallScript + "if   command -v konsole       >/dev/null 2>&1; then" + Chr(10)
-		    InstallScript = InstallScript + "    konsole -e bash /LastOS/Tools/Uninstall.sh " + Chr(34) + "$DESKTOP" + Chr(34) + Chr(10)
-		    InstallScript = InstallScript + "elif command -v gnome-terminal >/dev/null 2>&1; then" + Chr(10)
-		    InstallScript = InstallScript + "    gnome-terminal --title=" + Chr(34) + "LastOS Uninstall" + Chr(34) + " -- bash /LastOS/Tools/Uninstall.sh " + Chr(34) + "$DESKTOP" + Chr(34) + "" + Chr(10)
-		    InstallScript = InstallScript + "elif command -v xfce4-terminal >/dev/null 2>&1; then" + Chr(10)
-		    InstallScript = InstallScript + "    xfce4-terminal -e " + Chr(34) + "bash /LastOS/Tools/Uninstall.sh '$DESKTOP'" + Chr(34) + Chr(10)
-		    InstallScript = InstallScript + "elif command -v mate-terminal  >/dev/null 2>&1; then" + Chr(10)
-		    InstallScript = InstallScript + "    mate-terminal  -e " + Chr(34) + "bash /LastOS/Tools/Uninstall.sh '$DESKTOP'" + Chr(34) + Chr(10)
-		    InstallScript = InstallScript + "elif command -v lxterminal     >/dev/null 2>&1; then" + Chr(10)
-		    InstallScript = InstallScript + "    lxterminal     -e " + Chr(34) + "bash /LastOS/Tools/Uninstall.sh '$DESKTOP'" + Chr(34) + Chr(10)
-		    InstallScript = InstallScript + "elif command -v x-terminal-emulator >/dev/null 2>&1; then" + Chr(10)
-		    InstallScript = InstallScript + "    x-terminal-emulator -e " + Chr(34) + "bash /LastOS/Tools/Uninstall.sh '$DESKTOP'" + Chr(34) + Chr(10)
-		    InstallScript = InstallScript + "elif command -v xterm          >/dev/null 2>&1; then" + Chr(10)
-		    InstallScript = InstallScript + "    xterm          -e " + Chr(34) + "bash /LastOS/Tools/Uninstall.sh '$DESKTOP'" + Chr(34) + Chr(10)
+		    InstallScript = InstallScript + "    if [ " + Chr(34) + "$_MOK" + Chr(34) + " -eq 0 ]; then" + Chr(10)
+		    InstallScript = InstallScript + "        rm -rf /LastOS" + Chr(10)
+		    InstallScript = InstallScript + "        ln -sf /opt/LastOS /LastOS 2>/dev/null && echo 'Migration: Symlink /LastOS → /opt/LastOS created.' || echo 'Migration: Symlink not possible (immutable fs) — continuing.'" + Chr(10)
+		    InstallScript = InstallScript + "    else" + Chr(10)
+		    InstallScript = InstallScript + "        echo 'Migration WARNING: Transfer had errors, leaving /LastOS in place.'" + Chr(10)
+		    InstallScript = InstallScript + "    fi" + Chr(10)
 		    InstallScript = InstallScript + "else" + Chr(10)
-		    InstallScript = InstallScript + "    exit 1" + Chr(10)
-		    InstallScript = InstallScript + "fi" + Chr(10)
-		    InstallScript = InstallScript + "LAUNCHER_EOF" + Chr(10)
-		    InstallScript = InstallScript + "chmod 775 /LastOS/Tools/UninstallLauncher.sh" + Chr(10)
-		    InstallScript = InstallScript + "chown root:lastos-users /LastOS/Tools/UninstallLauncher.sh" + Chr(10)
+		    InstallScript = InstallScript + "    ln -sf /opt/LastOS /LastOS 2>/dev/null || true" + Chr(10)
+		    InstallScript = InstallScript + "fi" + Chr(10) + Chr(10)
 		    
 		    'Execute the install script with sudo once
-		    NotifyStep("Step 2/10: Copying files to /LastOS/LLStore/...")
+		    NotifyStep("Step 2/10: Copying files to /opt/LastOS/LLStore/...")
 		    RunSudo(InstallScript)
+		    
+		    ' Now that /opt/LastOS/Tools is set up (775 root:lastos-users) by the install script above,
+		    ' refresh the uninstall scripts via SetupUninstallTools. It will write them directly as the
+		    ' current user (no sudo) if the directory is writable, or use the sg fast-path if the
+		    ' session hasn't picked up the new GID yet. Sudo is only a last resort.
+		    Loading.SetupUninstallTools(True)
 		    
 		    'Copy user-specific items without sudo (to user's home directory)
 		    NotifyStep("Step 3/10: Copying user templates...")
@@ -3938,13 +3882,28 @@ Protected Module LLMod
 		    InstallLinuxContextMenus 'Install context menus for all detected Linux file managers
 		    
 		    NotifyStep("Step 5/10: Setting up menu sorting...")
-		    InstallLinuxMenuSorting(True) 'This adds my own menu sorting style
+		    InstallLinuxMenuSorting(False) 'This adds my own menu sorting style — InstallLLStore releases sudo itself at Step 10
 		    
 		    Dim Bin As String = " /usr/bin/" 'Make sure to include the space at the start of this as it's used.
 		    
 		    'Make SymLinks to Store
-		    NotifyStep("Step 6/10: Creating symlinks in /usr/bin/...")
-		    RunSudo("ln -sf "+Target+Bin+"llapp ; ln -sf "+Target+Bin+"lledit ; ln -sf "+Target+Bin+"llfile ; ln -sf "+Target+Bin+"llinstall ; ln -sf "+Target+Bin+"lllauncher ; ln -sf "+Target+Bin+"llstore" ) 'Sym Links do not need to be set to Exec
+		    ' ~/.local/bin is always created (works on all distros, no sudo needed).
+		    ' /usr/bin is skipped on immutable OS — it's read-only.
+		    Dim LocalBin As String = Slash(HomePath)+".local/bin/"
+		    ShellFast.Execute("mkdir -p "+Chr(34)+LocalBin+Chr(34))
+		    ShellFast.Execute("ln -sf "+Target+" "+Chr(34)+LocalBin+"llapp"+Chr(34)+" ; "+_
+		      "ln -sf "+Target+" "+Chr(34)+LocalBin+"lledit"+Chr(34)+" ; "+_
+		      "ln -sf "+Target+" "+Chr(34)+LocalBin+"llfile"+Chr(34)+" ; "+_
+		      "ln -sf "+Target+" "+Chr(34)+LocalBin+"llinstall"+Chr(34)+" ; "+_
+		      "ln -sf "+Target+" "+Chr(34)+LocalBin+"lllauncher"+Chr(34)+" ; "+_
+		      "ln -sf "+Target+" "+Chr(34)+LocalBin+"llstore"+Chr(34))
+		    
+		    If ImmutableOS Then
+		      NotifyStep("Step 6/10: Creating symlinks in ~/.local/bin/ (immutable OS — skipping /usr/bin/)...")
+		    Else
+		      NotifyStep("Step 6/10: Creating symlinks in /usr/bin/ and ~/.local/bin/...")
+		      RunSudo("ln -sf "+Target+Bin+"llapp ; ln -sf "+Target+Bin+"lledit ; ln -sf "+Target+Bin+"llfile ; ln -sf "+Target+Bin+"llinstall ; ln -sf "+Target+Bin+"lllauncher ; ln -sf "+Target+Bin+"llstore" ) 'Sym Links do not need to be set to Exec
+		    End If
 		    
 		    'Make Associations - I changed it from Target to "llfile"
 		    NotifyStep("Step 7/10: Registering file types...")
@@ -3954,7 +3913,7 @@ Protected Module LLMod
 		    'Make LLStore as default for all supported types
 		    'application/x-llfile
 		    ShellFast.Execute ("bash -c 'xdg-mime default llfile_filetype.desktop application/x-llfile > /dev/null 2>&1 &'") 'Backgrounded: no need to wait
-		    RunSudo ("xdg-mime default llfile_filetype.desktop application/x-llfile &") 'Backgrounded: no need to wait
+		    If Not ImmutableOS Then RunSudo ("xdg-mime default llfile_filetype.desktop application/x-llfile &") 'Backgrounded: no need to wait
 		    
 		    
 		    'Make Shortcuts
@@ -3968,7 +3927,7 @@ Protected Module LLMod
 		    DesktopContent = DesktopContent + "Type=Application" + Chr(10)
 		    DesktopContent = DesktopContent + "Version=1.0" + Chr(10)
 		    DesktopContent = DesktopContent + "Name=LL Store" + Chr(10)
-		    DesktopContent = DesktopContent + "Exec=env GDK_BACKEND=x11 llstore" + Chr(10)
+		    DesktopContent = DesktopContent + "Exec=env GDK_BACKEND=x11 /opt/LastOS/LLStore/llstore" + Chr(10)
 		    DesktopContent = DesktopContent + "Comment=Install LLFiles" + Chr(10)
 		    DesktopContent = DesktopContent + "Icon=" + InstallPath+"llstore Resources/appicon_256.png" + Chr(10)
 		    DesktopContent = DesktopContent + "Categories=Application;System;Settings;XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;" + Chr(10)
@@ -3983,8 +3942,8 @@ Protected Module LLMod
 		    SaveDataToFile(DesktopContent, DesktopOutPath+DesktopFile)
 		    ShellFast.Execute ("chmod 775 "+Chr(34)+DesktopOutPath+DesktopFile+Chr(34)) 'Change Read/Write/Execute to defaults
 		    
-		    'System Wide
-		    RunSudo("cp -f "+DesktopOutPath+DesktopFile+" /usr/share/applications/")
+		    'System Wide (skip on immutable OS — /usr/share/applications is read-only)
+		    If Not ImmutableOS Then RunSudo("cp -f "+DesktopOutPath+DesktopFile+" /usr/share/applications/")
 		    
 		    
 		    DesktopOutPath = Slash(HomePath)+"Desktop/"
@@ -3999,7 +3958,7 @@ Protected Module LLMod
 		    DesktopContent = DesktopContent + "Type=Application" + Chr(10)
 		    DesktopContent = DesktopContent + "Version=1.0" + Chr(10)
 		    DesktopContent = DesktopContent + "Name=LL Editor" + Chr(10)
-		    DesktopContent = DesktopContent + "Exec=env GDK_BACKEND=x11 llstore -e" + Chr(10)
+		    DesktopContent = DesktopContent + "Exec=env GDK_BACKEND=x11 /opt/LastOS/LLStore/llstore -e" + Chr(10)
 		    DesktopContent = DesktopContent + "Comment=Edit LLFiles" + Chr(10)
 		    DesktopContent = DesktopContent + "Icon=" + InstallPath+"Themes/LLEditor.png" + Chr(10)
 		    DesktopContent = DesktopContent + "Categories=Application;System;Settings;XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;" + Chr(10)
@@ -4010,8 +3969,8 @@ Protected Module LLMod
 		    SaveDataToFile(DesktopContent, DesktopOutPath+DesktopFile)
 		    ShellFast.Execute ("chmod 775 "+Chr(34)+DesktopOutPath+DesktopFile+Chr(34)) 'Change Read/Write/Execute to defaults
 		    
-		    'System Wide
-		    RunSudo("cp -f "+DesktopOutPath+DesktopFile+" /usr/share/applications/")
+		    'System Wide (skip on immutable OS — /usr/share/applications is read-only)
+		    If Not ImmutableOS Then RunSudo("cp -f "+DesktopOutPath+DesktopFile+" /usr/share/applications/")
 		    
 		    
 		    'Launcher
@@ -4019,7 +3978,7 @@ Protected Module LLMod
 		    DesktopContent = DesktopContent + "Type=Application" + Chr(10)
 		    DesktopContent = DesktopContent + "Version=1.0" + Chr(10)
 		    DesktopContent = DesktopContent + "Name=LL Launcher" + Chr(10)
-		    DesktopContent = DesktopContent + "Exec=env GDK_BACKEND=x11 llstore -l" + Chr(10)
+		    DesktopContent = DesktopContent + "Exec=env GDK_BACKEND=x11 /opt/LastOS/LLStore/llstore -l" + Chr(10)
 		    DesktopContent = DesktopContent + "Comment=Launch LLStore games" + Chr(10)
 		    DesktopContent = DesktopContent + "Icon=" + InstallPath+"Themes/LLLauncher.png" + Chr(10)
 		    DesktopContent = DesktopContent + "Categories=Game;" + Chr(10)
@@ -4030,8 +3989,8 @@ Protected Module LLMod
 		    SaveDataToFile(DesktopContent, DesktopOutPath+DesktopFile)
 		    ShellFast.Execute ("chmod 775 "+Chr(34)+DesktopOutPath+DesktopFile+Chr(34)) 'Change Read/Write/Execute to defaults
 		    
-		    'System Wide
-		    RunSudo("cp -f "+DesktopOutPath+DesktopFile+" /usr/share/applications/")
+		    'System Wide (skip on immutable OS — /usr/share/applications is read-only)
+		    If Not ImmutableOS Then RunSudo("cp -f "+DesktopOutPath+DesktopFile+" /usr/share/applications/")
 		    
 		    DesktopOutPath = Slash(HomePath)+"Desktop/"
 		    SaveDataToFile(DesktopContent, DesktopOutPath+DesktopFile)
@@ -4051,12 +4010,13 @@ Protected Module LLMod
 		    'Refresh desktop database — must happen before Unlock closes the sudo terminal.
 		    'User path: backgrounded via ShellFast, no privileges needed.
 		    '/usr/share/applications: root-owned, sent through the still-open sudo terminal with & so it doesn't block.
+		    'On immutable OS /usr/share/applications is read-only — skip the system-wide refresh.
 		    NotifyStep("Step 10/10: Refreshing desktop database...")
 		    If TargetLinux Then ShellFast.Execute ("bash -c 'update-desktop-database ~/.local/share/applications > /dev/null 2>&1 &'")
-		    If TargetLinux Then RunSudo ("update-desktop-database /usr/share/applications &")
+		    If TargetLinux And Not ImmutableOS Then RunSudo ("update-desktop-database /usr/share/applications &")
 		    '
 		    'Close Sudo Terminal
-		    If KeepSudo = False Then ShellFast.Execute ("echo "+Chr(34)+"Unlock"+Chr(34)+" > "+BaseDir+"/LLSudoDone") 'Quits Terminal after All items have been installed.
+		    ReleaseSudoListener() 'Writes LLSudoDone only if KeepSudo=False and no other instances still busy
 		  End If
 		  
 		  Notify ("LLStore Installed", "Installed LL Store:-"+Chr(10)+"LL Store v"+App.MajorVersion.ToString+"."+App.MinorVersion.ToString, ThemePath+"Icon.png", 3000) 'Show its finished installing LL Store
@@ -4407,6 +4367,7 @@ Protected Module LLMod
 		    ItemLLItem.SendTo = False
 		    ItemLLItem.InternetRequired = False
 		    ItemLLItem.ForceDERefresh = False
+		    ItemLLItem.Startup = False
 		    For I = 1 To Sp().Count -1
 		      Lin = Sp(I).Trim
 		      OrigLine = Lin
@@ -4507,6 +4468,7 @@ Protected Module LLMod
 		            ItemLLItem.ForceDERefresh = True
 		            ForceDERefresh = True
 		          End If
+		          If ItemLLItem.Flags.IndexOf("startup") >= 0 Then ItemLLItem.Startup = True
 		          Continue 'Once used Data no need to process the rest, The other lines will cause the lower things to be tested per line
 		        Case "priority"
 		          ItemLLItem.Priority = Val(LineData)
@@ -5046,7 +5008,8 @@ Protected Module LLMod
 		    End If
 		    SaveDataToFile(FileContent, FileOut)
 		    'SystemWide install runs BEFORE the backgrounded user install so FileOut (the XML) is not yet deleted
-		    If  SystemWide = True Then
+		    'Immutable OS: /usr/share/mime is read-only — skip system-wide install; user-level below still runs.
+		    If  SystemWide = True And Not ImmutableOS Then
 		      RunSudo ("xdg-mime install " + FileOut)
 		      RunSudo ("update-mime-database /usr/share/mime/ &") 'Backgrounded: very slow, cache refresh only
 		    End If
@@ -5065,7 +5028,8 @@ Protected Module LLMod
 		    '_filetype.desktop is NOT created — it appeared as a duplicate in Nemo's Open With dialog
 		    'because NoDisplay=true is ignored by Open With. The link .desktop carries MimeType= instead.
 		    If DesktopFileHint <> "" Then
-		      If  SystemWide = True Then
+		      'Immutable OS: /usr/share/applications is read-only — skip system-wide db refresh and default.
+		      If  SystemWide = True And Not ImmutableOS Then
 		        RunSudo ("update-desktop-database /usr/share/applications &") 'Backgrounded: cache refresh only
 		        RunSudo ("xdg-mime default " + DesktopFileHint + " application/x-" + APP)
 		      End If
@@ -5078,7 +5042,7 @@ Protected Module LLMod
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ConsolidateWineExtensions(AppTitle As String, MainDesktopPath As String, CleanupOnly As Boolean = False)
+		Sub ConsolidateWineExtensions(AppTitle As String, MainDesktopPath As String, CleanupOnly As Boolean = False, IsWineInstaller As Boolean = False, IsOpenWith As Boolean = False)
 		  'Harvest MimeType= from wine-extension-*.desktop files that Wine's winemenubuilder
 		  'created for this app and merge them directly into the main app .desktop,
 		  'inserted before Actions= so they stay correctly inside [Desktop Entry].
@@ -5097,7 +5061,14 @@ Protected Module LLMod
 		  S = S + "MAINDESK=" + Chr(34) + MainDesktopPath + Chr(34) + Chr(10)
 		  S = S + "APPNAME=" + Chr(34) + AppTitle.Trim + Chr(34) + Chr(10)
 		  S = S + Chr(10)
-		  'Step 1: find wine-extension files where Name= matches APPNAME
+		  'Step 1: brief pause to let winemenubuilder finish writing wine-extension-*.desktop files.
+		  'Only needed for ssApp (runs a real Windows installer); ppApp/ppGame are file copies
+		  'and do not trigger winemenubuilder so the sleep would just waste time for those.
+		  If IsWineInstaller Then
+		    S = S + "sleep 4" + Chr(10)
+		    S = S + Chr(10)
+		  End If
+		  'Step 2: find wine-extension files where Name= matches APPNAME
 		  'Single grep -l call — no ls, no pipes, no xargs — much faster with many files
 		  S = S + "MATCHES=$(grep -rl " + Chr(34) + "^Name=${APPNAME}" + Chr(34) + " \" + Chr(10)
 		  S = S + "  --include=" + Chr(34) + "wine-extension-*.desktop" + Chr(34) + " \" + Chr(10)
@@ -5114,28 +5085,28 @@ Protected Module LLMod
 		    S = S + "  | paste -sd " + Chr(34) + ";" + Chr(34) + ")" + Chr(10)
 		    S = S + Chr(10)
 		    'Step 3: merge into main .desktop (only when MIMES were found)
-		    'If MimeType= already exists (LLApp with Associations set), append new entries to it.
-		    'Otherwise insert a new MimeType= line before Actions= (stays in [Desktop Entry]).
+		    'Always replace MimeType= with a fresh harvest — never append to stale existing value.
+		    'On reinstall the old MimeType= is already present; merging would leave stale types behind.
+		    'If MimeType= exists: replace it. Otherwise insert before Actions=.
 		    S = S + "if [ -n " + Chr(34) + "$MIMES" + Chr(34) + " ]; then" + Chr(10)
 		    S = S + "  MIMES=" + Chr(34) + "${MIMES};" + Chr(34) + Chr(10)
 		    S = S + "  if grep -q " + Chr(34) + "^MimeType=" + Chr(34) + " " + Chr(34) + "$MAINDESK" + Chr(34) + "; then" + Chr(10)
-		    S = S + "    EXISTING=$(grep " + Chr(34) + "^MimeType=" + Chr(34) + " " + Chr(34) + "$MAINDESK" + Chr(34) + " | cut -d= -f2-)" + Chr(10)
-		    S = S + "    ALL=$(printf " + Chr(34) + "%s;%s" + Chr(34) + " " + Chr(34) + "$EXISTING" + Chr(34) + " " + Chr(34) + "$MIMES" + Chr(34) + " \" + Chr(10)
-		    S = S + "      | tr " + Chr(34) + ";" + Chr(34) + " " + Chr(34) + "\n" + Chr(34) + " | sort -u | grep -v " + Chr(34) + "^$" + Chr(34) + " | paste -sd " + Chr(34) + ";" + Chr(34) + ")" + Chr(10)
-		    S = S + "    ALL=" + Chr(34) + "${ALL};" + Chr(34) + Chr(10)
-		    S = S + "    sed -i " + Chr(34) + "s|^MimeType=.*|MimeType=${ALL}|" + Chr(34) + " " + Chr(34) + "$MAINDESK" + Chr(34) + Chr(10)
+		    S = S + "    sed -i " + Chr(34) + "s|^MimeType=.*|MimeType=${MIMES}|" + Chr(34) + " " + Chr(34) + "$MAINDESK" + Chr(34) + Chr(10)
 		    S = S + "  else" + Chr(10)
 		    S = S + "    sed -i " + Chr(34) + "/^Actions=/i MimeType=${MIMES}" + Chr(34) + " " + Chr(34) + "$MAINDESK" + Chr(34) + Chr(10)
 		    S = S + "  fi" + Chr(10)
 		    'Step 3b: wrap Exec= with winepath so Open With passes Windows-style paths to Wine
+		    'Only for ssApp/ppApp (IsOpenWith=True) — ppGame/LLGame must not have their Exec= rewritten
 		    'Uses ENVIRON in awk to pass the new line safely — avoids sed backslash/dollar issues.
 		    'Handles %f/%F/%u/%U variants when stripping the file arg placeholder.
-		    S = S + "  if grep -q " + Chr(34) + "^Exec=wine " + Chr(34) + " " + Chr(34) + "$MAINDESK" + Chr(34) + "; then" + Chr(10)
-		    S = S + "    WINE_CMD=$(grep " + Chr(34) + "^Exec=wine " + Chr(34) + " " + Chr(34) + "$MAINDESK" + Chr(34) + " | head -1 | sed 's/^Exec=wine //;s/ %[fFuU]$//')" + Chr(10)
-		    S = S + "    NEW_EXEC_LINE=" + Chr(34) + "Exec=bash -c 'wine ${WINE_CMD} " + "\" + Chr(34) + "\$(winepath -w " + "\" + Chr(34) + "\$1" + "\" + Chr(34) + " 2>/dev/null || echo " + "\" + Chr(34) + "\$1" + "\" + Chr(34) + ")" + "\" + Chr(34) + "' -- %f" + Chr(34) + Chr(10)
-		    S = S + "    export NEW_EXEC_LINE" + Chr(10)
-		    S = S + "    awk 'BEGIN{nl=ENVIRON[" + Chr(34) + "NEW_EXEC_LINE" + Chr(34) + "]} /^Exec=wine /{print nl; next} {print}' " + Chr(34) + "$MAINDESK" + Chr(34) + " > " + Chr(34) + "${MAINDESK}.tmp" + Chr(34) + " && mv " + Chr(34) + "${MAINDESK}.tmp" + Chr(34) + " " + Chr(34) + "$MAINDESK" + Chr(34) + Chr(10)
-		    S = S + "  fi" + Chr(10)
+		    If IsOpenWith Then
+		      S = S + "  if grep -q " + Chr(34) + "^Exec=wine " + Chr(34) + " " + Chr(34) + "$MAINDESK" + Chr(34) + "; then" + Chr(10)
+		      S = S + "    WINE_CMD=$(grep " + Chr(34) + "^Exec=wine " + Chr(34) + " " + Chr(34) + "$MAINDESK" + Chr(34) + " | head -1 | sed 's/^Exec=wine //;s/ %[fFuU]$//')" + Chr(10)
+		      S = S + "    NEW_EXEC_LINE=" + Chr(34) + "Exec=bash -c 'wine ${WINE_CMD} " + "\" + Chr(34) + "\$(winepath -w " + "\" + Chr(34) + "\$1" + "\" + Chr(34) + " 2>/dev/null || echo " + "\" + Chr(34) + "\$1" + "\" + Chr(34) + ")" + "\" + Chr(34) + "' -- %f" + Chr(34) + Chr(10)
+		      S = S + "    export NEW_EXEC_LINE" + Chr(10)
+		      S = S + "    awk 'BEGIN{nl=ENVIRON[" + Chr(34) + "NEW_EXEC_LINE" + Chr(34) + "]} /^Exec=wine /{print nl; next} {print}' " + Chr(34) + "$MAINDESK" + Chr(34) + " > " + Chr(34) + "${MAINDESK}.tmp" + Chr(34) + " && mv " + Chr(34) + "${MAINDESK}.tmp" + Chr(34) + " " + Chr(34) + "$MAINDESK" + Chr(34) + Chr(10)
+		      S = S + "  fi" + Chr(10)
+		    End If
 		    S = S + "fi" + Chr(10)
 		    S = S + Chr(10)
 		  End If
@@ -5294,7 +5265,7 @@ Protected Module LLMod
 		    If ItemLLItem.Flags.IndexOf("sendto") >=0 Then SendTo = True'Do SendTo (Not done yet)
 		    If ItemLLItem.Flags.IndexOf("root") >=0 Then Root = True
 		    If ItemLLItem.Flags.IndexOf("programs") >=0 Then Root = True
-		    If ItemLLItem.Flags.IndexOf("startup") >=0 Then Startup = True
+		    If ItemLLItem.Startup Then Startup = True
 		    
 		    'Clean up Done in MoveLinks
 		  End If
@@ -5487,6 +5458,38 @@ Protected Module LLMod
 		        
 		        If Debugging Then Debug("SHORTCUT EXEC: " + ExecName)
 		        
+		        ' ── Determine the final desktop file location BEFORE building DesktopContent ──
+		        ' This must happen here so the Uninstall Exec= line inside the .desktop is correct.
+		        '
+		        ' A LLApp goes to /usr/share/applications/ only when ALL of:
+		        '   • It IS a LLApp
+		        '   • The OS is NOT immutable (read-only root)
+		        '   • The app installs OUTSIDE the user's home directory
+		        '     — checked against InstallToPath first (most reliable: set by the install
+		        '       pipeline to the actual destination folder), then WorkingDirectory as a
+		        '       fallback for edge cases where InstallToPath is empty.
+		        '     — If the app is in ~/LLApps it only works for this user anyway, so keeping
+		        '       the shortcut in ~/.local/share/applications/ is the right call.
+		        '
+		        ' Everything else (all other BuildTypes, ImmutableOS, user-path installs) stays
+		        ' in ~/.local/share/applications/.
+		        Dim IsSystemWide As Boolean = False
+		        Dim FinalDesktopPath As String = Slash(HomePath) + ".local/share/applications/" + DesktopFile
+		        
+		        If BT = "LLApp" And Not ImmutableOS Then
+		          Dim InstallIsUserOnly As Boolean
+		          If InstallToPath <> "" Then
+		            InstallIsUserOnly = (InstallToPath.IndexOf(HomePath) >= 0)
+		          Else
+		            ' InstallToPath not set — fall back to WorkingDirectory
+		            InstallIsUserOnly = (ItemLnk(I).Link.WorkingDirectory.IndexOf(HomePath) >= 0)
+		          End If
+		          If Not InstallIsUserOnly Then
+		            IsSystemWide = True
+		            FinalDesktopPath = "/usr/share/applications/" + DesktopFile
+		          End If
+		        End If
+		        
 		        DesktopContent = "[Desktop Entry]" + Chr(10)
 		        DesktopContent = DesktopContent + "Type=Application" + Chr(10)
 		        DesktopContent = DesktopContent + "Version=1.0" + Chr(10)
@@ -5495,9 +5498,12 @@ Protected Module LLMod
 		        If ItemLLItem.BuildType = "LLApp" Or ItemLLItem.BuildType = "LLGame" Or ItemLnk(I).LinuxLink Then
 		          DesktopContent = DesktopContent + "Exec=" + ExecName + Chr(10) 'LinuxLink .desktop items are native executables, no Wine prefix
 		        Else
-		          'Add %f so the DE knows this app can open files — required for Open With to list it
-		          Dim WineExecArgs As String = " %f"
-		          If ExecName.IndexOf("%f") >= 0 Or ExecName.IndexOf("%F") >= 0 Or ExecName.IndexOf("%u") >= 0 Or ExecName.IndexOf("%U") >= 0 Then WineExecArgs = "" 'Already has a file arg
+		          'Add %f only for ssApp/ppApp so the DE knows they can open files (Open With) — ppGame/LLGame must not get %f
+		          Dim WineExecArgs As String = ""
+		          If BT = "ssApp" Or BT = "ppApp" Then
+		            WineExecArgs = " %f"
+		            If ExecName.IndexOf("%f") >= 0 Or ExecName.IndexOf("%F") >= 0 Or ExecName.IndexOf("%u") >= 0 Or ExecName.IndexOf("%U") >= 0 Then WineExecArgs = "" 'Already has a file arg
+		          End If
 		          DesktopContent = DesktopContent + "Exec=" + "wine " + ExecName + WineExecArgs + Chr(10) 'Quotes are checked for above, so only added once
 		        End If
 		        
@@ -5540,12 +5546,12 @@ Protected Module LLMod
 		        DesktopContent = DesktopContent + Chr(10)
 		        DesktopContent = DesktopContent + "[Desktop Action Uninstall]" + Chr(10)
 		        DesktopContent = DesktopContent + "Name=Uninstall LLStore Item" + Chr(10)
-		        DesktopContent = DesktopContent + "Exec=bash /LastOS/Tools/UninstallLauncher.sh %k" + Chr(10)
+		        DesktopContent = DesktopContent + "Exec=setsid bash /opt/LastOS/Tools/UninstallLauncher.sh " + Chr(34) + FinalDesktopPath + Chr(34) + Chr(10) 'setsid ensures the launcher is in its own session so KDE cgroup cleanup can't kill it
 		        
 		        'MakeFileType — LLApps only, registers MIME XML and sets default handler
 		        If ItemLnk(I).Associations.Trim <> "" Then
 		          If BT = "LLApp" Then
-		            If ItemLnk(I).Link.WorkingDirectory.IndexOf(HomePath) = -1 Then 'system wide
+		            If IsSystemWide Then 'use same flag as the mv block below
 		              MakeFileType(ItemLnk(I).Title, ItemLnk(I).Associations, ItemLnk(I).Link.Description, ExecName, ExpPath(ItemLnk(I).Link.WorkingDirectory), ItemLnk(I).Link.IconLocation, "", True, DesktopFile)
 		            Else
 		              MakeFileType(ItemLnk(I).Title, ItemLnk(I).Associations, ItemLnk(I).Link.Description, ExecName, ExpPath(ItemLnk(I).Link.WorkingDirectory), ItemLnk(I).Link.IconLocation, "", False, DesktopFile)
@@ -5565,15 +5571,15 @@ Protected Module LLMod
 		        If BT = "ppApp" Or BT = "ssApp" Or BT = "ppGame" Then
 		          If CWEProcessed.IndexOf(ItemLnk(I).Title.Trim) < 0 Then
 		            CWEProcessed.Add(ItemLnk(I).Title.Trim)
-		            ConsolidateWineExtensions(ItemLnk(I).Title, DesktopOutPath+DesktopFile)
+		            ConsolidateWineExtensions(ItemLnk(I).Title, DesktopOutPath+DesktopFile, False, BT = "ssApp", BT = "ssApp" Or BT = "ppApp")
 		          End If
 		        End If
 		        
 		        'System Wide (LLApps only)
-		        If BT = "LLApp" Then
-		          If ItemLnk(I).Link.WorkingDirectory.IndexOf(HomePath) = -1 Then 'If item isn't inside the users path then it is system wide
-		            RunSudo("mv -f "+Chr(34)+DesktopOutPath+DesktopFile+Chr(34)+" /usr/share/applications/")
-		          End If
+		        'IsSystemWide was computed before DesktopContent was built so FinalDesktopPath is already correct.
+		        'Conditions: LLApp + non-immutable OS + app installs outside $HOME (checked via InstallToPath).
+		        If IsSystemWide Then
+		          RunSudo("mv -f "+Chr(34)+DesktopOutPath+DesktopFile+Chr(34)+" /usr/share/applications/")
 		        End If
 		        
 		        'Desktop Link
@@ -5608,6 +5614,37 @@ Protected Module LLMod
 		        ' the full KDE application list. Non-destructive — no plasmashell restart needed.
 		        If SysDesktopEnvironment = "kde" Or SysDesktopEnvironment = "plasma" Then
 		          ShellFast.Execute("bash -c 'timeout 15 kbuildsycoca6 --noincremental 2>/dev/null || timeout 15 kbuildsycoca5 --noincremental 2>/dev/null || true &'")
+		        End If
+		        
+		        ' Panel Link — GNOME / Ubuntu / Zorin / Budgie dash pinning.
+		        ' Cinnamon panel (grouped-window-list JSON) is handled in the block above.
+		        ' GNOME and its derivatives use org.gnome.shell favorite-apps via gsettings.
+		        ' We only do this when the .desktop entry has just been written (I loop).
+		        If ItemLnk(I).Panel = True Then
+		          Dim DELow As String = SysDesktopEnvironment.Trim.Lowercase
+		          If DELow = "gnome" Or DELow = "unity" Or DELow = "ubuntu" Or DELow = "budgie" Or DELow = "budgie-desktop" Or DELow = "zorin" Or DELow = "zorin:gnome" Then
+		            Dim GScript As String = "/tmp/llstore_gnomefav_" + DesktopFile.ReplaceAll(".desktop", "") + ".sh"
+		            Dim GS As String = "#!/bin/bash" + Chr(10)
+		            GS = GS + "DF=" + Chr(34) + DesktopFile + Chr(34) + Chr(10)
+		            GS = GS + "FAVS=$(gsettings get org.gnome.shell favorite-apps 2>/dev/null)" + Chr(10)
+		            GS = GS + "echo " + Chr(34) + "$FAVS" + Chr(34) + " | grep -qF " + Chr(34) + "$DF" + Chr(34) + " && exit 0" + Chr(10)
+		            GS = GS + "NEWFAVS=$(echo " + Chr(34) + "$FAVS" + Chr(34) + " | sed " + Chr(34) + "s/]$/," + Chr(39) + "$DF" + Chr(39) + "]/g" + Chr(34) + ")" + Chr(10)
+		            GS = GS + "gsettings set org.gnome.shell favorite-apps " + Chr(34) + "$NEWFAVS" + Chr(34) + " >/dev/null 2>&1" + Chr(10)
+		            SaveDataToFile(GS, GScript)
+		            ShellFast.Execute("bash -c 'chmod +x " + Chr(34) + GScript + Chr(34) + " && bash " + Chr(34) + GScript + Chr(34) + " >/dev/null 2>&1 &'")
+		          End If
+		        End If
+		        
+		        ' Startup — XDG autostart: copy the .desktop to ~/.config/autostart/ so the
+		        ' application launches at login. This is the universal cross-distro mechanism
+		        ' supported by GNOME, KDE Plasma, XFCE, Cinnamon, MATE, LXQt, LXDE, Budgie
+		        ' and every other XDG-compliant desktop (XDG Base Directory Specification).
+		        ' Only done for the first link (I=1) to avoid duplicate autostart entries.
+		        If ItemLLItem.Startup And I = 1 Then
+		          Dim AutostartDir As String = Slash(HomePath) + ".config/autostart/"
+		          MakeFolder(AutostartDir)
+		          SaveDataToFile(DesktopContent, AutostartDir + DesktopFile)
+		          ShellFast.Execute("chmod 755 " + Chr(34) + AutostartDir + DesktopFile + Chr(34))
 		        End If
 		        
 		      Next I
@@ -5999,19 +6036,58 @@ Protected Module LLMod
 		  End If
 		  
 		  'Startup
-		  If ItemLLItem.Flags.IndexOf ("startup") >=0 Then 'Trying to do it for all of the Windows items, if it's set, then assume there is only one shortcut
+		  If ItemLLItem.Startup Then 'Item-level flag — applies to all shortcuts for this item
 		    CreateShortcut(ItemLnk(I).Title, Target, Slash(ItemLnk(I).Link.WorkingDirectory), Slash(Slash(FixPath(StartPath))+"Startup"))
 		  End If
-		  If ItemLnk(I).Flags.IndexOf ("startup") >=0 Then 'Per Item
+		  If ItemLnk(I).Flags.IndexOf ("startup") >=0 Then 'Per-link override
 		    CreateShortcut(ItemLnk(I).Title, Target, Slash(ItemLnk(I).Link.WorkingDirectory), Slash(Slash(FixPath(StartPath))+"Startup"))
 		  End If
 		  
-		  'QuickLaunch
-		  If ItemLLItem.Flags.IndexOf ("quicklaunch") >=0 Then 'Trying to do it for all of the Windows items, if it's set, then assume there is only one shortcut
-		    CreateShortcut(ItemLnk(I).Title, Target, Slash(ItemLnk(I).Link.WorkingDirectory), Slash(FixPath(SpecialFolder.ApplicationData.NativePath))+"Microsoft/Internet Explorer/Quick Launch/")
+		  'QuickLaunch / Taskbar pinning
+		  ' On Windows 10/11 the only reliable way to have a shortcut appear in the taskbar
+		  ' is to write it to the User Pinned\TaskBar folder.  The legacy IE Quick Launch
+		  ' path is kept as a commented fallback for XP/Vista/7 with Quick Launch re-enabled.
+		  ' After writing the .lnk we attempt a dynamic pin via PowerShell using the
+		  ' Shell.Application "taskbarpin" verb.  This works on Win7/8 and on Win10 builds
+		  ' older than 1703; on newer Win10/11 builds the verb is blocked by design, so the
+		  ' file-copy fallback ensures the shortcut is there on the next login / taskbar refresh.
+		  If ItemLLItem.Flags.IndexOf ("quicklaunch") >=0 Then 'Item-level flag — all shortcuts
+		    Dim QuickLaunchPath1 As String = Slash(FixPath(SpecialFolder.ApplicationData.NativePath))+"Microsoft/Internet Explorer/Quick Launch/"
+		    MakeFolder(QuickLaunchPath1) ' Ensure folder exists — CreateShortcut silently fails if it doesn't
+		    CreateShortcut(ItemLnk(I).Title, Target, Slash(ItemLnk(I).Link.WorkingDirectory), QuickLaunchPath1) 'Legacy Quick Launch toolbar (XP/7/10 with re-enabled Quick Launch)
+		    Dim TaskBarPath1 As String = Slash(FixPath(SpecialFolder.ApplicationData.NativePath))+"Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar/"
+		    MakeFolder(TaskBarPath1) ' Ensure folder exists — CreateShortcut silently fails if it doesn't
+		    CreateShortcut(ItemLnk(I).Title, Target, Slash(ItemLnk(I).Link.WorkingDirectory), TaskBarPath1)
+		    ' Attempt dynamic pin via PowerShell taskbarpin verb (gracefully no-ops on Win10 1703+)
+		    Dim LnkFile1 As String = TaskBarPath1 + ItemLnk(I).Title + ".lnk"
+		    LnkFile1 = LnkFile1.ReplaceAll("/", "\")
+		    Dim PinCmd1 As String = "powershell -WindowStyle Hidden -NonInteractive -Command " + Chr(34) + _
+		      "try{$sa=New-Object -ComObject Shell.Application;" + _
+		      "$fi=$sa.Namespace(0).ParseName('" + LnkFile1 + "');" + _
+		      "if($fi){$fi.InvokeVerb('taskbarpin')}}catch{}" + Chr(34)
+		    ShellFast.Execute(PinCmd1)
+		    ' Notify the shell so the taskbar refreshes without requiring re-login
+		    Declare Sub SHChangeNotify1 Lib "shell32.dll" Alias "SHChangeNotify" (wEventId As Integer, uFlags As Integer, dwItem1 As Ptr, dwItem2 As Ptr)
+		    SHChangeNotify1(&h8000000, &h1000, Nil, Nil)
 		  End If
-		  If ItemLnk(I).Flags.IndexOf ("quicklaunch") >=0 Then 'Per Item
-		    CreateShortcut(ItemLnk(I).Title, Target, Slash(ItemLnk(I).Link.WorkingDirectory), Slash(FixPath(SpecialFolder.ApplicationData.NativePath))+"Microsoft/Internet Explorer/Quick Launch/")
+		  If ItemLnk(I).Flags.IndexOf ("quicklaunch") >=0 Or ItemLnk(I).Panel = True Then 'Per-link flag — panel ShowOn also maps to Quick Launch on Windows
+		    Dim QuickLaunchPath2 As String = Slash(FixPath(SpecialFolder.ApplicationData.NativePath))+"Microsoft/Internet Explorer/Quick Launch/"
+		    MakeFolder(QuickLaunchPath2) ' Ensure folder exists — CreateShortcut silently fails if it doesn't
+		    CreateShortcut(ItemLnk(I).Title, Target, Slash(ItemLnk(I).Link.WorkingDirectory), QuickLaunchPath2) 'Legacy Quick Launch toolbar (XP/7/10 with re-enabled Quick Launch)
+		    Dim TaskBarPath2 As String = Slash(FixPath(SpecialFolder.ApplicationData.NativePath))+"Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar/"
+		    MakeFolder(TaskBarPath2) ' Ensure folder exists — CreateShortcut silently fails if it doesn't
+		    CreateShortcut(ItemLnk(I).Title, Target, Slash(ItemLnk(I).Link.WorkingDirectory), TaskBarPath2)
+		    ' Attempt dynamic pin via PowerShell taskbarpin verb (gracefully no-ops on Win10 1703+)
+		    Dim LnkFile2 As String = TaskBarPath2 + ItemLnk(I).Title + ".lnk"
+		    LnkFile2 = LnkFile2.ReplaceAll("/", "\")
+		    Dim PinCmd2 As String = "powershell -WindowStyle Hidden -NonInteractive -Command " + Chr(34) + _
+		      "try{$sa=New-Object -ComObject Shell.Application;" + _
+		      "$fi=$sa.Namespace(0).ParseName('" + LnkFile2 + "');" + _
+		      "if($fi){$fi.InvokeVerb('taskbarpin')}}catch{}" + Chr(34)
+		    ShellFast.Execute(PinCmd2)
+		    ' Notify the shell so the taskbar refreshes without requiring re-login
+		    Declare Sub SHChangeNotify2 Lib "shell32.dll" Alias "SHChangeNotify" (wEventId As Integer, uFlags As Integer, dwItem1 As Ptr, dwItem2 As Ptr)
+		    SHChangeNotify2(&h8000000, &h1000, Nil, Nil)
 		  End If
 		  
 		  ' Release the reused WScript.Shell COM object now all shortcuts for this item are done
@@ -6042,7 +6118,7 @@ Protected Module LLMod
 		  DesktopContent = DesktopContent + Chr(10)
 		  DesktopContent = DesktopContent + "[Desktop Action Uninstall]" + Chr(10)
 		  DesktopContent = DesktopContent + "Name=Uninstall LLStore Item" + Chr(10)
-		  DesktopContent = DesktopContent + "Exec=bash /LastOS/Tools/UninstallLauncher.sh %k" + Chr(10)
+		  DesktopContent = DesktopContent + "Exec=setsid bash /opt/LastOS/Tools/UninstallLauncher.sh " + Chr(34) + DesktopFile + Chr(34) + Chr(10)
 		  
 		  SaveDataToFile (DesktopContent, DesktopFile)
 		  ShellFast.Execute("chmod 775 "+Chr(34)+DesktopFile+Chr(34))
@@ -6718,6 +6794,63 @@ Protected Module LLMod
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub RegisterSudoBusy()
+		  ' Writes a per-PID busy marker so ReleaseSudoListener knows other instances
+		  ' are still active before deciding whether to write LLSudoDone.
+		  If TargetWindows Then Return
+		  Dim PID As String = Str(App.ProcessID)
+		  SudoBusyFile = BaseDir + "/LLSudoBusy_" + PID
+		  ShellFast.Execute("echo " + Chr(34) + PID + Chr(34) + " > " + Chr(34) + SudoBusyFile + Chr(34))
+		  If Debugging Then Debug("RegisterSudoBusy: wrote " + SudoBusyFile)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ReleaseSudoListener()
+		  ' Removes this instance's busy marker and writes LLSudoDone only when:
+		  '   (a) KeepSudo is False, AND
+		  '   (b) no other LLStore instances still have a busy marker
+		  ' This prevents one instance from killing a sudo terminal that another is still using.
+		  
+		  If TargetWindows Then Return
+		  If Not SudoEnabled Then Return
+		  
+		  SudoEnabled = False
+		  
+		  ' Remove our own busy marker first.
+		  ' IMPORTANT: must use FolderItem.Remove (synchronous, no shell subprocess) rather
+		  ' than ShellFast.Execute("rm -f ...") here.  ShellFast is asynchronous — if we used
+		  ' it, the CheckShell count below could run before the rm completes, find our own file
+		  ' still present, return BusyCount=1, and skip writing LLSudoDone (leaving the
+		  ' listener terminal open forever).  FolderItem.Remove is immediate.
+		  If SudoBusyFile <> "" Then
+		    Dim BusyFI As FolderItem = GetFolderItem(SudoBusyFile, FolderItem.PathTypeNative)
+		    If BusyFI <> Nil And BusyFI.Exists Then BusyFI.Remove
+		    SudoBusyFile = ""
+		  End If
+		  
+		  If KeepSudo Then Return ' Caller explicitly wants the listener kept alive
+		  
+		  ' Check whether any other instance is still active
+		  Dim CheckShell As New Shell
+		  CheckShell.ExecuteMode = Shell.ExecuteModes.Synchronous
+		  CheckShell.TimeOut = 3
+		  ' Quote the directory portion but NOT the glob — quoting the * prevents shell expansion.
+		  ' bash -c is used so the glob runs in a real shell regardless of how Xojo invokes sh.
+		  CheckShell.Execute("bash -c 'ls " + Chr(34) + BaseDir + Chr(34) + "/LLSudoBusy_* 2>/dev/null | wc -l'")
+		  Dim BusyCount As Integer = Val(CheckShell.Result.Trim)
+		  
+		  If BusyCount = 0 Then
+		    ' Nobody else is using the listener — safe to shut it down
+		    ShellFast.Execute("echo " + Chr(34) + "Unlock" + Chr(34) + " > " + BaseDir + "/LLSudoDone")
+		    If Debugging Then Debug("ReleaseSudoListener: wrote LLSudoDone — listener will exit")
+		  Else
+		    If Debugging Then Debug("ReleaseSudoListener: " + BusyCount.ToString + " other instance(s) still busy — listener kept alive")
+		  End If
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub QuitApp()
 		  StoreMode = 99 'Forces it to NOT show Main again
 		  
@@ -7386,11 +7519,11 @@ Protected Module LLMod
 		  
 		  If Not TargetWindows Then
 		    
-		    if SudoShellLoop.IsRunning = False Then 'Can only chekc if Local script is running, so will check sudo is enabled each time
-		      EnableSudoScript 'if SudoShellLoop.IsRunning = True Then
+		    If SudoEnabled = False Then ' With nohup+& SudoShellLoop.IsRunning is always False; use SudoEnabled flag instead
+		      EnableSudoScript
 		    End If
 		    
-		    'if SudoShellLoop.IsRunning = True Then ' Check still running
+		    'if SudoShellLoop.IsRunning = True Then ' Check still running — not used, SudoEnabled is the authority
 		    'SudoEnabled = True
 		    'Else
 		    'SudoEnabled = False
@@ -7464,8 +7597,8 @@ Protected Module LLMod
 		    If Exist(InstallToPath+"LLScript_Sudo.sh") Then
 		      
 		      'Bring it back if it shuts down
-		      if SudoShellLoop.IsRunning = False Then 'Can only check local session, will do handshake each time called
-		        EnableSudoScript 'if SudoShellLoop.IsRunning = True Then
+		      If SudoEnabled = False Then ' With nohup+& SudoShellLoop.IsRunning is always False; use SudoEnabled flag instead
+		        EnableSudoScript
 		      End If
 		      
 		      'if SudoShellLoop.IsRunning = True Then ' Check still running - Not needed as Sudo Check above does this
@@ -7484,7 +7617,8 @@ Protected Module LLMod
 		        Wend
 		        
 		        'Update Linux .desktop Links Database (usually occurs after sudo scripts as that installs system wide .desktop files)
-		        If TargetLinux Then RunSudo ("update-desktop-database /usr/share/applications &") 'Backgrounded: cache refresh, no need to block
+		        'Immutable OS: /usr/share/applications is read-only — skip system-wide db refresh.
+		        If TargetLinux And Not ImmutableOS Then RunSudo ("update-desktop-database /usr/share/applications &") 'Backgrounded: cache refresh, no need to block
 		        
 		      End If
 		    End If
@@ -8225,6 +8359,14 @@ Protected Module LLMod
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		EditorSavedLeft As Integer = -1
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		EditorSavedTop As Integer = -1
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		UninstallerOnly As Boolean = False
 	#tag EndProperty
 
@@ -8725,6 +8867,14 @@ Protected Module LLMod
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		EnableSudoScriptRunning As Boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		SudoBusyFile As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		SudoShellLoop As Shell
 	#tag EndProperty
 
@@ -8806,6 +8956,14 @@ Protected Module LLMod
 
 	#tag Property, Flags = &h0
 		WasContext As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		ImmutableOS As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		ToldOnceImmutable As Boolean = False
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -9947,6 +10105,14 @@ Protected Module LLMod
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="SudoBusyFile"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="ForcePostQuit"
 			Visible=false
 			Group="Behavior"
@@ -10060,6 +10226,22 @@ Protected Module LLMod
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ForceExeUpdate"
+			Visible=false
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ImmutableOS"
+			Visible=false
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ToldOnceImmutable"
 			Visible=false
 			Group="Behavior"
 			InitialValue="False"

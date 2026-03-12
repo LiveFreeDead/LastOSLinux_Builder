@@ -26,6 +26,7 @@ Begin DesktopWindow Loading
    Visible         =   False
    Width           =   440
    Begin Timer FirstRunTime
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   50
@@ -66,6 +67,7 @@ Begin DesktopWindow Loading
       Width           =   427
    End
    Begin Timer DownloadTimer
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   50
@@ -74,6 +76,7 @@ Begin DesktopWindow Loading
       TabPanelIndex   =   0
    End
    Begin Timer VeryFirstRunTimer
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   1
@@ -82,6 +85,7 @@ Begin DesktopWindow Loading
       TabPanelIndex   =   0
    End
    Begin Timer QuitCheckTimer
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   1000
@@ -90,6 +94,7 @@ Begin DesktopWindow Loading
       TabPanelIndex   =   0
    End
    Begin Timer DownloadScreenAndIcon
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   100
@@ -98,6 +103,7 @@ Begin DesktopWindow Loading
       TabPanelIndex   =   0
    End
    Begin Timer InstallTimer
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   120
@@ -106,6 +112,7 @@ Begin DesktopWindow Loading
       TabPanelIndex   =   0
    End
    Begin Timer BuildTimer
+      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   120
@@ -399,8 +406,8 @@ End
 		    End If
 		    'Delete uninstall tools so they are recreated fresh after update
 		    If TargetLinux Then
-		      Deltree "/LastOS/Tools/Uninstall.sh"
-		      Deltree "/LastOS/Tools/UninstallLauncher.sh"
+		      Deltree "/opt/LastOS/Tools/Uninstall.sh"
+		      Deltree "/opt/LastOS/Tools/UninstallLauncher.sh"
 		    End If
 		    
 		    'ReRun the newer Store version
@@ -472,8 +479,8 @@ End
 		      End If
 		      'Delete uninstall tools so they are recreated fresh after update
 		      If TargetLinux Then
-		        Deltree "/LastOS/Tools/Uninstall.sh"
-		        Deltree "/LastOS/Tools/UninstallLauncher.sh"
+		        Deltree "/opt/LastOS/Tools/Uninstall.sh"
+		        Deltree "/opt/LastOS/Tools/UninstallLauncher.sh"
 		      End If
 		      
 		      'ReRun the newer Store version
@@ -1796,11 +1803,11 @@ End
 		      Dim GamePath As String
 		      GamePath = AppPath
 		      GamePath = Slash(Left(GamePath, Len(GamePath)-InStrRev(GamePath,"/")))
-		      If GamePath <> "/LastOS/" And GamePath <> "/" Then
+		      If GamePath <> "/opt/LastOS/" And GamePath <> "/" Then
 		        GetItemsPaths(Slash(GamePath)+"LLGames/", True)
 		      End If
 		      GamePath = Slash(Left(GamePath, Len(GamePath)-InStrRev(GamePath,"/"))) ' I check up to folders
-		      If GamePath <> "/LastOS/" And GamePath <> "/" Then
+		      If GamePath <> "/opt/LastOS/" And GamePath <> "/" Then
 		        GetItemsPaths(Slash(GamePath)+"LLGames/", True)
 		      End If
 		      
@@ -2354,6 +2361,11 @@ End
 		      End If
 		    Case "scanlocalitems"
 		      If LineData <> "" Then  Settings.SetScanLocalItems.Value = IsTrue(LineData)
+		    Case "toldonceimmutable"
+		      If LineData <> "" Then
+		        ToldOnceImmutable = IsTrue(LineData)
+		        Settings.SetToldOnceImmutable.Value = IsTrue(LineData)
+		      End If
 		    Case "usemanuallocations"
 		      If LineData <> "" Then Settings.SetUseManualLocations.Value = IsTrue(LineData)
 		    Case "flatpaklocation"
@@ -3023,6 +3035,7 @@ End
 		  RL = RL + "HideUnsetFlagsOnStartup=" + Str(Settings.SetHideUnsetFlags.Value) + Chr(10)
 		  
 		  RL = RL + "ScanLocalItems=" + Str(Settings.SetScanLocalItems.Value) + Chr(10)
+		  RL = RL + "ToldOnceImmutable=" + Str(Settings.SetToldOnceImmutable.Value) + Chr(10)
 		  
 		  RL = RL + "UseManualLocations=" + Str(Settings.SetUseManualLocations.Value) + Chr(10)
 		  RL = RL + "UseOnlineRepositiories=" + Str(Settings.SetUseOnlineRepos.Value) + Chr(10)
@@ -3066,11 +3079,29 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetupUninstallTools()
+		Sub SetupUninstallTools(ForceRefresh As Boolean = False)
 		  If Not TargetLinux Then Return
 		  
-		  Dim toolsDir As String = "/LastOS/Tools"
+		  Dim toolsDir As String = "/opt/LastOS/Tools"
 		  Dim needsSudo As Boolean = False
+		  
+		  ' ── Check whether /LastOS → /opt/LastOS migration is still needed ──────
+		  ' Immutable/Atomic distros (Bazzite, Silverblue, etc.) have a read-only root filesystem;
+		  ' creating /LastOS there is impossible and will always fail. Skip the check entirely so
+		  ' LLStore never prompts for sudo just for this step on those systems.
+		  ' On normal distros: ask for sudo only when /LastOS is NOT already a symlink, meaning
+		  ' the user is upgrading from the old /LastOS layout and the one-time move hasn't run yet.
+		  Dim migrationNeeded As Boolean = False
+		  If Not ImmutableOS Then
+		    Dim symlinkSh As New Shell
+		    symlinkSh.TimeOut = 5
+		    symlinkSh.ExecuteMode = Shell.ExecuteModes.Synchronous
+		    symlinkSh.Execute("test -L /LastOS && echo yes || echo no")
+		    If symlinkSh.Result.Trim <> "yes" Then
+		      migrationNeeded = True
+		    End If
+		  End If
+		  If Debugging And ImmutableOS Then Debug("SetupUninstallTools: ImmutableOS detected — skipping /LastOS symlink migration check")
 		  
 		  ' ── Check group membership (no execution yet) ────────────────────
 		  Dim gSh As New Shell
@@ -3089,7 +3120,9 @@ End
 		  ' NOTE: Group setup execution is deferred — handled below after needsSudo is known
 		  
 		  ' ── Already installed? ────────────────────────────────────────────
-		  If Not groupNeeded And Exist(toolsDir + "/Uninstall.sh") And Exist(toolsDir + "/UninstallLauncher.sh") Then
+		  ' Skip this guard when ForceRefresh is True (e.g. -setup run) so that
+		  ' stale scripts from a previous version are always replaced.
+		  If Not ForceRefresh And Not groupNeeded And Exist(toolsDir + "/Uninstall.sh") And Exist(toolsDir + "/UninstallLauncher.sh") Then
 		    If Debugging Then Debug("SetupUninstallTools: Scripts already present")
 		    Return
 		  End If
@@ -3100,7 +3133,7 @@ End
 		  If toolsDirF <> Nil And toolsDirF.Exists Then
 		    If Not toolsDirF.IsWriteable Then
 		      needsSudo = True
-		      If Debugging Then Debug("SetupUninstallTools: /LastOS/Tools not writable — will use sudo")
+		      If Debugging Then Debug("SetupUninstallTools: /opt/LastOS/Tools not writable — will use sudo")
 		    End If
 		  Else
 		    #Pragma BreakOnExceptions Off
@@ -3109,11 +3142,11 @@ End
 		      toolsDirF = GetFolderItem(toolsDir, FolderItem.PathTypeNative)
 		      If toolsDirF = Nil Or Not toolsDirF.Exists Then
 		        needsSudo = True
-		        If Debugging Then Debug("SetupUninstallTools: Could not create /LastOS/Tools without sudo")
+		        If Debugging Then Debug("SetupUninstallTools: Could not create /opt/LastOS/Tools without sudo")
 		      End If
 		    Catch
 		      needsSudo = True
-		      If Debugging Then Debug("SetupUninstallTools: Exception creating /LastOS/Tools — will use sudo")
+		      If Debugging Then Debug("SetupUninstallTools: Exception creating /opt/LastOS/Tools — will use sudo")
 		    End Try
 		    #Pragma BreakOnExceptions On
 		  End If
@@ -3123,20 +3156,44 @@ End
 		  
 		  ' ── Always call setup_lastos_group.sh whenever the script will run elevated.
 		  '     It is fully idempotent (skips group/member steps if already correct) and
-		  '     is the ONLY place that runs  chown root:lastos-users  on /LastOS + /LastOS/Tools.
+		  '     is the ONLY place that runs  chown root:lastos-users  on /opt/LastOS + /opt/LastOS/Tools.
 		  '     Previously this was guarded by (groupNeeded And needsSudo), so the chown was
 		  '     silently skipped whenever the group existed but dir ownership was still wrong. ──
-		  If needsSudo Or groupNeeded Then
+		  If needsSudo Or groupNeeded Or migrationNeeded Then
 		    If Debugging Then Debug("SetupUninstallTools: Including group + chown setup in sudo script")
 		    lines.Add("#!/usr/bin/env bash")
-		    lines.Add("bash " + Chr(34) + ToolPath + "setup_lastos_group.sh" + Chr(34) + " /LastOS")
+		    lines.Add("bash " + Chr(34) + ToolPath + "setup_lastos_group.sh" + Chr(34) + " /opt/LastOS")
 		    lines.Add("")
 		  Else
 		    lines.Add("#!/usr/bin/env bash")
 		  End If
 		  
-		  lines.Add("if ! mkdir -p /LastOS/Tools 2>/dev/null; then")
-		  lines.Add("    sudo mkdir -p /LastOS/Tools")
+		  ' Only include migration when /LastOS was not already a symlink at update time.
+		  ' This prevents asking for sudo just for this step on already-migrated systems.
+		  If migrationNeeded Then
+		    lines.Add("# Migrate /LastOS → /opt/LastOS — /LastOS was not a symlink at update time")
+		    lines.Add("if [ -d /LastOS ]; then")
+		    lines.Add("    mkdir -p /opt/LastOS")
+		    lines.Add("    if command -v rsync >/dev/null 2>&1; then")
+		    lines.Add("        rsync -a /LastOS/ /opt/LastOS/ && _MOK=0 || _MOK=1")
+		    lines.Add("    else")
+		    lines.Add("        _MOK=0")
+		    lines.Add("        for _i in /LastOS/.[!.]* /LastOS/*; do")
+		    lines.Add("            [ -e ""$_i"" ] || continue")
+		    lines.Add("            cp -a ""$_i"" /opt/LastOS/ 2>/dev/null || _MOK=1")
+		    lines.Add("        done")
+		    lines.Add("    fi")
+		    lines.Add("    if [ ""$_MOK"" -eq 0 ]; then")
+		    lines.Add("        rm -rf /LastOS")
+		    lines.Add("        ln -sf /opt/LastOS /LastOS 2>/dev/null || true")
+		    lines.Add("    fi")
+		    lines.Add("else")
+		    lines.Add("    ln -sf /opt/LastOS /LastOS 2>/dev/null || true")
+		    lines.Add("fi")
+		    lines.Add("")
+		  End If
+		  lines.Add("if ! mkdir -p /opt/LastOS/Tools 2>/dev/null; then")
+		  lines.Add("    sudo mkdir -p /opt/LastOS/Tools")
 		  lines.Add("    WRITE=""sudo tee""")
 		  lines.Add("    CHMOD=""sudo chmod""")
 		  lines.Add("else")
@@ -3144,10 +3201,10 @@ End
 		  lines.Add("    CHMOD=""chmod""")
 		  lines.Add("fi")
 		  lines.Add("# Ensure group ownership is correct even if Tools was just created after chown -R ran")
-		  lines.Add("chown root:lastos-users /LastOS /LastOS/Tools /LastOS/LLStore 2>/dev/null || true")
+		  lines.Add("chown root:lastos-users /opt/LastOS /opt/LastOS/Tools /opt/LastOS/LLStore 2>/dev/null || true")
 		  lines.Add("")
-		  ' ── Write /LastOS/Tools/Uninstall.sh ─────────────────────────────────────
-		  lines.Add("cat << 'UNINSTALL_EOF' | $WRITE /LastOS/Tools/Uninstall.sh > /dev/null")
+		  ' ── Write /opt/LastOS/Tools/Uninstall.sh ─────────────────────────────────────
+		  lines.Add("cat << 'UNINSTALL_EOF' | $WRITE /opt/LastOS/Tools/Uninstall.sh > /dev/null")
 		  lines.Add("#!/usr/bin/env bash")
 		  lines.Add("")
 		  lines.Add("###########################################")
@@ -3199,11 +3256,11 @@ End
 		  lines.Add("")
 		  lines.Add("NAME=$(grep ""^Name="" ""$DESKTOP"" | head -1 | cut -d= -f2)")
 		  lines.Add("DESKEXEC=$(grep ""^Exec="" ""$DESKTOP"" | head -1 | cut -d= -f2-)")
-		  lines.Add("DESKPATH=$(grep ""^Path="" ""$DESKTOP"" | head -1 | cut -d= -f2-)")
+		  lines.Add("DESKPATH=$(grep ""^Path="" ""$DESKTOP"" | head -1 | cut -d= -f2- | tr -d '\r')")
 		  lines.Add("")
-		  lines.Add("# Detect ssApp: Exec or Path references wine/ppApps/ppGames paths")
+		  lines.Add("# Detect ssApp: Exec or Path references any known Wine install location")
 		  lines.Add("IS_SSAPP=false")
-		  lines.Add("if echo ""$DESKEXEC$DESKPATH"" | grep -qi ""\.wine\|ppApps\|ppGames""; then")
+		  lines.Add("if echo ""$DESKEXEC$DESKPATH"" | grep -qi ""\.wine\|ppApps\|ppGames\|Program Files""; then")
 		  lines.Add("    IS_SSAPP=true")
 		  lines.Add("fi")
 		  lines.Add("")
@@ -3290,23 +3347,16 @@ End
 		  lines.Add("    say ""Install not found""")
 		  lines.Add("    say")
 		  lines.Add("")
-		  lines.Add("    if [ ""$SILENT"" = false ] && [ ""$IS_SSAPP"" = true ]; then")
-		  lines.Add("")
+		  lines.Add("    # If it's a Wine app and we're interactive, offer the Wine uninstaller.")
+		  lines.Add("    # Either way: fall through to desktop cleanup — $DESKTOP still needs removing.")
+		  lines.Add("    if [ ""$IS_SSAPP"" = true ] && [ ""$SILENT"" = false ]; then")
 		  lines.Add("        if command -v wine >/dev/null 2>&1; then")
 		  lines.Add("            echo ""Opening Wine uninstaller...""")
 		  lines.Add("            wine uninstaller")
 		  lines.Add("        else")
 		  lines.Add("            echo ""Wine is not installed. Cannot open Wine uninstaller.""")
 		  lines.Add("        fi")
-		  lines.Add("")
-		  lines.Add("    else")
-		  lines.Add("")
-		  lines.Add("        say ""Nothing to remove.""")
-		  lines.Add("")
 		  lines.Add("    fi")
-		  lines.Add("")
-		  lines.Add("    [ ""$SILENT"" = false ] && sleep 3")
-		  lines.Add("    exit 0")
 		  lines.Add("")
 		  lines.Add("fi")
 		  lines.Add("")
@@ -3336,13 +3386,77 @@ End
 		  lines.Add("")
 		  lines.Add("rm -f ""$DESKTOP""")
 		  lines.Add("")
+		  lines.Add("# Also remove ~/Desktop/ shortcut — rm -f is silent if it wasn't placed there")
+		  lines.Add("DESK_BASENAME=$(basename ""$DESKTOP"")")
+		  lines.Add("rm -f ""$HOME/Desktop/$DESK_BASENAME""")
+		  lines.Add("")
+		  lines.Add("# Sibling shortcut cleanup.")
+		  lines.Add("# Multiple shortcuts for the same app (e.g. IrfanView + IrfanView Thumbnails)")
+		  lines.Add("# all share the same Path= value. Find and remove them all.")
+		  lines.Add("# Safety: only scan if Path= is within a known LLStore install location —")
+		  lines.Add("# never remove shortcuts whose Path= points somewhere unexpected.")
+		  lines.Add("if [ -n ""$DESKPATH"" ]; then")
+		  lines.Add("    # Canonicalise both sides to resolve symlinks (e.g. Bazzite: $HOME=/var/home/user")
+		  lines.Add("    # but .desktop files were written using /home/user via the symlink).")
+		  lines.Add("    REAL_HOME=$(realpath ""$HOME"" 2>/dev/null || echo ""$HOME"")")
+		  lines.Add("    NORM_PATH=$(realpath -m ""$DESKPATH"" 2>/dev/null | sed 's|/*$||')  # canonical — for safe-path check")
+		  lines.Add("    [ -z ""$NORM_PATH"" ] && NORM_PATH=$(echo ""$DESKPATH"" | sed 's|/*$||')  # realpath fallback")
+		  lines.Add("    RAW_PATH=$(echo ""$DESKPATH"" | sed 's|/*$||')  # trailing-slash stripped — for exact comparison")
+		  lines.Add("    SAFE_PATH=false")
+		  lines.Add("    case ""$NORM_PATH"" in")
+		  lines.Add("        ""$REAL_HOME/LLApps/""*) SAFE_PATH=true ;;")
+		  lines.Add("        ""$REAL_HOME/LLGames/""*) SAFE_PATH=true ;;")
+		  lines.Add("        ""$REAL_HOME/.wine/drive_c/ppApps/""*) SAFE_PATH=true ;;")
+		  lines.Add("        ""$REAL_HOME/.wine/drive_c/ppGames/""*) SAFE_PATH=true ;;")
+		  lines.Add("        ""$REAL_HOME/.wine/drive_c/Program Files/""*) SAFE_PATH=true ;;")
+		  lines.Add("        ""$REAL_HOME/.wine/drive_c/Program Files (x86)/""*) SAFE_PATH=true ;;")
+		  lines.Add("    esac")
+		  lines.Add("    if [ ""$SAFE_PATH"" = true ]; then")
+		  lines.Add("        # find+normalize: strip trailing slash and \r from each candidate's Path=,")
+		  lines.Add("        # then exact-match against RAW_PATH (also stripped). Avoids false positives")
+		  lines.Add("        # (e.g. 'AIMP' prefix matching 'AIMP2') and handles trailing-slash inconsistencies")
+		  lines.Add("        # between the source .desktop and Wine-generated child shortcuts.")
+		  lines.Add("        while IFS= read -r -d '' RELATED; do")
+		  lines.Add("            [ ""$RELATED"" = ""$DESKTOP"" ] && continue  # already removed above")
+		  lines.Add("            REL_PATH=$(grep -m1 ""^Path="" ""$RELATED"" 2>/dev/null | cut -d= -f2- | tr -d '\r' | sed 's|/*$||')")
+		  lines.Add("            [ ""$REL_PATH"" = ""$RAW_PATH"" ] || continue")
+		  lines.Add("            RELATED_BASENAME=$(basename ""$RELATED"")")
+		  lines.Add("            say ""Removing related shortcut: $RELATED_BASENAME""")
+		  lines.Add("            rm -f ""$RELATED""")
+		  lines.Add("            rm -f ""$HOME/Desktop/$RELATED_BASENAME""")
+		  lines.Add("        done < <(find ""$HOME/.local/share/applications"" -maxdepth 1 -name '*.desktop' -print0 2>/dev/null)")
+		  lines.Add("    fi")
+		  lines.Add("fi")
+		  lines.Add("")
+		  lines.Add("# Wine Programs/ shortcut directory cleanup.")
+		  lines.Add("# Wine creates shortcuts in ~/.local/share/applications/wine/Programs/{AppName}/")
+		  lines.Add("# These have no Path= so the sibling scan above can't find them.")
+		  lines.Add("# Remove the whole directory if it matches the app name, but only when the path")
+		  lines.Add("# is strictly inside ~/.local/share/applications/wine/Programs/ (sub-path required).")
+		  lines.Add("if [ ""$IS_SSAPP"" = true ] && [ -n ""$NAME"" ]; then")
+		  lines.Add("    WINE_PROG_DIR=""$HOME/.local/share/applications/wine/Programs/$NAME""")
+		  lines.Add("    if [ -d ""$WINE_PROG_DIR"" ]; then")
+		  lines.Add("        say ""Removing Wine program shortcuts: $NAME""")
+		  lines.Add("        rm -rf ""$WINE_PROG_DIR""")
+		  lines.Add("    fi")
+		  lines.Add("fi")
+		  lines.Add("")
 		  lines.Add("")
 		  lines.Add("#################################")
 		  lines.Add("# Refresh menu")
 		  lines.Add("#################################")
 		  lines.Add("")
+		  lines.Add("# update-desktop-database: updates MIME/application cache (all DEs)")
 		  lines.Add("if command -v update-desktop-database >/dev/null 2>&1; then")
 		  lines.Add("    update-desktop-database ""$HOME/.local/share/applications"" 2>/dev/null")
+		  lines.Add("fi")
+		  lines.Add("")
+		  lines.Add("# kbuildsycoca6/5: rebuilds KDE's service cache (Bazzite, Kinoite, KDE Neon, etc.)")
+		  lines.Add("# Without this KDE's app menu keeps showing the entry until next login.")
+		  lines.Add("if command -v kbuildsycoca6 >/dev/null 2>&1; then")
+		  lines.Add("    kbuildsycoca6 --noincremental 2>/dev/null &")
+		  lines.Add("elif command -v kbuildsycoca5 >/dev/null 2>&1; then")
+		  lines.Add("    kbuildsycoca5 --noincremental 2>/dev/null &")
 		  lines.Add("fi")
 		  lines.Add("")
 		  lines.Add("")
@@ -3362,38 +3476,62 @@ End
 		  lines.Add("    fi")
 		  lines.Add("fi")
 		  lines.Add("UNINSTALL_EOF")
-		  lines.Add("$CHMOD 775 /LastOS/Tools/Uninstall.sh")
+		  lines.Add("$CHMOD 775 /opt/LastOS/Tools/Uninstall.sh")
 		  lines.Add("")
-		  ' ── Write /LastOS/Tools/UninstallLauncher.sh ──────────────────────────────
-		  lines.Add("cat << 'LAUNCHER_EOF' | $WRITE /LastOS/Tools/UninstallLauncher.sh > /dev/null")
+		  ' ── Write /opt/LastOS/Tools/UninstallLauncher.sh ──────────────────────────────
+		  lines.Add("cat << 'LAUNCHER_EOF' | $WRITE /opt/LastOS/Tools/UninstallLauncher.sh > /dev/null")
 		  lines.Add("#!/usr/bin/env bash")
 		  lines.Add("DESKTOP=""$1""")
 		  lines.Add("SILENT=""$2""")
 		  lines.Add("")
 		  lines.Add("if [ ""$SILENT"" = ""--silent"" ]; then")
-		  lines.Add("    bash /LastOS/Tools/Uninstall.sh ""$DESKTOP"" --silent")
+		  lines.Add("    bash /opt/LastOS/Tools/Uninstall.sh ""$DESKTOP"" --silent")
 		  lines.Add("    exit 0")
 		  lines.Add("fi")
 		  lines.Add("")
-		  lines.Add("if command -v gnome-terminal >/dev/null 2>&1; then")
-		  lines.Add("    gnome-terminal --title=""LastOS Uninstall"" -- bash /LastOS/Tools/Uninstall.sh ""$DESKTOP""")
+		  ' Terminal order matches TERMS priority list in LLScript_Sudo_Core.sh:
+		  ' (ptyxis gnome-terminal konsole xfce4-terminal mate-terminal lxterminal
+		  '  qterminal tilix terminator alacritty kitty foot x-terminal-emulator xterm)
+		  '
+		  ' Argument syntax per terminal (also mirrors LLScript_Sudo_Core.sh flatinst):
+		  '   --  style : ptyxis, gnome-terminal, tilix, mate-terminal, alacritty
+		  '   -x  style : terminator
+		  '  bare style : kitty, foot  (no flag before command)
+		  '   -e  style : konsole, xfce4-terminal, lxterminal, qterminal,
+		  '               x-terminal-emulator, xterm
+		  lines.Add("if command -v ptyxis >/dev/null 2>&1; then")
+		  lines.Add("    ( setsid ptyxis --new-window -- bash /opt/LastOS/Tools/Uninstall.sh ""$DESKTOP"" >/dev/null 2>&1 & )")
+		  lines.Add("elif command -v gnome-terminal >/dev/null 2>&1; then")
+		  lines.Add("    ( setsid gnome-terminal --title=""LastOS Uninstall"" -- bash /opt/LastOS/Tools/Uninstall.sh ""$DESKTOP"" >/dev/null 2>&1 & )")
 		  lines.Add("elif command -v konsole >/dev/null 2>&1; then")
-		  lines.Add("    konsole -e bash /LastOS/Tools/Uninstall.sh ""$DESKTOP""")
+		  lines.Add("    ( setsid konsole -e bash /opt/LastOS/Tools/Uninstall.sh ""$DESKTOP"" >/dev/null 2>&1 & )")
 		  lines.Add("elif command -v xfce4-terminal >/dev/null 2>&1; then")
-		  lines.Add("    xfce4-terminal -e ""bash /LastOS/Tools/Uninstall.sh '$DESKTOP'""")
+		  lines.Add("    ( setsid xfce4-terminal -e ""bash /opt/LastOS/Tools/Uninstall.sh '$DESKTOP'"" >/dev/null 2>&1 & )")
 		  lines.Add("elif command -v mate-terminal >/dev/null 2>&1; then")
-		  lines.Add("    mate-terminal -e ""bash /LastOS/Tools/Uninstall.sh '$DESKTOP'""")
+		  lines.Add("    ( setsid mate-terminal -- bash /opt/LastOS/Tools/Uninstall.sh ""$DESKTOP"" >/dev/null 2>&1 & )")
 		  lines.Add("elif command -v lxterminal >/dev/null 2>&1; then")
-		  lines.Add("    lxterminal -e ""bash /LastOS/Tools/Uninstall.sh '$DESKTOP'""")
+		  lines.Add("    ( setsid lxterminal -e ""bash /opt/LastOS/Tools/Uninstall.sh '$DESKTOP'"" >/dev/null 2>&1 & )")
+		  lines.Add("elif command -v qterminal >/dev/null 2>&1; then")
+		  lines.Add("    ( setsid qterminal -e ""bash /opt/LastOS/Tools/Uninstall.sh '$DESKTOP'"" >/dev/null 2>&1 & )")
+		  lines.Add("elif command -v tilix >/dev/null 2>&1; then")
+		  lines.Add("    ( setsid tilix -- bash /opt/LastOS/Tools/Uninstall.sh ""$DESKTOP"" >/dev/null 2>&1 & )")
+		  lines.Add("elif command -v terminator >/dev/null 2>&1; then")
+		  lines.Add("    ( setsid terminator -x bash /opt/LastOS/Tools/Uninstall.sh ""$DESKTOP"" >/dev/null 2>&1 & )")
+		  lines.Add("elif command -v alacritty >/dev/null 2>&1; then")
+		  lines.Add("    ( setsid alacritty -- bash /opt/LastOS/Tools/Uninstall.sh ""$DESKTOP"" >/dev/null 2>&1 & )")
+		  lines.Add("elif command -v kitty >/dev/null 2>&1; then")
+		  lines.Add("    ( setsid kitty bash /opt/LastOS/Tools/Uninstall.sh ""$DESKTOP"" >/dev/null 2>&1 & )")
+		  lines.Add("elif command -v foot >/dev/null 2>&1; then")
+		  lines.Add("    ( setsid foot bash /opt/LastOS/Tools/Uninstall.sh ""$DESKTOP"" >/dev/null 2>&1 & )")
 		  lines.Add("elif command -v x-terminal-emulator >/dev/null 2>&1; then")
-		  lines.Add("    x-terminal-emulator -e ""bash /LastOS/Tools/Uninstall.sh '$DESKTOP'""")
+		  lines.Add("    ( setsid x-terminal-emulator -e ""bash /opt/LastOS/Tools/Uninstall.sh '$DESKTOP'"" >/dev/null 2>&1 & )")
 		  lines.Add("elif command -v xterm >/dev/null 2>&1; then")
-		  lines.Add("    xterm -e ""bash /LastOS/Tools/Uninstall.sh '$DESKTOP'""")
+		  lines.Add("    ( setsid xterm -e ""bash /opt/LastOS/Tools/Uninstall.sh '$DESKTOP'"" >/dev/null 2>&1 & )")
 		  lines.Add("else")
 		  lines.Add("    exit 1")
 		  lines.Add("fi")
 		  lines.Add("LAUNCHER_EOF")
-		  lines.Add("$CHMOD 775 /LastOS/Tools/UninstallLauncher.sh")
+		  lines.Add("$CHMOD 775 /opt/LastOS/Tools/UninstallLauncher.sh")
 		  
 		  ' ── Write and execute temp script ────────────────────────────────
 		  Dim scriptContent As String = Join(lines, Chr(10))
@@ -3406,16 +3544,19 @@ End
 		  chSh.TimeOut = -1
 		  chSh.Execute("chmod +x " + Chr(34) + tmpFile.NativePath + Chr(34))
 		  
-		  If needsSudo Or groupNeeded Then
-		    ' Both cases handled: either sudo needed for folders, or group setup needs sudo,
-		    ' or both (group call was already prepended into the script above)
+		  If needsSudo Or groupNeeded Or migrationNeeded Then
+		    ' The persistent sudo listener was opened before this call (in VeryFirstRunTimer),
+		    ' so RunSudo sends the script through the already-authenticated terminal —
+		    ' no second polkit/sudo prompt is needed.
 		    If Debugging Then
 		      If needsSudo And groupNeeded Then
-		        Debug("SetupUninstallTools: Running via RunSudoOnceDirect (folders + group setup)")
+		        Debug("SetupUninstallTools: Running via RunSudo (folders + group setup)")
 		      ElseIf needsSudo Then
-		        Debug("SetupUninstallTools: Running via RunSudoOnceDirect (folders only)")
+		        Debug("SetupUninstallTools: Running via RunSudo (folders only)")
+		      ElseIf groupNeeded Then
+		        Debug("SetupUninstallTools: Running via RunSudo (group setup only)")
 		      Else
-		        Debug("SetupUninstallTools: Running via RunSudoOnceDirect (group setup only)")
+		        Debug("SetupUninstallTools: Running via RunSudo (migration only)")
 		      End If
 		    End If
 		    
@@ -3425,7 +3566,7 @@ End
 		    ' because PAM only applies groups at login time.
 		    ' sg lastos-users -c activates the GID for this single command — no root / polkit needed.
 		    ' This is the most common scenario on CachyOS/Arch after a fresh LLStore install.
-		    If Not groupNeeded And needsSudo Then
+		    If Not groupNeeded And needsSudo And Not migrationNeeded Then
 		      If Debugging Then Debug("SetupUninstallTools: Trying sg lastos-users (group exists in /etc/group but not active in session)")
 		      Dim sgFastSh As New Shell
 		      sgFastSh.TimeOut = 30
@@ -3437,12 +3578,20 @@ End
 		        If sgTmpF <> Nil And sgTmpF.Exists Then sgTmpF.Remove
 		        Return
 		      End If
-		      If Debugging Then Debug("SetupUninstallTools: sg path failed, falling back to RunSudoOnceDirect")
+		      If Debugging Then Debug("SetupUninstallTools: sg path failed, falling back to RunSudo")
 		    End If
 		    
-		    ' If groupNeeded but NOT needsSudo, the script only contains group setup — still uses RunSudoOnceDirect
-		    ' If needsSudo, setup_lastos_group.sh + folder setup all run in one elevated call
-		    RunSudoOnceDirect(tmpFile.NativePath)
+		    ' Read the script content and pass it through the persistent listener
+		    Dim scriptTIS As TextInputStream = TextInputStream.Open(tmpFile)
+		    Dim scriptContent2 As String = scriptTIS.ReadAll
+		    scriptTIS.Close
+		    Dim tmpF As FolderItem = GetFolderItem(tmpFile.NativePath, FolderItem.PathTypeNative)
+		    If tmpF <> Nil And tmpF.Exists Then tmpF.Remove
+		    ' Open the persistent listener now — only prompted here when sudo work is actually needed.
+		    ' If the listener is already running (e.g. -KeepSudo from a prior run), handshake
+		    ' returns immediately with no second prompt.
+		    EnableSudoScript
+		    RunSudo(scriptContent2)
 		    
 		    ' ── Restart via sg if the group was just set up ──────────────────────────
 		    ' setup_lastos_group.sh added the user to lastos-users, but the *running* process
@@ -3463,6 +3612,7 @@ End
 		        Dim rlSh As New Shell
 		        rlSh.TimeOut = -1
 		        rlSh.Execute("nohup sg lastos-users -c " + Chr(34) + "exec " + Chr(34) + Slash(AppPath) + "llstore" + Chr(34) + Chr(34) + " >/dev/null 2>&1 &")
+		        ReleaseSudoListener() ' Close the terminal before we exit — no need to leave it hanging
 		        ForceQuit = True
 		        Quit
 		      End If
@@ -3950,6 +4100,23 @@ End
 		      Main.Height = PosHeight
 		    End If
 		    
+		    
+		    ' Show one-time reboot hint on immutable OS after a GUI install
+		    If ImmutableOS And Not ToldOnceImmutable And StoreMode = 0 Then
+		      Var d As New MessageDialog
+		      Var b As MessageDialogButton
+		      
+		      d.IconType = MessageDialog.IconTypes.Caution // This sets the triangle icon
+		      d.ActionButton.Caption = "I Understand"
+		      d.Message = "Immutable OS Detected"
+		      d.Explanation = "This is an Immutable OS and it will require WINE being installed and a reboot before wine apps and games can be installed using LLStore."
+		      
+		      b = d.ShowModal
+		      
+		    End If
+		    
+		    
+		    
 		    If StoreMode <> 99 Then Main.Visible = True ' Show Main Form Again
 		    
 		    If PosWidth <> 0 Then
@@ -4363,6 +4530,24 @@ End
 		    SysDesktopEnvironment = SysDesktopEnvironment.ReplaceAll("gnome-wayland", "gnome")
 		    SysDesktopEnvironment = SysDesktopEnvironment.ReplaceAll("gnome-xorg", "gnome")
 		    If System.EnvironmentVariable("XDG_SESSION_TYPE").Lowercase.Trim = "wayland" Then Wayland = True
+		    
+		    ' Detect Immutable / Atomic OS (Bazzite, Silverblue, Kinoite, etc.)
+		    ' These have a read-only root — /usr/share/applications cannot be written to.
+		    ImmutableOS = False
+		    Dim OsDetSh As New Shell
+		    OsDetSh.TimeOut = 3000
+		    OsDetSh.Execute("bash -c 'source /etc/os-release 2>/dev/null && echo ${ID:-}'")
+		    Dim OsIDRaw As String = OsDetSh.Result.Trim.Lowercase
+		    Select Case OsIDRaw
+		    Case "bazzite", "silverblue", "kinoite", "sericea", "onyx", "aurora", "bluefin", "nixos", "endless", "vanillaos"
+		      ImmutableOS = True
+		    Case Else
+		      ' Fallback: if rpm-ostree binary exists this is an Atomic/Immutable system
+		      Dim RpmOstreeSh As New Shell
+		      RpmOstreeSh.TimeOut = 2000
+		      RpmOstreeSh.Execute("command -v rpm-ostree")
+		      If RpmOstreeSh.Result.Trim <> "" Then ImmutableOS = True
+		    End Select
 		    SysPackageManager = ""
 		    SysTerminal = ""
 		    ManualLocationsFile = "Linux"
@@ -4377,7 +4562,7 @@ End
 		  End If
 		  
 		  SysAvailableDesktops = Array("All","All-Linux","Cinnamon","Explorer","Gnome","KDE","LXDE","Mate","Unity","XFCE","cosmic", "ubuntu","LXQt","budgie")
-		  SysAvailablePackageManagers = Array("All","apt","apk","dnf","emerge","eopkg","pacman","pamac","winget","zypper")
+		  SysAvailablePackageManagers = Array("All","apt","apk","dnf","emerge","eopkg","pacman","pamac","rpm-ostree","winget","zypper")
 		  SysAvailableArchitectures = Array("All","x86 + x64","x86","x64","ARM")
 		  
 		  Dim F, G As FolderItem
@@ -4431,35 +4616,71 @@ End
 		  
 		  'Msgbox (App.ExecutableFile.Parent.NativePath)
 		  
+		  ' ── Resolve the real executable path ──────────────────────────────────
+		  ' 1. Walk up from App.ExecutableFile.Parent — works for USB/direct launch.
+		  ' 2. If not found, check /opt/LastOS/LLStore directly — covers symlink
+		  '    launches (llstore/lledit/llfile from terminal via /usr/bin or
+		  '    ~/.local/bin) since the install location is always /opt/LastOS/LLStore.
+		  ' 3. If still not found, try resolving via /proc/$PPID/exe (edge cases).
+		  ' 4. Hard fallback to /bin/llfile path or MsgBox+Quit.
+		  Dim TriedProcParent As Boolean = False
+		  
 		  F = App.ExecutableFile.Parent
 		  Do
+		    If F = Nil Then
+		      #If TargetLinux Then
+		        ' Step 2: installed path — always correct for symlink launches
+		        If Exist("/opt/LastOS/LLStore/Tools") Then
+		          AppPath = "/opt/LastOS/LLStore/"
+		          Exit Do
+		        End If
+		        ' Step 3: resolve the real binary via the parent process link (once only)
+		        If Not TriedProcParent Then
+		          TriedProcParent = True
+		          Dim ProcSh As New Shell
+		          ProcSh.TimeOut = 2000
+		          ProcSh.Execute("readlink -f /proc/$PPID/exe")
+		          Dim ResolvedPath As String = ProcSh.Result.Trim
+		          If ResolvedPath <> "" Then
+		            Dim ResolvedFI As FolderItem = GetFolderItem(ResolvedPath, FolderItem.PathTypeNative)
+		            If ResolvedFI <> Nil And ResolvedFI.Exists Then
+		              F = ResolvedFI.Parent
+		              Continue  ' Loop back and check this new directory
+		            End If
+		          End If
+		        End If
+		      #EndIf
+		      
+		      ' Step 4: all resolution attempts exhausted — try known LastOS fallbacks
+		      If TargetWindows Then
+		        G = GetFolderItem("C:\Windows\LLStore\LLStore.exe",FolderItem.PathTypeNative)
+		      Else
+		        G = GetFolderItem(Slash(HomePath)+".local/bin/llfile",FolderItem.PathTypeNative) 'User-level symlink (installed location)
+		        If G = Nil Or Not G.Exists Then
+		          G = GetFolderItem("/bin/llfile",FolderItem.PathTypeNative) 'Hardcoded path, will exist on LastOS's
+		        End If
+		      End If
+		      If G <> Nil And G.Exists Then
+		        AppPath = Slash(G.Parent.NativePath)
+		      End If
+		      Exit Do
+		    End If
 		    If Exist(Slash(F.NativePath) + "Tools") Then
 		      AppPath  = F.NativePath
 		      LLStoreParent = NoSlash(F.Parent.NativePath)
-		      If LLStoreParent = "/LastOS" Then LLStoreParent = "" 'Don't bother if it's the installed LLStore
+		      If LLStoreParent = "/opt/LastOS" Then LLStoreParent = "" 'Don't bother if it's the installed LLStore
 		      If LLStoreParent = "C:\Program Files" Then LLStoreParent = "" 'Don't bother if it's the installed LLStore
 		      'MsgBox LLStoreParent
 		      Exit Do
 		    End If
 		    F = F.Parent
-		    If F = Nil Then
-		      If TargetWindows Then
-		        G = GetFolderItem("C:\Windows\LLStore\LLStore.exe",FolderItem.PathTypeNative) 'Pretend path for now, might move it to be system wide tool in System32
-		      Else
-		        G = GetFolderItem("/bin/llfile",FolderItem.PathTypeNative) 'Hardcoded path, will exist on LastOS's
-		      End If
-		      If G.Exists Then 'Use LLFile path
-		        AppPath = Slash(G.Parent.NativePath)
-		        Exit Do 'Exit Loop
-		      End If
-		    End If
 		  Loop
 		  
 		  If Exist (AppPath+"Tools") Then
 		  Else
 		    If TargetLinux Then
-		      If Exist("/LastOS/LLStore/Tools") Then
-		        AppPath = "/LastOS/LLStore/" 'Fall back to this version/path if I can't get the real path (due to using /bin/llfile etc)
+		      If Exist("/opt/LastOS/LLStore/Tools") Then
+		        AppPath = "/opt/LastOS/LLStore/" 'Fall back to this version/path if I can't get the real path (due to using /bin/llfile etc)
 		      Else
 		        MsgBox "Can't find Tools path, Exiting"
 		        Quit
@@ -4975,19 +5196,13 @@ End
 		  If Debugging Then Debug("Admin Enabled: " + AdminEnabled.ToString)
 		  
 		  ' ── Startup sudo tasks (group membership + uninstall scripts) ──────
-		  ' Both checks are combined into a single one-shot elevated call so the
-		  ' user sees at most ONE polkit/sudo prompt.  The elevated shell closes
-		  ' when done — SudoShellLoop is never opened for these startup tasks.
-		  ' If neither task is needed the call returns immediately with no prompt.
-		  SetupUninstallTools  ' True = also check lastos-users group
+		  SetupUninstallTools(InstallStore)  ' ForceRefresh=True when -setup: always rewrite stale scripts
 		  
 		  'Install Store Mode
 		  If OriginalStoreMode = 4 Or InstallStore = True Then
 		    Loading.Hide
-		    ' NOTE: Do NOT delete uninstall scripts here. SetupUninstallTools (called
-		    ' above) already wrote them without sudo when the path was writable, and
-		    ' InstallLLStore embeds fresh copies in its own sudo script anyway.
-		    ' Deleting them here forced a redundant sudo prompt even when none was needed.
+		    ' SetupUninstallTools (called above with ForceRefresh=True) already rewrote
+		    ' the scripts — no need to delete them here.
 		    InstallLLStore
 		    'PreQuitApp ' Save Debug etc
 		    'QuitApp 'Done installing, exit app, no need to continue
@@ -5028,16 +5243,26 @@ End
 		    'MsgBox "Loading: " + CommandLineFile
 		    #Pragma BreakOnExceptions Off
 		    If CommandLineFile = "" Then
-		      Editor.Left = (Screen(0).AvailableWidth/2) - (Editor.Width /2) 'Centered
-		      Editor.Top = (Screen(0).AvailableHeight/2) - (Editor.Height /2)
+		      If EditorSavedLeft >= 0 And EditorSavedTop >= 0 Then
+		        Editor.Left = EditorSavedLeft
+		        Editor.Top = EditorSavedTop
+		      Else
+		        Editor.Left = (Screen(0).AvailableWidth/2) - (Editor.Width /2) 'Centered
+		        Editor.Top = (Screen(0).AvailableHeight/2) - (Editor.Height /2)
+		      End If
 		      Editor.PopulateData
 		      Editor.Show
 		    Else
 		      Success = LoadLLFile(CommandLineFile) ', "", True) 'The true means it extracts all the file contents, we'll just update existing ones if open then saving instead of Extracting the big ones
 		      If Success Then 
 		        If Build = False Then
-		          Editor.Left = (Screen(0).AvailableWidth/2) - (Editor.Width /2) 'Centered
-		          Editor.Top = (Screen(0).AvailableHeight/2) - (Editor.Height /2)
+		          If EditorSavedLeft >= 0 And EditorSavedTop >= 0 Then
+		            Editor.Left = EditorSavedLeft
+		            Editor.Top = EditorSavedTop
+		          Else
+		            Editor.Left = (Screen(0).AvailableWidth/2) - (Editor.Width /2) 'Centered
+		            Editor.Top = (Screen(0).AvailableHeight/2) - (Editor.Height /2)
+		          End If
 		          Editor.PopulateData
 		          Editor.Show
 		        Else ' Just Build It
@@ -5057,8 +5282,13 @@ End
 		          Return ' Yield to message loop — BuildTimer.Action handles the rest
 		        End If
 		      Else 'Failed to load item, Show Editor
-		        Editor.Left = (Screen(0).AvailableWidth/2) - (Editor.Width /2) 'Centered
-		        Editor.Top = (Screen(0).AvailableHeight/2) - (Editor.Height /2)
+		        If EditorSavedLeft >= 0 And EditorSavedTop >= 0 Then
+		          Editor.Left = EditorSavedLeft
+		          Editor.Top = EditorSavedTop
+		        Else
+		          Editor.Left = (Screen(0).AvailableWidth/2) - (Editor.Width /2) 'Centered
+		          Editor.Top = (Screen(0).AvailableHeight/2) - (Editor.Height /2)
+		        End If
 		        Editor.PopulateData
 		        Editor.Show
 		      End If
@@ -5135,7 +5365,7 @@ End
 		    Else ' Linux
 		      Loading.Hide
 		      Notify ("LLStore Installing Menu Style", "Installing Menu Style: Linux", "", -1) 'Mini Installer can't call this and wouldn't want to.
-		      InstallLinuxMenuSorting(False)
+		      InstallLinuxMenuSorting()
 		      QuitNow = True
 		    End If
 		  End If
@@ -5158,6 +5388,11 @@ End
 		    QuitApp 'Done installing, exit app, no need to continue
 		    Return ' Just get out of here once set to show editor
 		  End If
+		  ' Reaching here means we are about to show the main store GUI.
+		  ' The startup sudo tasks are complete — release the listener unless KeepSudo is set.
+		  ' If KeepSudo is True (e.g. called with -KeepSudo) the terminal stays open for
+		  ' subsequent command-line installs that want to reuse it.
+		  If Not TargetWindows Then ReleaseSudoListener()
 		  'Using a timer at the end of Form open allows it to display, many events hold off other processes until the complete
 		  If StoreMode <=1 Then FirstRunTime.RunMode = Timer.RunModes.Single ' Only show the store in Installer or Launcher modes, else just quit?
 		  
@@ -5240,10 +5475,7 @@ End
 		  
 		  ' Post-install housekeeping (mirrors what VeryFirstRunTimer.Action used to do)
 		  If Not TargetWindows Then
-		    If SudoEnabled = True Then
-		      SudoEnabled = False
-		      If KeepSudo = False Then ShellFast.Execute("echo " + Chr(34) + "Unlock" + Chr(34) + " > "+BaseDir+"/LLSudoDone")
-		    End If
+		    ReleaseSudoListener() 'Writes LLSudoDone only if KeepSudo=False and no other instances still busy
 		    
 		    If RunRefreshScript = True Or ForceDERefresh = True Then RunRefresh("cinnamon -r&")
 		    
@@ -5285,6 +5517,13 @@ End
 		    QuitApp
 		  ElseIf EditorOnly Then
 		    ' Opened via context menu — keep app running, put the Editor back
+		    If EditorSavedLeft >= 0 And EditorSavedTop >= 0 Then
+		      Editor.Left = EditorSavedLeft
+		      Editor.Top = EditorSavedTop
+		    Else
+		      Editor.Left = (Screen(0).AvailableWidth/2) - (Editor.Width /2)
+		      Editor.Top = (Screen(0).AvailableHeight/2) - (Editor.Height /2)
+		    End If
 		    Editor.Show
 		  Else
 		    ' Normal GUI flow — Editor and Main were hidden for the build; restore Main

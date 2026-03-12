@@ -88,7 +88,7 @@ Begin DesktopWindow Main
       Scope           =   0
       TabIndex        =   0
       TabPanelIndex   =   0
-      TabStop         =   True
+      TabStop         =   False
       Tooltip         =   ""
       Top             =   29
       Transparent     =   False
@@ -146,7 +146,7 @@ Begin DesktopWindow Main
       Width           =   705
    End
    Begin DesktopListBox Categories
-      AllowAutoDeactivate=   True
+      AllowAutoDeactivate=   False
       AllowAutoHideScrollbars=   True
       AllowExpandableRows=   False
       AllowFocusRing  =   True
@@ -183,7 +183,7 @@ Begin DesktopWindow Main
       Scope           =   0
       TabIndex        =   1
       TabPanelIndex   =   0
-      TabStop         =   True
+      TabStop         =   False
       Tooltip         =   ""
       Top             =   29
       Transparent     =   False
@@ -248,10 +248,10 @@ Begin DesktopWindow Main
       TabIndex        =   5
       TabPanelIndex   =   0
       TabStop         =   False
-      Text            =   "Items/Search"
+      Text            =   "🔍 Items"
       TextAlignment   =   2
       TextColor       =   &cFFFFFF00
-      Tooltip         =   "Clicking this will allow searching the items"
+      Tooltip         =   "Hover to search items"
       Top             =   0
       Transparent     =   True
       Underline       =   False
@@ -351,7 +351,7 @@ Begin DesktopWindow Main
       AllowAutoDeactivate=   False
       AllowFocus      =   True
       AllowFocusRing  =   True
-      AllowTabs       =   False
+      AllowTabs       =   True
       Backdrop        =   0
       Enabled         =   True
       Height          =   128
@@ -365,7 +365,7 @@ Begin DesktopWindow Main
       Scope           =   0
       TabIndex        =   2
       TabPanelIndex   =   0
-      TabStop         =   True
+      TabStop         =   False
       Tooltip         =   ""
       Top             =   558
       Transparent     =   True
@@ -405,7 +405,7 @@ Begin DesktopWindow Main
       HeadingIndex    =   -1
       Height          =   128
       Index           =   -2147483648
-      InitialValue    =   "https://www.LastOS.org\n\nWelcome to LLStore\nLastOS 2025"
+      InitialValue    =   "https://www.LastOS.net\n\nWelcome to LLStore\nLastOS 2026"
       Italic          =   False
       Left            =   701
       LockBottom      =   True
@@ -444,83 +444,51 @@ Begin DesktopWindow Main
       Scope           =   0
       TabPanelIndex   =   0
    End
-   Begin DesktopButton MenuButton
+   Begin DesktopCanvas MenuButton
       AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "Menu"
-      Default         =   True
+      AllowFocus      =   True
+      AllowFocusRing  =   False
+      AllowTabs       =   True
+      Backdrop        =   0
       Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
+      Height          =   26
       Index           =   -2147483648
-      Italic          =   False
       Left            =   497
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   11
       TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   "Press for Menu"
-      Top             =   0
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   60
-   End
-   Begin DesktopTextField SearchText
-      AllowAutoDeactivate=   True
-      AllowFocusRing  =   True
-      AllowSpellChecking=   False
-      AllowTabs       =   False
-      BackgroundColor =   &cC0303000
-      Bold            =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Format          =   ""
-      HasBorder       =   False
-      Height          =   27
-      Hint            =   ""
-      Index           =   -2147483648
-      InitialParent   =   ""
-      Italic          =   False
-      Left            =   415
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      MaximumCharactersAllowed=   0
-      Password        =   False
-      ReadOnly        =   False
-      Scope           =   0
-      TabIndex        =   12
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Text            =   ""
-      TextAlignment   =   2
-      TextColor       =   &c000000
-      Tooltip         =   ""
+      TabStop         =   False
+      Tooltip         =   "Menu"
       Top             =   0
       Transparent     =   True
-      Underline       =   False
-      ValidationMask  =   ""
-      Visible         =   False
-      Width           =   80
+      Visible         =   True
+      Width           =   26
    End
    Begin Timer SearchNow
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   50
+      RunMode         =   0
+      Scope           =   0
+      TabPanelIndex   =   0
+   End
+   Begin Timer SearchHideTimer
+      Index           =   -2147483648
+      LockedInPosition=   False
+      Period          =   5000
+      RunMode         =   0
+      Scope           =   0
+      TabPanelIndex   =   0
+   End
+   Begin Timer MenuHoverTimer
+      Index           =   -2147483648
+      LockedInPosition=   False
+      Period          =   700
       RunMode         =   0
       Scope           =   0
       TabPanelIndex   =   0
@@ -545,7 +513,7 @@ Begin DesktopWindow Main
       Scope           =   0
       TabIndex        =   13
       TabPanelIndex   =   0
-      TabStop         =   True
+      TabStop         =   False
       Tooltip         =   ""
       Top             =   693
       Transparent     =   True
@@ -554,6 +522,47 @@ Begin DesktopWindow Main
       Visible         =   False
       VisualState     =   0
       Width           =   100
+   End
+   Begin DesktopTextField SearchText
+      AllowAutoDeactivate=   True
+      AllowFocusRing  =   True
+      AllowSpellChecking=   False
+      AllowTabs       =   False
+      BackgroundColor =   &cFFFFFF
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "Arial"
+      FontSize        =   13.0
+      FontUnit        =   0
+      Format          =   ""
+      HasBorder       =   True
+      Height          =   27
+      Hint            =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   415
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MaximumCharactersAllowed=   0
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   14
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextAlignment   =   0
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   0
+      Transparent     =   False
+      Underline       =   False
+      ValidationMask  =   ""
+      Visible         =   False
+      Width           =   80
    End
 End
 #tag EndDesktopWindow
@@ -602,12 +611,10 @@ End
 		    
 		    If Asc(Key) = 84 Or Asc(Key) = 116 Or Asc(Key) = 20 Then Tools.Show 'Ctrl + T or t '20 is T in Windows
 		    
-		    If TargetLinux Then
-		      If Asc(Key) = 85 Or Asc(Key) = 117 Or Asc(Key) = 21 Then  'Ctrl + U or u '21 is U in Windows
-		        Uninstaller.Left = (Screen(0).AvailableWidth/2) - (Uninstaller.Width/2)
-		        Uninstaller.Top = (Screen(0).AvailableHeight/2) - (Uninstaller.Height/2)
-		        Uninstaller.Show
-		      End If
+		    If Asc(Key) = 85 Or Asc(Key) = 117 Or Asc(Key) = 21 Then  'Ctrl + U or u '21 is U in Windows
+		      Uninstaller.Left = (Screen(0).AvailableWidth/2) - (Uninstaller.Width/2)
+		      Uninstaller.Top = (Screen(0).AvailableHeight/2) - (Uninstaller.Height/2)
+		      Uninstaller.Show
 		    End If
 		    
 		    If Asc(Key) = 80 Or Asc(Key) = 112 Or Asc(Key) = 16 Then ControlPanel.Show 'Ctrl + P or p '20 is T in Windows
@@ -1115,7 +1122,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DoContextMenu()
+		Sub DoContextMenu(AnchorToMenu As Boolean = False)
 		  
 		  Dim I As Integer
 		  Dim Success As Boolean
@@ -1298,11 +1305,14 @@ End
 		  base.Append New MenuItem("Tools") 'Tools submenu
 		  MC = MC + 1
 		  base.Item(MC).Append New MenuItem("View Install Log")
-		  base.Item(MC).Append New MenuItem("Debug")
+		  base.Item(MC).Append New MenuItem("&Debug")
+		  base.Item(MC).Child("&Debug").Shortcut = "F9"
 		  base.Item(MC).Append New MenuItem("Update Sizes In Items")
 		  base.Item(MC).Append New MenuItem("Save Current &List")
+		  base.Item(MC).Child("Save Current &List").Shortcut = "L"
+		  base.Item(MC).Append New MenuItem("&Uninstaller")
+		  base.Item(MC).Child("&Uninstaller").Shortcut = "U"
 		  If TargetLinux Then
-		    base.Item(MC).Append New MenuItem("Uninstaller")
 		    base.Item(MC).Append New MenuItem("Make SFX")
 		  End If
 		  
@@ -1343,7 +1353,13 @@ End
 		  '-------------------------------------------------------------------- Do Actions Below ----------------------------------------------------------------------
 		  
 		  'MsgBox"Here"
-		  hitItem = base.Popup '**** Waits here for response
+		  If AnchorToMenu Then
+		    Dim MenuX As Integer = Main.Left + MenuButton.Left
+		    Dim MenuY As Integer = Main.Top + ItemsLabel.Top + ItemsLabel.Height
+		    hitItem = base.Popup(MenuX, MenuY)
+		  Else
+		    hitItem = base.Popup 'Opens at mouse cursor position
+		  End If
 		  
 		  If hitItem = Nil Then Return  'Nothing Picked
 		  
@@ -1367,12 +1383,10 @@ End
 		    MakeDesktopShortcut()
 		  Case "Build I"
 		    BuildToDesktop()
-		  Case "Uninsta" ' Uninstaller (Linux only)
-		    If TargetLinux Then
-		      Uninstaller.Left = (Screen(0).AvailableWidth/2) - (Uninstaller.Width/2)
-		      Uninstaller.Top = (Screen(0).AvailableHeight/2) - (Uninstaller.Height/2)
-		      Uninstaller.Show
-		    End If
+		  Case "&Uninst" ' Uninstaller
+		    Uninstaller.Left = (Screen(0).AvailableWidth/2) - (Uninstaller.Width/2)
+		    Uninstaller.Top = (Screen(0).AvailableHeight/2) - (Uninstaller.Height/2)
+		    Uninstaller.Show
 		  Case "Make SF"
 		    If TargetLinux Then
 		      Try
@@ -1513,8 +1527,8 @@ End
 		      End If
 		    Else
 		      MsgBox "No install log found yet." + Chr(10) + Chr(10) + _
-		        "The log ( ~/LLStore.log ) is created automatically" + Chr(10) + _
-		        "when items are first installed or uninstalled."
+		      "The log ( ~/LLStore.log ) is created automatically" + Chr(10) + _
+		      "when items are first installed or uninstalled."
 		    End If
 		  End Select
 		  
@@ -1583,6 +1597,7 @@ End
 		  Dim ColBuildType     As Integer = Data.GetDBHeader("BuildType")
 		  Dim ColHidden        As Integer = Data.GetDBHeader("Hidden")
 		  Dim ColHiddenAlways  As Integer = Data.GetDBHeader("HiddenAlways")
+		  Dim ColShowSetupOnly As Integer = Data.GetDBHeader("ShowSetupOnly")
 		  Dim ColSelected      As Integer = Data.GetDBHeader("Selected")
 		  Dim ColTitleName     As Integer = Data.GetDBHeader("TitleName")
 		  Dim ColCategories    As Integer = Data.GetDBHeader("Categories")
@@ -1609,6 +1624,13 @@ End
 		    If IsTrue(Data.Items.CellTextAt(I, ColHiddenAlways)) Then
 		      Data.Items.CellTextAt(I, ColSelected) = "F" 'Unselect now hidden items
 		      Continue 'Skip Hidden items
+		    End If
+		    'ShowSetupOnly: only visible in Installer mode (StoreMode=0), hidden in Launcher and all other modes
+		    If ColShowSetupOnly >= 0 Then
+		      If IsTrue(Data.Items.CellTextAt(I, ColShowSetupOnly)) And StoreMode <> 0 Then
+		        Data.Items.CellTextAt(I, ColSelected) = "F"
+		        Continue
+		      End If
 		    End If
 		    
 		    ItemToAdd = Data.Items.CellTextAt(I, ColTitleName)
@@ -2027,15 +2049,19 @@ End
 		  ItemsLabel.Width = (Main.Width / 3.45) - 6
 		  ItemsLabel.Height = CategoriesLabel.Height
 		  
-		  MenuButton.Left = ItemsLabel.Left + ItemsLabel.Width - 60
-		  MenuButton.Top = Items.Top - 22 - (Items.Height / 200) 'ItemsLabel.Top + (Main.Height / 130)
+		  MenuButton.Height = CType(ItemsLabel.Height * 0.75, Integer)
+		  MenuButton.Width = MenuButton.Height
+		  MenuButton.Left = ItemsLabel.Left + ItemsLabel.Width + 4
+		  MenuButton.Top = ItemsLabel.Top + CType((ItemsLabel.Height - MenuButton.Height) / 2, Integer)
+		  MenuButton.Refresh
 		  
-		  SearchText.TextColor = ColTitle
-		  SearchText.BackgroundColor = ColBG
-		  SearchText.Left = ItemsLabel.Left
-		  SearchText.Top = 0
-		  SearchText.Width = ItemsLabel.Width
-		  SearchText.Height = Items.Top - 2
+		  'SearchText.TextColor = ColTitle
+		  'SearchText.Left = ItemsLabel.Left
+		  'SearchText.Top = ItemsLabel.Top
+		  'SearchText.Width = ItemsLabel.Width
+		  'SearchText.Height = ItemsLabel.Height
+		  'SearchText.MaximumCharactersAllowed = 64
+		  Main.SearchText.FontSize = Stats.FontSize
 		  
 		  
 		  TitleLabel.Left = ItemsLabel.Left + ItemsLabel.Width + PaddingMid
@@ -2384,6 +2410,7 @@ End
 		      OutText = OutText + Items.CellTextAt(I,0)+Chr(10)
 		    Next 
 		    SaveDataToFile(OutText, Slash(SpecialFolder.Desktop.NativePath)+"LLStore_CurrentList.txt")
+		    Notify("Saved Items List To Desktop", "LLStore_CurrentList.txt", "", 3000)
 		  End If
 		End Sub
 	#tag EndMethod
@@ -2478,6 +2505,18 @@ End
 		  ScaledScreenShot.Graphics.DrawPicture(ScreenShotCurrent,X,Y,RealSSWidth, RealSSHeight,0,0,ScreenShotCurrent.Width, ScreenShotCurrent.Height)
 		  
 		  ScreenShot.Backdrop = ScaledScreenShot
+		  
+		  'Because this does run during a resize, I'll refresh the Search Field size
+		  SearchText.Left = ItemsLabel.Left
+		  SearchText.Top = ItemsLabel.Top
+		  SearchText.Width = ItemsLabel.Width
+		  SearchText.Height = ItemsLabel.Height
+		  
+		  Main.SearchText.FontSize = Stats.FontSize
+		  
+		  'Below Breaks Highlighting Text
+		  'SearchText.TextColor = ColTitle
+		  'SearchText.BackgroundColor = ColBG
 		End Sub
 	#tag EndMethod
 
@@ -2816,6 +2855,70 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function HandleCtrlKeyDown(key As String) As Boolean
+		  ' Returns True if a Ctrl+letter shortcut is recognised so the caller can
+		  ' return True from KeyDown, preventing the listbox acting on the keypress.
+		  ' On Windows KeyDown fires with the control-char value (Ctrl+A=1 … Ctrl+U=21);
+		  ' on Linux/Mac it fires with the lowercase letter value (a=97 … u=117). Check both.
+		  If Not Keyboard.ControlKey Then Return False
+		  Dim kc As Integer = Asc(Key)
+		  If kc=1  Or kc=97  Or kc=2  Or kc=98  Or kc=4  Or kc=100 Or kc=6  Or kc=102 Or _
+		     kc=9  Or kc=105 Or kc=12 Or kc=108 Or kc=14 Or kc=110 Or kc=15 Or kc=111 Or _
+		     kc=16 Or kc=112 Or kc=18 Or kc=114 Or kc=19 Or kc=115 Or kc=20 Or kc=116 Or _
+		     kc=21 Or kc=117 Then Return True
+		  Return False
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub HandleCtrlKeyUp(key As String)
+		  ' Shared Ctrl+letter handler — called from both Items.KeyUp and Categories.KeyUp.
+		  If Not Keyboard.ControlKey Then Return
+		  Dim Successed As Boolean
+		  Select Case Asc(Key)
+		  Case 45 ' Ctrl + -
+		    Items.FontSize = Items.FontSize - 1
+		    If Items.FontSize <= 4 Then Items.FontSize = 4
+		    Categories.FontSize = Items.FontSize
+		    Description.FontSize = Items.FontSize
+		  Case 61 ' Ctrl + +
+		    Items.FontSize = Items.FontSize + 1
+		    If Items.FontSize >= 32 Then Items.FontSize = 32
+		    Categories.FontSize = Items.FontSize
+		    Description.FontSize = Items.FontSize
+		  Case 1, 97 ' Ctrl+A
+		    SelectItems("Select All")
+		  Case 2, 98 ' Ctrl+B
+		    If StoreMode = 1 Then BuildToDesktop()
+		  Case 4, 100 ' Ctrl+D
+		    MakeDesktopShortcut()
+		  Case 6, 102 ' Ctrl+F
+		    If StoreMode = 1 Then AddFavorite()
+		  Case 9, 105 ' Ctrl+I
+		    SelectItems("Select Invert")
+		  Case 12, 108 ' Ctrl+L
+		    SaveCurrentList()
+		  Case 14, 110 ' Ctrl+N
+		    SelectItems("Select None")
+		  Case 15, 111 ' Ctrl+O
+		    Successed = LoadFromPreset()
+		  Case 16, 112 ' Ctrl+P
+		    ControlPanel.Show
+		  Case 18, 114 ' Ctrl+R
+		    If StoreMode = 1 Then RemoveFavorite()
+		  Case 19, 115 ' Ctrl+S
+		    If StoreMode = 0 Then SaveToPreset()
+		  Case 20, 116 ' Ctrl+T
+		    Tools.Show
+		  Case 21, 117 ' Ctrl+U
+		    Uninstaller.Left = (Screen(0).AvailableWidth/2) - (Uninstaller.Width/2)
+		    Uninstaller.Top  = (Screen(0).AvailableHeight/2) - (Uninstaller.Height/2)
+		    Uninstaller.Show
+		  End Select
+		End Sub
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h0
 		CurrentCat As String
@@ -2875,6 +2978,14 @@ End
 
 	#tag Property, Flags = &h0
 		HideUnsetFlags As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		MenuButtonFocused As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		MenuButtonHovered As Boolean = False
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -3060,6 +3171,7 @@ End
 		    End If
 		  End If
 		  
+		  #Pragma BreakOnExceptions Off
 		  Try
 		    If Me.SelectedRowIndex = Row Then 'Highlight
 		      g.ForeColor = ColHiLite
@@ -3068,6 +3180,7 @@ End
 		    End If
 		  Catch
 		  End Try
+		  #Pragma BreakOnExceptions On
 		  
 		  If CLI = -1 Then Return True ' Not an item, just skip it (Drawn BG above)
 		  
@@ -3113,56 +3226,19 @@ End
 		End Function
 	#tag EndEvent
 	#tag Event
-		Sub KeyUp(key As String)
-		  Dim Successed As Boolean
-		  If Keyboard.ControlKey Then
-		    'MsgBox Str(asc(Key))
-		    Select Case Asc(Key)
-		    Case 45 '-
-		      Items.FontSize = Items.FontSize - 1
-		      If Items.FontSize <= 4 Then Items.FontSize = 4
-		      Categories.FontSize = Items.FontSize
-		      Description.FontSize = Items.FontSize
-		    Case 61 '+
-		      Items.FontSize = Items.FontSize + 1
-		      If Items.FontSize >= 32 Then Items.FontSize = 32
-		      Categories.FontSize = Items.FontSize
-		      Description.FontSize = Items.FontSize
-		      'Case 70
-		    Case 97
-		      SelectItems("Select All")
-		      
-		    Case 98 'Ctrl + B - Build to Desktop
-		      If StoreMode = 1 Then BuildToDesktop()
-		      
-		    Case 100  'Ctrl + D 'Add Desktop Shortcut
-		      MakeDesktopShortcut()
-		    Case 102
-		      If StoreMode = 1 Then AddFavorite() 'Ctrl + F or f
-		    Case 114 
-		      If StoreMode = 1 Then RemoveFavorite() 'Ctrl + R or r
-		    Case 110
-		      SelectItems("Select None")
-		    Case 105
-		      SelectItems("Select Invert")
-		    Case 111
-		      Successed = LoadFromPreset()
-		    Case 115
-		      If StoreMode = 0 Then SaveToPreset()
-		    Case 108
-		      SaveCurrentList()
-		    Case 116
-		      Tools.Show
-		    Case 112
-		      ControlPanel.Show
-		    Case 117 'Ctrl + U - Uninstaller (Linux only)
-		      If TargetLinux Then
-		        Uninstaller.Left = (Screen(0).AvailableWidth/2) - (Uninstaller.Width/2)
-		        Uninstaller.Top = (Screen(0).AvailableHeight/2) - (Uninstaller.Height/2)
-		        Uninstaller.Show
-		      End If
-		    End Select
+		Function KeyDown(key As String) As Boolean
+		  If Asc(Key) = 9 Then
+		    StartButton.SetFocus
+		    Return True
 		  End If
+		  If HandleCtrlKeyDown(Key) Then Return True
+		  Return False
+		End Function
+	#tag EndEvent
+	#tag Event
+		Sub KeyUp(key As String)
+		  HandleCtrlKeyUp(Key)
+		  If Keyboard.ControlKey Then Return 'All Ctrl actions handled — don't update selection
 		  
 		  #Pragma BreakOnExceptions False
 		  Try 
@@ -3260,6 +3336,7 @@ End
 	#tag Event
 		Function PaintCellBackground(g As Graphics, row As Integer, column As Integer) As Boolean
 		  'If Main.Visible = False Then Return False ' Don't redraw if not seen 'This may be breaking Wayland, try this fix
+		  #Pragma BreakOnExceptions Off
 		  Try
 		    'Can Do Solid Color
 		    'g.DrawingColor =  &C000000
@@ -3276,6 +3353,7 @@ End
 		    End If
 		  Catch
 		  End Try
+		  #Pragma BreakOnExceptions On
 		End Function
 	#tag EndEvent
 	#tag Event
@@ -3289,18 +3367,30 @@ End
 		  
 		  If CurrentCat <> "" Then ChangeCat(CurrentCat)
 		  Try
-		    If Items.RowCount >= 1 Then
-		      Items.SelectedRowIndex = 0
-		      Items.SetFocus
-		    End If
+		    Items.SelectedRowIndex = 0 'Reset highlight, but keep focus in Categories
 		  Catch
 		  End Try
-		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Function KeyDown(key As String) As Boolean
+		  If Asc(Key) = 9 Then
+		    MenuButton.SetFocus
+		    Return True
+		  End If
+		  If Asc(Key) = 13 Or Asc(Key) = 3 Or Asc(Key) = 32 Then 'Enter/Return/Space — go to Items
+		    Items.SetFocus
+		    Return True
+		  End If
+		  If HandleCtrlKeyDown(Key) Then Return True
+		  Return False
 		End Function
 	#tag EndEvent
 	#tag Event
 		Sub KeyUp(key As String)
 		  If Asc(Key) = 9 Then Return 'If tabbed in, don't do update
+		  HandleCtrlKeyUp(Key)
+		  If Keyboard.ControlKey Then Return 'All Ctrl actions handled — don't update category
 		  Try 
 		    CurrentCatID = Categories.CellTagAt (Categories.SelectedRowIndex, 0)
 		    CurrentCat = Categories.CellTextAt (Categories.SelectedRowIndex, 0)
@@ -3315,6 +3405,7 @@ End
 		  'If Main.Visible = False Then Return False ' Don't redraw if not seen 'This may be breaking Wayland, try this fix
 		  Dim Pos As Integer
 		  
+		  #Pragma BreakOnExceptions Off
 		  Try
 		    Pos = 2 + (g.Height / 6)
 		    
@@ -3327,6 +3418,7 @@ End
 		    
 		  Catch
 		  End Try
+		  #Pragma BreakOnExceptions On
 		End Function
 	#tag EndEvent
 	#tag Event
@@ -3348,13 +3440,18 @@ End
 #tag EndEvents
 #tag Events ItemsLabel
 	#tag Event
-		Sub MouseUp(x As Integer, y As Integer)
+		Sub MouseEnter()
+		  'Hover over label to reveal search box
+		  SearchHideTimer.RunMode = Timer.RunModes.Off
 		  SearchText.Visible = True
 		  ItemsLabel.Visible = False
-		  
 		  SearchText.SetFocus
-		  SearchNow.RunMode = Timer.RunModes.Single
-		  SearchText.SelectionStart = 999 'Move to end
+		  SearchText.SelectionStart = 999 'Move cursor to end
+		  'Only start auto-hide timer if there is no active search text
+		  If SearchText.Text = "" Then
+		    SearchHideTimer.Period = 5000
+		    SearchHideTimer.RunMode = Timer.RunModes.Single
+		  End If
 		End Sub
 	#tag EndEvent
 	#tag Event
@@ -3457,10 +3554,10 @@ End
 	#tag EndEvent
 	#tag Event
 		Function KeyDown(key As String) As Boolean
-		  If Asc(Key) = 9 Then Return False ' Allow Tabbing
-		  
-		  'MsgBox Asc(Key).ToString
 		  Select Case Asc(Key)
+		  Case 9
+		    Categories.SetFocus
+		    Return True
 		  Case 3, 13, 32
 		    StartPushed
 		  Case Else
@@ -3518,22 +3615,23 @@ End
 		  'g.FillRectangle(0,0,g.Width, g.Height)
 		  
 		  'Draw Wallpaper (Transparent)
+		  #Pragma BreakOnExceptions Off
 		  Try
 		    g.DrawPicture Main.Backdrop, -MetaData.Left, (-MetaData.Top)-(row*me.RowHeight) +(Me.ScrollPosition*me.RowHeight)
 		  Catch
 		  End Try
+		  #Pragma BreakOnExceptions On
 		End Function
 	#tag EndEvent
 	#tag Event
 		Function PaintCellText(g as Graphics, row as Integer, column as Integer, x as Integer, y as Integer) As Boolean
 		  'If Main.Visible = False Then Return False ' Don't redraw if not seen 'This may be breaking Wayland, try this fix
-		  '#Pragma BreakOnExceptions False
-		  
 		  #PRAGMA unused x
 		  #PRAGMA unused y
 		  
 		  Dim Pos As Integer
 		  
+		  #Pragma BreakOnExceptions Off
 		  Try
 		    Pos = 2+(g.Height / 6)
 		    
@@ -3541,6 +3639,7 @@ End
 		    g.FontName = FontMeta
 		  Catch
 		  End Try
+		  #Pragma BreakOnExceptions On
 		  
 		  #Pragma BreakOnExceptions False
 		  Try 'Ignore no items
@@ -3621,17 +3720,62 @@ End
 #tag EndEvents
 #tag Events MenuButton
 	#tag Event
-		Sub Pressed()
-		  DoContextMenu
+		Sub Paint(g As Graphics, areas() As Rect)
+		  'Draw a clean hamburger/menu icon using the theme colour
+		  Dim ic As Color
+		  #Pragma BreakOnExceptions Off
+		  Try
+		    ic = ColTitle
+		  Catch
+		    ic = &cFFFFFF 'Fallback white
+		  End Try
+		  #Pragma BreakOnExceptions On
+		  
+		  'Draw subtle rounded background on hover or focus
+		  If MenuButtonHovered Or MenuButtonFocused Then
+		    g.DrawingColor = Color.RGB(ic.Red, ic.Green, ic.Blue, 40) 'Semi-transparent tint
+		    g.FillRoundRectangle(1, 1, g.Width-2, g.Height-2, 4, 4)
+		  End If
+		  
+		  'Draw focus ring when keyboard-focused
+		  If MenuButtonFocused Then
+		    g.DrawingColor = Color.RGB(ic.Red, ic.Green, ic.Blue, 180)
+		    g.DrawRoundRectangle(1, 1, g.Width-2, g.Height-2, 4, 4)
+		  End If
+		  
+		  'Three horizontal bars (hamburger icon)
+		  g.DrawingColor = ic
+		  Dim barW As Integer = g.Width - 8
+		  Dim barH As Integer = Max(2, g.Height / 8)
+		  Dim startX As Integer = 4
+		  Dim gap As Double = g.Height / 4.0
+		  
+		  g.FillRoundRectangle(startX, CType(gap * 1, Integer) - barH \ 2, barW, barH, 1, 1)
+		  g.FillRoundRectangle(startX, CType(gap * 2, Integer) - barH \ 2, barW, barH, 1, 1)
+		  g.FillRoundRectangle(startX, CType(gap * 3, Integer) - barH \ 2, barW, barH, 1, 1)
 		End Sub
 	#tag EndEvent
-#tag EndEvents
-#tag Events SearchText
+	#tag Event
+		Sub MouseEnter()
+		  MenuButtonHovered = True
+		  MenuButton.Refresh
+		  'Start short hover timer — opens menu only if intentional hover
+		  MenuHoverTimer.RunMode = Timer.RunModes.Single
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub MouseExit()
+		  MenuButtonHovered = False
+		  MenuButton.Refresh
+		  'Cancel pending hover-open if mouse left quickly
+		  MenuHoverTimer.RunMode = Timer.RunModes.Off
+		End Sub
+	#tag EndEvent
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
-		  SearchText.Visible = False
-		  ItemsLabel.Visible = True
-		  SearchNow.RunMode = Timer.RunModes.Single
+		  'Direct click also opens menu immediately
+		  MenuHoverTimer.RunMode = Timer.RunModes.Off
+		  DoContextMenu(True)
 		End Sub
 	#tag EndEvent
 	#tag Event
@@ -3640,21 +3784,29 @@ End
 		End Function
 	#tag EndEvent
 	#tag Event
+		Sub FocusReceived()
+		  MenuButtonFocused = True
+		  MenuButton.Refresh
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub FocusLost()
+		  MenuButtonFocused = False
+		  MenuButton.Refresh
+		End Sub
+	#tag EndEvent
+	#tag Event
 		Function KeyDown(key As String) As Boolean
-		  'Msgbox Asc(Key).ToString
-		  
-		  
 		  Select Case Asc(Key)
-		  Case 13,3
-		    SearchText.Visible = False
-		    ItemsLabel.Visible = True
-		    SearchNow.RunMode = Timer.RunModes.Single
+		  Case 9
+		    MenuHoverTimer.RunMode = Timer.RunModes.Off
+		    Items.SetFocus
 		    Return True
-		    
+		  Case 13, 3, 32 'Enter / Return / Space — open menu
+		    MenuHoverTimer.RunMode = Timer.RunModes.Off
+		    DoContextMenu(True)
+		    Return True
 		  End Select
-		  
-		  SearchNow.RunMode = Timer.RunModes.Single
-		  
 		  Return False
 		End Function
 	#tag EndEvent
@@ -3663,6 +3815,27 @@ End
 	#tag Event
 		Sub Action()
 		  GenerateItems 'Search for typed in text
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events SearchHideTimer
+	#tag Event
+		Sub Action()
+		  'Only hide if there is no active search text
+		  SearchHideTimer.RunMode = Timer.RunModes.Off
+		  If SearchText.Visible And SearchText.Text = "" Then
+		    SearchText.Visible = False
+		    ItemsLabel.Visible = True
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events MenuHoverTimer
+	#tag Event
+		Sub Action()
+		  'Hover held long enough — open the context menu
+		  MenuHoverTimer.RunMode = Timer.RunModes.Off
+		  DoContextMenu(True)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -3688,6 +3861,87 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events SearchText
+	#tag Event
+		Function KeyDown(key As String) As Boolean
+		  Select Case Asc(Key)
+		    
+		  Case 13, 3 'Enter / Return — keep results, hide box, go to Items
+		    SearchHideTimer.RunMode = Timer.RunModes.Off
+		    SearchText.Visible = False
+		    ItemsLabel.Visible = True
+		    Items.SetFocus
+		    Return True
+		    
+		  Case 28, 29, 30, 31 'Arrow keys — jump to Items only if Shift not held (Shift+arrow = selection)
+		    If Not Keyboard.AsyncShiftKey Then
+		      SearchHideTimer.RunMode = Timer.RunModes.Off
+		      If SearchText.Text = "" Then SearchText.Visible = False
+		      ItemsLabel.Visible = True
+		      Items.SetFocus
+		      Return True
+		    End If
+		    
+		  Case 27 'Escape — clear search text, restore full list, go to Items
+		    SearchHideTimer.RunMode = Timer.RunModes.Off
+		    SearchText.Text = ""
+		    SearchText.Visible = False
+		    ItemsLabel.Visible = True
+		    SearchNow.RunMode = Timer.RunModes.Single
+		    Items.SetFocus
+		    Return True
+		    
+		  Case 9 'Tab — clear search text, restore full list, go to MenuButton
+		    SearchHideTimer.RunMode = Timer.RunModes.Off
+		    'SearchText.Text = ""
+		    If SearchText.Text = "" Then SearchText.Visible = False
+		    ItemsLabel.Visible = True
+		    SearchNow.RunMode = Timer.RunModes.Single
+		    MenuButton.SetFocus
+		    Return True
+		    
+		  End Select
+		  
+		  'Navigation/modifier keys — pass through without side effects
+		  If Keyboard.AsyncShiftKey Or Keyboard.AsyncControlKey Then Return False
+		  Select Case Asc(Key)
+		  Case 28, 29, 30, 31 'Bare arrow keys already handled above
+		    Return False
+		  End Select
+		  
+		  'Regular typing — reset idle timer and refresh results
+		  SearchHideTimer.RunMode = Timer.RunModes.Off
+		  SearchHideTimer.Period = 3000
+		  SearchHideTimer.RunMode = Timer.RunModes.Single
+		  SearchNow.RunMode = Timer.RunModes.Single
+		  
+		  Return False
+		End Function
+	#tag EndEvent
+	#tag Event
+		Sub MouseEnter()
+		  'Mouse is back over the search box — cancel any pending auto-hide
+		  SearchHideTimer.RunMode = Timer.RunModes.Off
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub MouseExit()
+		  'Only auto-hide if there is no active search text
+		  If SearchText.Text = "" Then
+		    SearchHideTimer.Period = 1000
+		    SearchHideTimer.RunMode = Timer.RunModes.Single
+		  End If
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub FocusReceived()
+		  SearchText.Left = ItemsLabel.Left
+		  SearchText.Top = ItemsLabel.Top
+		  SearchText.Width = ItemsLabel.Width
+		  SearchText.Height = ItemsLabel.Height
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -4088,6 +4342,14 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="MenuButtonHovered"
+		Visible=false
+		Group="Behavior"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="MultiSelect"
 		Visible=false
 		Group="Behavior"
@@ -4117,6 +4379,14 @@ End
 		Group="Behavior"
 		InitialValue=""
 		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MenuButtonFocused"
+		Visible=false
+		Group="Behavior"
+		InitialValue="False"
+		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior
