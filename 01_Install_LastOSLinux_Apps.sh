@@ -202,3 +202,5 @@ sudo gsettings set org.nemo.preferences show-hidden-files true
 
 # Remove Builder Flag now that we're done
 [ -f /tmp/LastOSLinux-Builder ] && rm -f /tmp/LastOSLinux-Builder
+
+notify-send "System Update" "Reboot Recommended Now" --icon=system-reboot --urgency=critical
