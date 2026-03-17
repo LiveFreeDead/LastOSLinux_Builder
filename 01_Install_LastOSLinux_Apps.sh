@@ -167,9 +167,9 @@ sudo apt -y remove firefox firefox-locale-en
 gsettings set org.cinnamon favorite-apps "['google-chrome.desktop', 'mintinstall.desktop', 'cinnamon-settings.desktop', 'llstore.desktop', 'org.gnome.Terminal.desktop', 'nemo.desktop']"
 
 # Install all apps from the main LastOS preset
-/opt/LastOS/LLStore/llstore -i -p "$CurDir/LastOSLinux_Preset.ini"
+/opt/LastOS/LLStore/llstore -i -p -q -KeepSudo "$CurDir/LastOSLinux_Preset.ini"
 #> $HOME/Desktop/LLStore-Results.txt
-#I removed -q (quit) from above after -i
+#I removed -q (quit) from above after -i, put back as I trust it is all good now.
 
 # Signal that the sudo-elevated stage is done
 echo "Done" > /tmp/LLSudoDone
@@ -202,5 +202,3 @@ sudo gsettings set org.nemo.preferences show-hidden-files true
 
 # Remove Builder Flag now that we're done
 [ -f /tmp/LastOSLinux-Builder ] && rm -f /tmp/LastOSLinux-Builder
-
-notify-send "System Update" "Reboot Recommended Now" --icon=system-reboot --urgency=critical

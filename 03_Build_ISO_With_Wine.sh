@@ -100,7 +100,7 @@ esac
 echo "Running Clean up from $MAINDIR/LLAppsInstalls/"
 CLEAN_TAR=$(ls "$MAINDIR/LLAppsInstalls/"LastOSLinux.Clean.Build_*_x64+x86_LLApp.tar 2>/dev/null | head -n 1)
 if [ -n "$CLEAN_TAR" ]; then
-    /opt/LastOS/LLStore/llstore -i -q "$CLEAN_TAR"
+    /opt/LastOS/LLStore/llstore -KeepSudo -i -q "$CLEAN_TAR"
 else
     echo "Warning: Clean build LLApp tar not found in $MAINDIR/LLAppsInstalls/"
 fi
