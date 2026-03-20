@@ -26,7 +26,6 @@ Begin DesktopWindow Loading
    Visible         =   False
    Width           =   440
    Begin Timer FirstRunTime
-      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   50
@@ -67,7 +66,6 @@ Begin DesktopWindow Loading
       Width           =   427
    End
    Begin Timer DownloadTimer
-      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   50
@@ -76,7 +74,6 @@ Begin DesktopWindow Loading
       TabPanelIndex   =   0
    End
    Begin Timer VeryFirstRunTimer
-      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   1
@@ -85,7 +82,6 @@ Begin DesktopWindow Loading
       TabPanelIndex   =   0
    End
    Begin Timer QuitCheckTimer
-      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   1000
@@ -94,7 +90,6 @@ Begin DesktopWindow Loading
       TabPanelIndex   =   0
    End
    Begin Timer DownloadScreenAndIcon
-      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   100
@@ -103,7 +98,6 @@ Begin DesktopWindow Loading
       TabPanelIndex   =   0
    End
    Begin Timer InstallTimer
-      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   120
@@ -112,7 +106,6 @@ Begin DesktopWindow Loading
       TabPanelIndex   =   0
    End
    Begin Timer BuildTimer
-      Enabled         =   True
       Index           =   -2147483648
       LockedInPosition=   False
       Period          =   120
@@ -3609,9 +3602,23 @@ End
 		        If Debugging Then Debug("SetupUninstallTools: Relaunching via sg lastos-users to activate group membership in session")
 		        ' Detach a new LLStore in the lastos-users group context, then exit this one.
 		        ' nohup + & ensures the child outlives this process cleanly.
+		        ' Reconstruct any flags that must survive into the relaunched instance.
+		        Dim relaunchArgs As String = ""
+		        If InstallStore Then relaunchArgs = relaunchArgs + " -setup"
+		        If KeepSudo Then relaunchArgs = relaunchArgs + " -keepsudo"
+		        If Debugging Then relaunchArgs = relaunchArgs + " -debug"
+		        If ForceOffline Then relaunchArgs = relaunchArgs + " -offline"
+		        relaunchArgs = relaunchArgs.Trim
+		        Dim rlCmd As String
+		        If relaunchArgs <> "" Then
+		          rlCmd = "nohup sg lastos-users -c " + Chr(34) + Slash(AppPath) + "llstore " + relaunchArgs + Chr(34) + " >/dev/null 2>&1 &"
+		        Else
+		          rlCmd = "nohup sg lastos-users -c " + Chr(34) + Slash(AppPath) + "llstore" + Chr(34) + " >/dev/null 2>&1 &"
+		        End If
+		        If Debugging Then Debug("SetupUninstallTools: Relaunch cmd: " + rlCmd)
 		        Dim rlSh As New Shell
 		        rlSh.TimeOut = -1
-		        rlSh.Execute("nohup sg lastos-users -c " + Chr(34) + "exec " + Chr(34) + Slash(AppPath) + "llstore" + Chr(34) + Chr(34) + " >/dev/null 2>&1 &")
+		        rlSh.Execute(rlCmd)
 		        ReleaseSudoListener() ' Close the terminal before we exit — no need to leave it hanging
 		        ForceQuit = True
 		        Quit
@@ -3820,8 +3827,54 @@ End
 		        If Settings.SetUseLocalDBFiles.Value = True Then
 		          F = GetFolderItem(Data.ScanPaths.CellTextAt(I,0)+".lldb/lldb.ini",FolderItem.PathTypeNative)
 		          If F.Exists And ForceRefreshDBs = False Then
+		            ' Track row counts before loading so we can roll back if items are missing
+		            Dim DBItemStart As Integer = Data.Items.RowCount
+		            Dim DBIconStart As Integer = Data.Icons.RowCount
 		            LoadDB(Data.ScanPaths.CellTextAt(I,0))
 		            Data.ScanPaths.CellTextAt(I,1) = "T"
+		            
+		            ' --- FAST DB INTEGRITY CHECK ---
+		            ' One Exists() call per item — pure stat() under the hood, essentially free.
+		            ' Bail on the very first missing file so a freshly uninstalled package is
+		            ' caught in microseconds without scanning every remaining entry.
+		            Dim DBStale As Boolean = False
+		            Dim CI As Integer
+		            Dim ciChkFileINI As Integer = Data.GetDBHeader("FileINI")
+		            If ciChkFileINI >= 0 Then
+		              Dim DBItemEnd As Integer = Data.Items.RowCount - 1
+		              For CI = DBItemStart To DBItemEnd
+		                Dim ChkFI As String = Data.Items.CellTextAt(CI, ciChkFileINI)
+		                If ChkFI <> "" Then
+		                  Dim ChkF As FolderItem = GetFolderItem(ChkFI, FolderItem.PathTypeNative)
+		                  If Not ChkF.Exists Then
+		                    DBStale = True
+		                    Exit ' First missing item found — no need to check the rest
+		                  End If
+		                End If
+		              Next
+		            End If
+		            
+		            If DBStale Then
+		              ' Roll back all items and icons that LoadDB just added
+		              For CI = Data.Items.RowCount - 1 DownTo DBItemStart
+		                Data.Items.RemoveRowAt(CI)
+		              Next
+		              ' Nuke the stale .lldb folder if the path is writable.
+		              ' Do NOT set ForceRefreshDBs — that would force ALL other scan paths to
+		              ' rescan too. We only want to fix this one path. The outer For-I loop
+		              ' already skips the .lldb-load branch (F.Exists = False after Deltree)
+		              ' for any path whose folder was deleted, so other paths are untouched.
+		              Dim StaleLLDB As String = Data.ScanPaths.CellTextAt(I,0)+".lldb/"
+		              If IsWritable(StaleLLDB) Then Deltree(StaleLLDB)
+		              ' Mark as needing a fresh scan. GetItems populates Data.ScanItems for
+		              ' this path; the normal 'Adding Items' pass below calls GetItem() on
+		              ' each entry, then SaveAllDBs writes a clean .lldb. Next boot, LoadDB
+		              ' loads the accurate file and the integrity check passes — no loop.
+		              Data.ScanPaths.CellTextAt(I,1) = "F"
+		              GetItems(Data.ScanPaths.CellTextAt(I,0))
+		            End If
+		            ' --- END INTEGRITY CHECK ---
+		            
 		          Else 'Scan Items and Save DB Below
 		            GetItems(Data.ScanPaths.CellTextAt(I,0))
 		            Data.ScanPaths.CellTextAt(I,1) = "F"
@@ -4712,6 +4765,17 @@ End
 		    MakeFolder (BaseDir)
 		    S = "chmod 700 "+BaseDir
 		    ShellFast.Execute (S)
+		    
+		    ' Prune any stale LLSudoBusy_* markers left by crashed/killed instances or ISO captures.
+		    ' kill -0 is a no-op existence check only — it sends no signal and does not interrupt anything.
+		    ' If the PID no longer exists the marker is deleted; live instances are completely untouched.
+		    Dim pruneCmd As String
+		    pruneCmd = "for f in " + Chr(34) + BaseDir + Chr(34) + "/LLSudoBusy_*"
+		    pruneCmd = pruneCmd + "; do [ -f " + Chr(34) + "$f" + Chr(34) + " ] || continue"
+		    pruneCmd = pruneCmd + "; pid=" + Chr(34) + "${f##*_}" + Chr(34)
+		    pruneCmd = pruneCmd + "; kill -0 " + Chr(34) + "$pid" + Chr(34) + " 2>/dev/null || rm -f " + Chr(34) + "$f" + Chr(34)
+		    pruneCmd = pruneCmd + "; done"
+		    ShellFast.Execute(pruneCmd)
 		  End If
 		  
 		  If TargetWindows Then 'Need to add Windows ppGames and Apps drives here
