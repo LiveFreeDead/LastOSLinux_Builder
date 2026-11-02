@@ -1,1 +1,28 @@
-# this is only a stub
+# branding.desc on Linuxmint penguins-eggs 26.3.21
+---
+componentName: LastOSTheme
+images:
+  productIcon: LastOSTheme-logo.png
+  productLogo: LastOSTheme-logo.png
+  productWelcome: welcome.png
+slideshow: show.qml
+slideshowAPI: 1
+strings:
+  bootloaderEntryName: Linuxmint
+  knownIssuesUrl: 
+  productName: LastOSLinux
+  productUrl: https://www.linuxmint.com/
+  releaseNotesUrl: 
+  shortProductName: LastOSLinux
+  shortVersion: 2026.03.30
+  shortVersionedName: LastOSLinux 2026-03-30
+  supportUrl: 
+  version: '2026-03-30'
+  versionedName: LastOSLinux (2026.03.30)
+style:
+  SidebarBackground: '#292F34'
+  SidebarBackgroundCurrent: '#8C6EC9'
+  SidebarText: '#FFFFFF'
+  SidebarTextCurrent: '#292F34'
+  Background: '#292F34'
+welcomeStyleCalamares: true
